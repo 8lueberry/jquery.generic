@@ -1,0 +1,22 @@
+{
+  "name": "jquery.generic",
+  "version": "0.0.1",
+  "homepage": "https://github.com/danlevan/jquery.generic",
+  "authors": [
+    "Dan Le Van <danlevan@gmail.com>"
+  ],
+  "description": "Generic jquery plugins for modern webapps. CSS3 animations and HTML5 driven.",
+  "main": "lib/jquery.generic.dateTimePicker.js",
+  "keywords": [
+    "jquery",
+    "generic"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
