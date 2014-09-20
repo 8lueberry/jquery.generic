@@ -1,0 +1,22 @@
+{
+  "name": "jquery.generic",
+  "version": "0.0.1",
+  "homepage": "https://github.com/danlevan/jquery.generic",
+  "authors": [
+    "Dan Le Van <danlevan@gmail.com>"
+  ],
+  "description": "Generic UI suite for jquery",
+  "main": "lib/jquery.genericBox.js",
+  "keywords": [
+    "jquery",
+    "genericbox"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
