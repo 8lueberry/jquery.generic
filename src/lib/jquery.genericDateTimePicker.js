@@ -1,18 +1,3 @@
-/*
-* GenericDateTimePicker - jQuery Plugin
-* Simple datetime picker
-*
-* Examples and documentation at:
-*
-* Copyright (c) 2013 Dan LE VAN
-*
-* Version: 1.0 (2013/08/15)
-* Requires: jQuery v1.3+
-*
-* Licensed under the MIT license:
-*   http://www.opensource.org/licenses/mit-license.php
-*/
-
 (function(factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {
@@ -95,17 +80,17 @@
         var month = (date.getMonth() + 1);
         var day = date.getDate();
 
-        return date.getFullYear()
-          + '/' + (month<10 ? '0' : '') + month
-          + '/' + (day<10 ? '0': '') + day
-          + ' ' + this.formatTime(date.getHours(), date.getMinutes());
+        return date.getFullYear() +
+          '/' + (month<10 ? '0' : '') + month +
+          '/' + (day<10 ? '0': '') + day +
+          ' ' + this.formatTime(date.getHours(), date.getMinutes());
       },
 
       // hours minute to string
       formatTime: function(hours, minutes) {
-        return (hours%12===0 ? 12 : hours%12)
-          + ':' + (minutes<10 ? '0' : '') + minutes
-          + (hours>=12 ? 'pm' : 'am');
+        return (hours%12 === 0 ? 12 : hours%12) + ':' +
+          (minutes<10 ? '0' : '') + minutes +
+          (hours>=12 ? 'pm' : 'am');
       },
 
       // string to date
@@ -160,10 +145,10 @@
   ///////////////////////////////////////////////////////
   // Implementation
   ///////////////////////////////////////////////////////
-	function GenericDateTimePicker(el, options) {
-		var that = this;
+  function GenericDateTimePicker(el, options) {
+    var that = this;
 
-		// members
+    // members
     this.$el = $(el);
     this.options = $.extend(true, {}, $.fn.gdt.defaults, options);
 
@@ -180,18 +165,15 @@
       var elPosition = getPosition(that.options.parent || el);
       that.$picker
         .css({
-          top: elPosition.top + elPosition.height,
-          left: elPosition.left,
-        })
-        .flushCss() // don't animate the position
-        .css({
           visibility: 'visible',
         })
         .addClass(that.options.css.visible);
 
       // automatically scroll to start of time or selected time
-      scrollToTime(that.selectedTime != null ? that.selectedTime : that.options.startTime);
-
+      scrollToTime(that.selectedTime !== null ?
+        that.selectedTime :
+        that.options.startTime
+      );
 
       // listen to keyboard on input
       that.$el
@@ -228,7 +210,7 @@
     this.setPastDate = function(date) {
       that.options.pastDate = date;
       updateCalendar();
-      updateInput();
+      redrawInput();
 
       return that;
     };
@@ -240,21 +222,16 @@
       var dateClone = parseDate(date);
 
       // extract time
-      // that.selectedTime = dateClone.getHours()*60 + dateClone.getMinutes();
+      that.selectedTime = dateClone.getHours()*60 + dateClone.getMinutes();
 
       // extract date
       dateClone.setHours(0,0,0,0);
       that.selectedDate = dateClone;
 
-      updatePicker();
+      redrawPicker();
+      redrawInput();
 
       return that;
-    };
-
-    //
-    // Selects a time
-    //
-    this.selectTime = function(date) {
     };
 
     ///////////////////////////////////////////////////////
@@ -275,20 +252,23 @@
 
       // specified a date
       if (that.options.date) {
+
+        // remove time
         that.selectedDate = new Date(that.options.date);
         that.selectedDate.setHours(0,0,0,0);
 
-        that.selectedTime = that.options.date.getHours() * 60
-          + that.options.date.getMinutes();
+        // extract time
+        that.selectedTime = that.options.date.getHours() * 60 +
+          that.options.date.getMinutes();
 
         that.currentDate = new Date(that.selectedDate);
 
-        updateInput();
+        redrawInput();
       }
 
       // parse input
-      else if(that.$el.val() != '') {
-        updateSelection();
+      else if(that.$el.val() !== '') {
+        parseInput();
 
         if (that.selectedDate) {
           that.currentDate = new Date(that.selectedDate);
@@ -299,32 +279,26 @@
       // Start building html
       //
 
-    	// build the calendar popup
-	    that.$el
-	    	.addClass(that.options.css.input);
+      // build the calendar popup
+      that.$el
+        .addClass(that.options.css.input);
 
       // picker
 
       that.$picker = $('<div>')
-	    	.addClass(that.options.css.picker);
+        .addClass(that.options.css.picker);
 
       if (that.options.inline) {
         that.$picker
           .css({
-            display: 'inline-block',
             visibility: 'visible',
           })
           .addClass(that.options.css.visible);
       }
       else{
-        var elPosition = getPosition(that.options.parent || el);
         that.$picker
           .css({
-            display: 'block',
             visibility: 'hidden',
-            position: 'absolute',
-            top: elPosition.top + elPosition.height,
-            left: elPosition.left,
           })
           .on('mouseover.gdt', function() {
             that.$el.off('blur', that.hide);
@@ -363,7 +337,7 @@
             .addClass(that.options.css.calendar.selected);
 
           that.selectedDate = new Date(parseInt($this.attr('data')));
-          updateInput();
+          redrawInput();
 
           // callback
           if ($.isFunction(that.options.onDateSelected)) {
@@ -383,16 +357,19 @@
       that.$timeContainer = $('<div class="'+ that.options.css.time.container +'">')
         .html(getTimeHtml())
         .on('mousewheel.gdt', function(e) {
-          if ((this.scrollTop <= 0)
-            && (e.originalEvent.wheelDelta > 0)
-            || (this.clientHeight + this.scrollTop >= this.scrollHeight)
-            && (e.originalEvent.wheelDelta < 0)) {
+          if ((this.scrollTop <= 0) &&
+            (e.originalEvent.wheelDelta > 0) ||
+            (this.clientHeight + this.scrollTop >= this.scrollHeight) &&
+            (e.originalEvent.wheelDelta < 0)
+          ) {
             e.preventDefault();
           }
         })
         .on('click.gdt', 'li', function(e) {
           var $this = $(this);
-          if (!that.options.selectPast && $this.hasClass(that.options.css.calendar.past)) {
+          if (!that.options.selectPast &&
+            $this.hasClass(that.options.css.calendar.past)
+          ) {
             return;
           }
 
@@ -404,7 +381,7 @@
             .addClass(that.options.css.time.selected);
 
           that.selectedTime = parseInt($this.attr('data'));
-          updateInput();
+          redrawInput();
 
           // callback
           if ($.isFunction(that.options.onTimeSelected)) {
@@ -424,14 +401,26 @@
 
       if (!that.options.inline) {
         that.$el
-  	    	.on('focus.gdt', that.show)
+          .on('focus.gdt', that.show)
           .on('click.gdt', that.show)
           .on('blur.gdt', that.hide);
       }
 
       // events
-      that.$el.on('selectionChange', updatePicker);
-    };
+      that.$el.on('selectionChange', function() {
+        redrawPicker();
+
+        var dateValue = new Date(that.selectedDate);
+        if (that.selectedTime !== null) {
+          dateValue.setHours(0, that.selectedTime);
+        }
+
+        // callback
+        if ($.isFunction(that.options.onChange)) {
+          that.options.onChange.call(this, dateValue);
+        }
+      });
+    }
 
     //
     // Input keyup event handler
@@ -451,23 +440,23 @@
           }
 
           previousValue = that.$el.val();
-          updateSelection();
+          parseInput();
 
         }, that.options.inputParseDelay);
-      }
-    };
+      };
+    }
 
     //
     // Close picker helper
     //
     function closePickerIfDone(e) {
-      if (that.selectedDate != null && that.selectedTime != null) {
+      if (that.selectedDate !== null && that.selectedTime !== null) {
         that.$el.focus();
         that.hide();
         e.stopImmediatePropagation();
         e.preventDefault();
       }
-    };
+    }
 
     //
     // If a string is passed, parse it
@@ -479,6 +468,7 @@
           return that.options.parseEngine.parse.call(that.options.parseEngine, date);
         }
         catch(err) {
+          console.error(err);
           return null;
         }
       }
@@ -489,7 +479,7 @@
     //
     // Updates the input value
     //
-    function updateInput() {
+    function redrawInput() {
 
       if (that.selectedDate === null || that.selectedTime === null) {
         that.$el.val('');
@@ -499,7 +489,7 @@
       // merge date and time
       var dateValue = new Date(that.selectedDate);
 
-      if (that.selectedTime != null) {
+      if (that.selectedTime !== null) {
         dateValue.setHours(0, that.selectedTime);
       }
 
@@ -512,12 +502,12 @@
       if ($.isFunction(that.options.onChange)) {
         that.options.onChange.call(this, dateValue);
       }
-    };
+    }
 
     //
     // Parses the input and update the selected date
     //
-    function updateSelection() {
+    function parseInput() {
 
       // parse the string
       var date = parseDate(that.$el.val());
@@ -538,23 +528,29 @@
 
       // trigger the change
       that.$el.trigger('selectionChange', that.selectedDate, that.selectedTime);
-    };
+    }
 
     //
     // Update the UI based on the current selection
     //
-    function updatePicker() {
+    function redrawPicker() {
+
+      // select date
       if (that.selectedDate) {
         that.currentDate = new Date(that.selectedDate);
       }
 
+      // select time
+      selectTime(that.selectedTime);
+
+      // draw calendar
       updateCalendar();
 
-      selectTime(that.selectedTime);
-      if (that.selectedTime != null) {
+      // scroll to time
+      if (that.selectedTime !== null) {
         scrollToTime(that.selectedTime);
       }
-    };
+    }
 
     //
     // Build the time html
@@ -576,7 +572,7 @@
 
       html += '</ol>';
       return html;
-    };
+    }
 
     //
     // Add the 'selected' class to the selected time
@@ -589,7 +585,7 @@
       that.$timeContainer
         .find('li[data='+ time +']')
         .addClass(that.options.css.time.selected);
-    };
+    }
 
     //
     // Scrolls to the specified time
@@ -618,14 +614,14 @@
           + '</header>'
           + getCalendarHtml(that.currentDate)
         );
-    };
+    }
 
     //
     // Builds the calendar html
     //
     function getCalendarHtml(date) {
 
-      var date = new Date(date);
+      date = new Date(date);
       date.setDate(1); // begginning of the month
       date.setHours(0,0,0,0); // no time
 
@@ -689,7 +685,7 @@
             date.setDate(dateDay + 1);
           }
           else {
-            html += '">'
+            html += '">';
           }
 
           html += '</td>';
@@ -706,7 +702,7 @@
       html += '</tr></table>';
 
       return html;
-    };
+    }
 
     //
     // Gets the position of an object
@@ -721,7 +717,7 @@
         width: $object.outerWidth(),
         height: $object.outerHeight()
       };
-    };
+    }
 
     var keys = {
       ESC: 27,
@@ -748,7 +744,7 @@
       // Cancel event if function did not return:
       e.stopImmediatePropagation();
       e.preventDefault();
-    };
+    }
 
     //
     // Input change
@@ -757,11 +753,11 @@
       var value = that.$el.val();
 
       // try to parse and select the right date
-    };
+    }
 
     // run constructor
     init();
-	};
+  }
 
   ///////////////////////////////////////////////////////
   // Jquery extension

@@ -1,6 +1,6 @@
 {
   "name": "jquery-generic",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "homepage": "https://github.com/danlevan/jquery.generic",
   "authors": [
     "Dan Le Van <danlevan@gmail.com>"
@@ -9,6 +9,7 @@
   "main": "lib/jquery.genericBox.js",
   "keywords": [
     "jquery",
+    "jquery.generic",
     "genericbox"
   ],
   "license": "MIT",

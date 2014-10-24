@@ -1,0 +1,1232 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+  <head>
+    <title>genericBox</title>
+
+    <link rel="stylesheet" href="genericBox.css" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" />
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="../lib/jquery.genericBox.min.js"></script>
+
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&lang=js&lang=html&skin=desert"></script>
+  </head>
+
+  <body>
+
+    <div>
+      <h1>GenericBox</h1>
+
+      <div>
+        GenericBox is a tiny jQuery popup plugin that doesn't handle any styling or animations in JavaScript. Instead, everything is customizable via css by you. The plugin only handles the html skeleton, events and key binding. The way it should be.
+      </div>
+
+      <div>
+
+        <script>
+          $(function() {
+
+            $('button#button-try').on('click', function() {
+              $('#popup-example').gb().show();
+            });
+
+            $('button#button-style').on('click', function() {
+              $('.example6 .popup').gb().show();
+            });
+
+            $('button#button-animate').on('click', function() {
+              $('.example7 button').click();
+            });
+
+            $('button#button-multi').on('click', function() {
+              $('.example5 >button').click();
+            });
+
+            $('button#button-modal').on('click', function() {
+              $('.example9 >button').click();
+            });
+          })
+        </script>
+
+        <div class="overlay-animate-opacity popup-animate-scale popup-center">
+          <div id="popup-example" class="popup">
+            <h1>This is a popup</h1>
+
+            <div>
+              You can close it by
+              <ul>
+                <li>Pressing escape key</li>
+                <li>Clicking the background</li>
+                <li>Clicking the close button</li>
+                <li>or throwing your computer through the window</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <button id="button-try">Try it</button>
+        <button id="button-style">Style it</button>
+        <button id="button-animate">Animate it</button>
+        <button id="button-multi">Multiple popups</button>
+        <button id="button-modal">Modal</button>
+      </div>
+
+      <h2>Download</h2>
+
+      <div>
+        Latest version: 0.1.0
+
+        <a href="#">Minified</a>
+        <a href="#">Normal</a>
+      </div>
+
+      <div>
+        <a href="https://github.com/danlevan/jquery.generic">View on GitHub</a>
+      </div>
+
+      <h2>Requirement</h2>
+
+      <div>
+        > jQuery 1.7 (<a href="http://jquery.com/download/">download page</a>)
+      </div>
+
+      <h2>Features</h2>
+
+      <div>
+        <ul>
+          <li>Extremely flexible</li>
+          <li>Lightweight: 1k .min.gz</li>
+          <li>No obscure styling options to be passed</li>
+          <li>Styles and anims entirely in css, by you</li>
+          <li>Supports animations libraries like <a href="http://daneden.github.io/animate.css/">animate.css</a></li>
+          <li>Esc key, overlay clisk to close</li>
+          <li>Multiple popup support (esc key works as expected)</li>
+          <li>Background scrolling doesn't scroll when you're scrolling the popup</li>
+          <li>Can be included as an AMD module</li>
+          <li>Do whatever you want. Events like show, hide, animation end...</li>
+          <li>Free (to use, to modify...)</li>
+        </ul>
+      </div>
+
+      <h2>Browser support</h2>
+
+      <div>
+        You decide! Animations and styling are entirely done by CSS.
+      </div>
+
+      <h2>License</h2>
+
+      <div>
+        <a href="https://raw.github.com/danlevan/jquery.generic/master/LICENSE">MIT</a>
+      </div>
+    </div>
+
+    <hr />
+
+    <div>
+      <ul>
+        <li><a href="#quick">Quick example</a></li>
+        <li><a href="#how">How does it work</a></li>
+        <li><a href="#option">Options</a></li>
+        <li>
+          <a href="#event">Events</a>
+          <ul>
+            <li><a href="#eventAction">See it in action</a></li>
+            <li><a href="#eventAttach">How to attach to an event</a></li>
+            <li><a href="#eventCancel">Cancel a default action</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#examples">Examples</a>
+          <ul>
+            <li><a href="#example1">example1: Fixed position</a></li>
+            <li><a href="#example2">example2: Center screen</a></li>
+            <li><a href="#example3">example3: Full screen</a></li>
+            <li><a href="#example4">example4: Common scenario (simple animation)</a></li>
+            <li><a href="#example5">example5: Multiple popup</a></li>
+            <li><a href="#example6">example6: Custom styles</a></li>
+            <li><a href="#example7">example7: Custom animations</a></li>
+            <li><a href="#example8">example8: Animation libraries</a></li>
+            <li><a href="#example9">example9: Modal</a></li>
+            <li><a href="#example10">example10: Prevent action</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <hr />
+
+    <div>
+
+      <a name="quick"></a>
+      <h1>Quick example</h1>
+
+      <h2>Step 1</h2>
+
+        <div>
+          Include jquery and jquery.genericBox
+
+<pre class="prettyprint lang-html">
+&lt;!-- cdn -->
+&lt;script src="//code.jquery.com/jquery-1.11.0.min.js">&lt;/script>
+
+&lt;!-- replace path -->
+&lt;script src="/path/to/jquery.genericBox.min.js">&lt;/script>
+</pre>
+        </div>
+
+      <h2>Step 2</h2>
+
+        <div>
+          Build your css skeleton (here's a simple example)
+
+<pre class="prettyprint lang-css">
+/**************************************************
+ * GenericBox container
+ *************************************************/
+.gb {
+  /* hidden */
+  display: none;
+}
+
+.gb.visible {
+  /* visible */
+  display: block;
+}
+
+/**************************************************
+ * Overlay
+ *************************************************/
+.gb .gbOverlay {
+  /* full screen */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* style */
+  background: rgba(0,0,0,0.6);
+}
+
+/**************************************************
+ * Close button
+ *************************************************/
+.gb .gbClose {
+  /* size and shape */
+  width: 20px;
+  height: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  /* position top right */
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  /* style */
+  background-color: #e84e40;
+  cursor: pointer;
+}
+
+.gb .gbClose:hover {
+  background-color: #e53929;
+}
+
+/**************************************************
+ * Popup container (popup + button)
+ *************************************************/
+.gb .gbBox {
+  /* position on screen */
+  position: fixed;
+  top: 100px;
+  left: 100px;
+}
+</pre>
+        </div>
+
+        <div>
+          Animations, centering, etc need more complex styling.
+          See below for more examples.
+        </div>
+
+      <h2>Step 3</h2>
+
+        <div>
+          Create a div with the popup content
+
+<pre class="prettyprint lang-html">
+&lt;!-- your popup -->
+&lt;div id="#popup">
+  ...
+&lt;/div>
+</pre>
+        </div>
+
+        <div>
+          Style it and hide it (you're free to style it the way you want)
+<pre class="prettyprint lang-css">
+#popup {
+  /* hidden */
+  display: none;
+
+  /*
+  max-height: 400px; // good practice
+  overflow: auto;
+  */
+  ...
+}
+</pre>
+        </div>
+
+      <h2>Step 4</h2>
+
+        <div>
+          Call genericBox
+<pre class="prettyprint lang-js">
+$(function() {
+  $('#popup').gb().show();
+})
+</pre>
+        </div>
+
+      <h2>That's it</h2>
+
+        <script>
+          $(function() {
+            $('button#button-example').on('click', function() {
+              $('.example1 >button').click();
+            });
+          })
+        </script>
+
+        <div>
+          <button id="button-example">Click here</button> to see the result.
+        </div>
+
+    </div>
+
+    <hr />
+
+    <div>
+
+      <a name="how"></a>
+      <h1>How does it work?</h1>
+
+      <div>
+
+<pre class="prettyprint lang-html">
+&lt;!-- your popup -->
+&lt;div id="popup">
+  ...
+&lt;/div>
+</pre>
+
+          becomes
+
+<pre class="prettyprint lang-html">
+&lt;div class="gb">
+  &lt;div class="overlay">&lt;/div>
+  &lt;div class="gbBox">
+    &lt;div class="gbClose">&lt;/div>
+    &lt;!-- your popup -->
+    &lt;div id="popup">
+      ...
+    &lt;/div>
+  &lt;/div>
+&lt;/div>
+</pre>
+
+          and when show() is called, the class 'visible' is added to the root container
+
+<pre class="prettyprint lang-html">
+&lt;div class="gb visible">
+  &lt;div class="overlay">&lt;/div>
+  &lt;div class="gbBox">
+    &lt;div class="gbClose">&lt;/div>
+    &lt;!-- your popup -->
+    &lt;div id="popup">
+      ...
+    &lt;/div>
+  &lt;/div>
+&lt;/div>
+</pre>
+
+        <ul>
+          <li>
+            <pre>&lt;div class="gb">&lt;/div></pre>
+            <div>Contains all the popup elements</div>
+            <div>When visible, the class 'visible' is added to this element</div>
+          </li>
+          <li>
+            <pre>&lt;div class="overlay">&lt;/div></pre>
+            <div>Overlay background element</div>
+            <div>Usually styled to be full screen with a transparent dark or bright color</div>
+          </li>
+          <li>
+            <pre>&lt;div class="gbBox">&lt;/div></pre>
+            <div>Contains the close button and your popup</div>
+            <div>Apply animations to this element so that your box and the close button is affected. You can also use this to center your popup.</div>
+          </li>
+          <li>
+            <pre>&lt;div class="gbClose">&lt;/div></pre>
+            <div>The close button</div>
+            <div>Since it's inside 'gbBox', it's easy to position it at the top, left, right or bottom</div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <hr />
+
+    <div>
+
+      <a name="option"></a>
+      <h1>Options</h1>
+
+      <table>
+        <tr>
+          <th>css</th>
+          <td>(Obj) You can change the default class name used.
+            <div>
+            Default:
+<pre>{
+  wrap: 'gb',
+  close: 'gbClose',
+  box: 'gbBox',
+  overlay: 'gbOverlay',
+  visible: 'visible',
+}</pre>
+          </div>
+          </td>
+        </tr>
+        <tr>
+          <th>hideOnClickOverlay</th>
+          <td>
+            (bool) Whether to hide the popup when the overlay is clicked.
+            <div>Default: true</div>
+          </td>
+        </tr>
+        <tr>
+          <th>hideOnEsc</th>
+          <td>
+            (bool) Whether to hide the popup when the esc key is pressed.
+            <div>Default: true</div>
+          </td>
+        </tr>
+        <tr>
+          <th>lockBackgroundScroll</th>
+          <td>
+            (bool) Whether to disable scrolling of the body when the popup is shown.
+            <div>Default: true</div>
+          </td>
+        </tr>
+        <tr>
+          <th>blurTrigger</th>
+          <td>
+            (bool) Whether to blur (unfocus) the body button, preventing the body button to be pressed by accidental keyboard events.
+            <div>Default: true</div>
+          </td>
+        </tr>
+        <tr>
+          <th>onInitialized</th>
+          <td>(function) Method binded to the 'initialized' event</td>
+        </tr>
+        <tr>
+          <th>onShow</th>
+          <td>(function) Method binded to the 'show' event</td>
+        </tr>
+        <tr>
+          <th>onHide</th>
+          <td>(function) Method binded to the 'hide' event</td>
+        </tr>
+        <tr>
+          <th>onShowStart</th>
+          <td>(function) Method binded to the 'showStart' event</td>
+        </tr>
+        <tr>
+          <th>onHideStart</th>
+          <td>(function) Method binded to the 'hideStart' event</td>
+        </tr>
+        <tr>
+          <th>onAnimationStart</th>
+          <td>(function) Method binded to the 'animationStart' event</td>
+        </tr>
+        <tr>
+          <th>onAnimationEnd</th>
+          <td>(function) Method binded to the 'animationEnd' event</td>
+        </tr>
+        <tr>
+          <th>onShowAnimationStart</th>
+          <td>(function) Method binded to the 'showAnimationStart' event</td>
+        </tr>
+        <tr>
+          <th>onShowAnimationEnd</th>
+          <td>(function) Method binded to the 'showAnimationEnd' event</td>
+        </tr>
+        <tr>
+          <th>onHideAnimationStart</th>
+          <td>(function) Method binded to the 'hideAnimationStart' event</td>
+        </tr>
+        <tr>
+          <th>onHideAnimationEnd</th>
+          <td>(function) Method binded to the 'hideAnimationEnd' event</td>
+        </tr>
+      </table>
+
+      <div>
+        There are 2 ways to pass options to the plugin:
+
+        <h2>As an html data attribute</h2>
+<pre class="prettyprint lang-html">
+&lt;div id="popup" data-gb='{"hideOnEsc": false, "hideOnClickOverlay": false}'>
+  ...
+&lt;/div>
+</pre>
+        <h2>Or directly when constructing the genericBox</h2>
+
+<pre class="prettyprint lang-js">
+$('#popup').gb({
+   hideOnClickOverlay: false,
+   hideOnEsc: false,
+ }).show();
+</pre>
+      </div>
+    </div>
+
+    <hr />
+
+    <div>
+
+      <a name="event"></a>
+      <h1>Events</h1>
+
+      <table>
+        <tr>
+          <th>initialized</th>
+          <td>When gb is initialized (DOM ready).</td>
+        </tr>
+        <tr>
+          <th>show</th>
+          <td>When the popup is showing. When there are no animations, the popup is visible at this point.</td>
+        </tr>
+        <tr>
+          <th>hide</th>
+          <td>When the popup is hidden. When there are no animations, the popup is hidden at this point.</td>
+        </tr>
+        <tr>
+          <th>showStart</th>
+          <td>Before the popup starts showing.</td>
+        </tr>
+        <tr>
+          <th>hideStart</th>
+          <td>Before the popup starts hiding.</td>
+        </tr>
+        <tr>
+          <th>animationStart</th>
+          <td>When any animation is starting (show or hide).</td>
+        </tr>
+        <tr>
+          <th>animationEnd</th>
+          <td>When any animation ended (show or hide).</td>
+        </tr>
+        <tr>
+          <th>showAnimationStart</th>
+          <td>When the show animation is starting.</td>
+        </tr>
+        <tr>
+          <th>showAnimationEnd</th>
+          <td>When the show animation ended.</td>
+        </tr>
+        <tr>
+          <th>hideAnimationStart</th>
+          <td>When the hide animation is starting.</td>
+        </tr>
+        <tr>
+          <th>hideAnimationEnd</th>
+          <td>When the hide animation ended.</td>
+        </tr>
+      </table>
+
+      <!--
+        example
+      -->
+      <div class="example-event overlay-static">
+        <a name="eventAction"></a>
+        <h2>See it in action</h2>
+        <button class="animation">Click</button>
+
+        <script>
+          $(function() {
+
+            function log(message) {
+              $('.example-event .log').append('<div>' + message + '</div>');
+            }
+
+            function animate(anim) {
+              $('.example-event .gbBox')
+                .addClass(anim + ' animated')
+                .one(
+                  'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
+                  function() {
+
+                    // reset animation class
+                    $(this)
+                      .removeClass()
+                      .addClass('gbBox');
+                  });
+            }
+
+            $('.example-event button').on('click', function() {
+              log('--- button clicked ---');
+
+              $('.example-event .popup').gb({
+
+                onInitialized: function() {
+                  log('genericBox initialized');
+                },
+
+                onShow: function() {
+                  log('show ready');
+
+                  animate('bounceIn');
+                },
+                onHide: function() {
+                  log('hide ready');
+
+                  animate('bounceOut');
+                },
+
+                onShowStart: function() {
+                  log('show started');
+                },
+                onHideStart: function() {
+                  log('hide started');
+                },
+
+                // animation events
+                onanimationStart: function() {
+                  log('(animation started)');
+                },
+                onanimationEnd: function() {
+                  log('(animation ended)');
+                },
+
+                onshowAnimationStart: function() {
+                  log('show animation started');
+                },
+                onshowAnimationEnd: function() {
+                  log('show animation ended');
+                },
+
+                onhideAnimationStart: function() {
+                  log('hide animation started');
+                },
+                onhideAnimationEnd: function() {
+                  log('hide animation ended');
+                },
+              })
+              .show();
+            });
+          })
+        </script>
+
+        <div class="log"></div>
+
+        <div class="popup">
+          Popup
+        </div>
+      </div>
+
+      <a name="eventAttach"></a>
+      <h2>How to attach to an event</h2>
+
+      <div>
+        As an option (see the <a href="#option">options documentation</a>)
+<pre class="prettyprint lang-js">
+$('#popup').gb({
+   onShow: function() {
+     console.log('Showing popup');
+   },
+   onHide: function() {
+     console.log('Hiding popup');
+   }
+ }).show();
+</pre>
+      </div>
+
+      <div>
+        Attach to an existing instance
+<pre class="prettyprint lang-js">
+var gbPopup = $('#popup').gb();
+...
+gbPopup
+  .on('show', function() {
+    console.log('Showing popup');
+  })
+
+  // yay, chaining
+  .on('hide', function() {
+    console.log('Hiding popup');
+  });
+</pre>
+      </div>
+
+      <a name="eventCancel"></a>
+      <h2>Cancel a default action</h2>
+
+      <div>
+        You can cancel showing and hiding on the 'showStart' and 'hideStart' events.
+<pre class="prettyprint lang-js">
+$('#popup').gb({
+   onHideStart: function(e) {
+     console.log('Cancel hiding');
+     e.preventAction();
+   }
+ }).show();
+</pre>
+      </div>
+
+    </div>
+
+    <hr />
+
+    <div>
+
+      <a name="examples"></a>
+      <h1>Examples</h1>
+
+      <div>
+        See the page source and refer to the <a href="genericBox.css">css</a> for the example code.
+      </div>
+
+      <!--
+        example1
+      -->
+      <a name="example1"></a>
+      <div class="example1">
+        <h2>example1: Fixed position</h2>
+
+        <div>This is the simplest example. It shows the popup on a fixed position.</div>
+
+        <button>Click</button>
+
+        <script>
+          $(function() {
+            $('.example1 >button').on('click', function() {
+              $('.example1 .popup').gb().show();
+            });
+          })
+        </script>
+
+        <div class="popup">
+          <h1>This is a simple example...</h1>
+          The popup is at a fixed position on the screen
+        </div>
+      </div>
+
+      <!--
+        example2
+      -->
+      <a name="example2"></a>
+      <div class="example2 overlay-static popup-center">
+        <h2>example2: Center screen</h2>
+
+        <div>
+          <a href="http://css-tricks.com/snippets/css/a-guide-to-flexbox/">Flexbox</a> can be used to center the popup horizontally and vertically on the screen.
+          (Chrome 21+, Safari 6.1+, Firefox 22+, Opera 12.1, IE 11+, Android 4.4+, iOS 7.1+)
+        </div>
+        <div>
+          Other centering methods can be used to support older browsers.
+        </div>
+
+        <button>Click</button>
+
+        <script>
+          $(function() {
+            $('.example2 >button').on('click', function() {
+              $('.example2 .popup').gb().show();
+            });
+          })
+        </script>
+
+        <div class="popup">
+          <h1>With flexbox</h1>
+
+          We can finally easily center horizontally and vertically
+        </div>
+      </div>
+
+      <!--
+        example3
+      -->
+      <a name="example3"></a>
+      <div class="example3 overlay-static">
+        <h2>example3: Full screen</h2>
+
+        <div>
+          The popup can also fill up the whole screen.
+
+        </div>
+
+        <button>Click</button>
+
+        <script>
+          $(function() {
+            $('.example3 >button').on('click', function() {
+              $('.example3 .popup').gb().show();
+            });
+          })
+        </script>
+
+        <div class="popup">
+          <h1>Full screen content</h1>
+          Resizing the browser will also resize the popup, without any javascript.
+        </div>
+      </div>
+
+      <!--
+        example4
+      -->
+      <a name="example4"></a>
+      <div class="example4 overlay-animate-opacity popup-animate-scale popup-center">
+        <h2>example4: Common scenario (simple animation)</h2>
+
+        <div>
+          In most cases, a centered box with a simple fading animation makes the popup less aggressive.
+        </div>
+
+        <button>Click</button>
+
+        <script>
+          $(function() {
+            $('.example4 >button').on('click', function() {
+              $('.example4 .popup').gb().show();
+            });
+          })
+        </script>
+
+        <div class="popup">
+          <h1>Simple animations</h1>
+
+          Makes a smooth transition
+        </div>
+      </div>
+
+      <!--
+        example5
+      -->
+      <a name="example5"></a>
+      <div class="example5 overlay-animate-opacity popup-animate-scale popup-center">
+        <h2>example5: Multiple popup</h2>
+
+        <div>Multiple popups are supported by default. You can also specify a z-index if needed.</div>
+
+        <button>Click</button>
+
+        <script>
+          $(function() {
+            $('.example5 >button').on('click', function() {
+              $('.example5 .popup1').gb().show();
+
+              setTimeout(function() {
+                $('.example5 .popup2').gb().show();
+              }, 200);
+
+              setTimeout(function() {
+                $('.example5 .popup3').gb().show();
+              }, 400);
+            });
+
+            $('.example5 .popup1 button').on('click', function() {
+              $('.example5 .popup2').gb().show();
+            });
+
+            $('.example5 .popup2 button').on('click', function() {
+              $('.example5 .popup3').gb().show();
+            });
+          })
+        </script>
+
+        <div class="popup popup1">
+
+          <h1>And since everything is done in CSS...</h1>
+          You can specify z-index if needed.
+
+          <div>
+            <button>Open popup</button>
+          </div>
+        </div>
+
+        <div class="popup popup2">
+          <h1>Click on the background also</h1>
+          <div>
+            <button>Open popup</button>
+          </div>
+        </div>
+
+        <div class="popup popup3">
+          <h2>Notice how the 'ESC' key is binded in order</h2>
+        </div>
+      </div>
+
+      <!--
+        example6
+      -->
+      <a name="example6"></a>
+      <div class="example6 overlay-animate-opacity popup-animate-scale popup-center">
+        <h2>example6: Custom styles</h2>
+
+        <div>Everything is customizable. You only need to know css.</div>
+
+        <button>Click</button>
+
+        <script>
+          $(function() {
+            $('.example6 >button').on('click', function() {
+              $('.example6 .popup').gb().show();
+            });
+
+            $('.example6 .popup button').on('click', function() {
+              $('.example6 .popup').gb().hide();
+            });
+          })
+        </script>
+
+        <div class="popup">
+          <h1>Freedom !!</h1>
+          <ul>
+            <li>
+              You can style the box
+            </li>
+            <li>
+              You can style the close button
+            </li>
+            <li>
+              You can position the close button
+            </li>
+            <li>
+              You can style the background
+            </li>
+          </ul>
+
+          <div>
+            And if you don't like the close button, hide it and make your own
+            <button>close button</button>
+          </div>
+        </div>
+      </div>
+
+      <!--
+        example7
+      -->
+      <a name="example7"></a>
+      <div class="example7 popup-center">
+        <h2>example7: Custom animations</h2>
+
+        <div>
+          Animations can also be defined in css.
+        </div>
+
+        <button>Click</button>
+
+        <script>
+          $(function() {
+            $('.example7 >button').on('click', function() {
+              $('.example7 .popup').gb().show();
+            });
+          })
+        </script>
+
+        <div class="popup">
+          <h1>Any animation you want</h1>
+          <ul>
+            <li>
+              Different animations for <strong>show</strong> and <strong>hide</strong>.
+            </li>
+            <li>
+              You can also animate the overlay (<strong>show</strong> and <strong>hide</strong> also)
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!--
+        example8
+      -->
+      <a name="example8"></a>
+      <div class="example8 popup-center">
+        <h2>example8: Animation libraries</h2>
+
+        <div>
+          Thirdparty libraries can easily be used. Here is an example with <a href="http://daneden.github.io/animate.css/">animate.css</a> library:
+        </div>
+
+        <div>
+          <select class="in">
+            <optgroup label="Attention Seekers">
+              <option value="bounce">bounce</option>
+              <option value="flash">flash</option>
+              <option value="pulse">pulse</option>
+              <option value="rubberBand">rubberBand</option>
+              <option value="shake">shake</option>
+              <option value="swing">swing</option>
+              <option value="tada">tada</option>
+              <option value="wobble">wobble</option>
+            </optgroup>
+
+            <optgroup label="Bouncing Entrances">
+              <option value="bounceIn" selected>bounceIn</option>
+              <option value="bounceInDown">bounceInDown</option>
+              <option value="bounceInLeft">bounceInLeft</option>
+              <option value="bounceInRight">bounceInRight</option>
+              <option value="bounceInUp">bounceInUp</option>
+            </optgroup>
+
+            <optgroup label="Fading Entrances">
+              <option value="fadeIn">fadeIn</option>
+              <option value="fadeInDown">fadeInDown</option>
+              <option value="fadeInDownBig">fadeInDownBig</option>
+              <option value="fadeInLeft">fadeInLeft</option>
+              <option value="fadeInLeftBig">fadeInLeftBig</option>
+              <option value="fadeInRight">fadeInRight</option>
+              <option value="fadeInRightBig">fadeInRightBig</option>
+              <option value="fadeInUp">fadeInUp</option>
+              <option value="fadeInUpBig">fadeInUpBig</option>
+            </optgroup>
+
+            <optgroup label="Flippers">
+              <option value="flip">flip</option>
+              <option value="flipInX">flipInX</option>
+              <option value="flipInY">flipInY</option>
+            </optgroup>
+
+            <optgroup label="Lightspeed">
+              <option value="lightSpeedIn">lightSpeedIn</option>
+            </optgroup>
+
+            <optgroup label="Rotating Entrances">
+              <option value="rotateIn">rotateIn</option>
+              <option value="rotateInDownLeft">rotateInDownLeft</option>
+              <option value="rotateInDownRight">rotateInDownRight</option>
+              <option value="rotateInUpLeft">rotateInUpLeft</option>
+              <option value="rotateInUpRight">rotateInUpRight</option>
+            </optgroup>
+
+            <optgroup label="Specials">
+              <option value="rollIn">rollIn</option>
+            </optgroup>
+
+            <optgroup label="Zoom Entrances">
+              <option value="zoomIn">zoomIn</option>
+              <option value="zoomInDown">zoomInDown</option>
+              <option value="zoomInLeft">zoomInLeft</option>
+              <option value="zoomInRight">zoomInRight</option>
+              <option value="zoomInUp">zoomInUp</option>
+            </optgroup>
+          </select>
+
+          <select class="out">
+            <optgroup label="Attention Seekers">
+              <option value="bounce">bounce</option>
+              <option value="flash">flash</option>
+              <option value="pulse">pulse</option>
+              <option value="rubberBand">rubberBand</option>
+              <option value="shake">shake</option>
+              <option value="swing">swing</option>
+              <option value="tada">tada</option>
+              <option value="wobble">wobble</option>
+            </optgroup>
+
+            <optgroup label="Bouncing Exits">
+              <option value="bounceOut" selected>bounceOut</option>
+              <option value="bounceOutDown">bounceOutDown</option>
+              <option value="bounceOutLeft">bounceOutLeft</option>
+              <option value="bounceOutRight">bounceOutRight</option>
+              <option value="bounceOutUp">bounceOutUp</option>
+            </optgroup>
+
+            <optgroup label="Fading Exits">
+              <option value="fadeOut">fadeOut</option>
+              <option value="fadeOutDown">fadeOutDown</option>
+              <option value="fadeOutDownBig">fadeOutDownBig</option>
+              <option value="fadeOutLeft">fadeOutLeft</option>
+              <option value="fadeOutLeftBig">fadeOutLeftBig</option>
+              <option value="fadeOutRight">fadeOutRight</option>
+              <option value="fadeOutRightBig">fadeOutRightBig</option>
+              <option value="fadeOutUp">fadeOutUp</option>
+              <option value="fadeOutUpBig">fadeOutUpBig</option>
+            </optgroup>
+
+            <optgroup label="Flippers">
+              <option value="flipOutX">flipOutX</option>
+              <option value="flipOutY">flipOutY</option>
+            </optgroup>
+
+            <optgroup label="Lightspeed">
+              <option value="lightSpeedOut">lightSpeedOut</option>
+            </optgroup>
+
+            <optgroup label="Rotating Exits">
+              <option value="rotateOut">rotateOut</option>
+              <option value="rotateOutDownLeft">rotateOutDownLeft</option>
+              <option value="rotateOutDownRight">rotateOutDownRight</option>
+              <option value="rotateOutUpLeft">rotateOutUpLeft</option>
+              <option value="rotateOutUpRight">rotateOutUpRight</option>
+            </optgroup>
+
+            <optgroup label="Specials">
+              <option value="hinge">hinge</option>
+              <option value="rollOut">rollOut</option>
+            </optgroup>
+
+            <optgroup label="Zoom Exits">
+              <option value="zoomOut">zoomOut</option>
+              <option value="zoomOutDown">zoomOutDown</option>
+              <option value="zoomOutLeft">zoomOutLeft</option>
+              <option value="zoomOutRight">zoomOutRight</option>
+              <option value="zoomOutUp">zoomOutUp</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <button>Click</button>
+
+        <script>
+          $(function() {
+
+            // add the animation to the box
+            function animate(anim) {
+              $('.example8 .gbBox')
+                .addClass(anim + ' animated')
+                .one(
+                  'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
+                  function(){
+
+                    // reset animation class
+                    $(this)
+                      .removeClass()
+                      .addClass('gbBox');
+                  });
+            };
+
+            $('.example8 >button').on('click', function() {
+              $('.example8 .popup').gb({
+                  onShow: function() {
+                    var anim = $('.example8 select.in').val();
+                    animate(anim);
+                  },
+                  onHide: function() {
+                    var anim = $('.example8 select.out').val();
+                    animate(anim);
+                  },
+                })
+                .show();
+            });
+          })
+        </script>
+
+        <div class="popup">
+          <h1>It's easy to use third party css animation.</h1>
+        </div>
+      </div>
+
+      <!--
+        example9
+      -->
+      <a name="example9"></a>
+      <div class="example9 overlay-animate-opacity popup-animate-scale popup-center">
+        <h2>example9: Modal</h2>
+
+        <div>
+          Creating a modal popup is done by
+          <ul>
+            <li>disabling the overlay click</li>
+            <li>disabling the esc key binding</li>
+            <li>hiding the close button</li>
+          </ul>
+        </div>
+
+        <button>Click</button>
+
+        <script>
+          $(function() {
+            $('.example9 >button').on('click', function() {
+
+              // options are passed on the data-gb attributes
+              $('.example9 .popup').gb().show();
+
+              // options can also be passed like this
+              // $('.example9 .popup').gb({
+              //   hideOnClickOverlay: false,
+              //   hideOnEsc: false,
+              // }).show();
+            });
+
+            $('.example9 .popup button').on('click', function() {
+              $('.example9 .popup').gb().hide();
+            });
+          });
+        </script>
+
+        <div class="popup" data-gb='{"hideOnEsc": false, "hideOnClickOverlay": false}'>
+
+          <h1>Modal popup</h1>
+
+          <ul>
+            <li>Click on the background doesn't close</li>
+            <li>Default close button is hidden</li>
+            <li>Esc key not listened</li>
+          </ul>
+
+          <div>
+            <button>close</button>
+          </div>
+        </div>
+      </div>
+
+      <!--
+        example10
+      -->
+      <a name="example10"></a>
+      <div class="example10 overlay-animate-opacity popup-animate-scale popup-center">
+        <h2>example10: Prevent action</h2>
+
+        <div>Show or hide a popup can be prevented when a condition is not met.</div>
+
+        <button>Click</button>
+
+        <script>
+          $(function() {
+            $('.example10 >button').on('click', function() {
+              $('.example10 .popup').gb({
+                onHideStart: function(e) {
+
+                  // won't close until the checkbox is checked
+                  var isChecked = $('.example10 .popup input[type=checkbox]').is(':checked');
+                  if (!isChecked) {
+                    $('.example10 .popup .message')
+                      .html('The checkbox has to be checked before closing');
+                    e.preventAction();
+                  }
+                }
+              }).show();
+            });
+          });
+        </script>
+
+        <div class="popup">
+
+          <h1>Check the checkbox</h1>
+
+          <div>
+            <label><input type="checkbox" />close the popup</label>
+          </div>
+
+          <div class="message"></div>
+
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>

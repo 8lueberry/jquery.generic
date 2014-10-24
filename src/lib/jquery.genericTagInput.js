@@ -1,18 +1,3 @@
-/*
-* GenericTip - jQuery Plugin
-* Simple tooltip
-*
-* Examples and documentation at:
-*
-* Copyright (c) 2013 Dan LE VAN
-*
-* Version: 1.0 (2013/09/19)
-* Requires: jQuery v1.3+
-*
-* Licensed under the MIT license:
-*   http://www.opensource.org/licenses/mit-license.php
-*/
-
 (function(factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
@@ -53,6 +38,12 @@
 
     // prefilled tags
     tags: [],
+
+    // when a tag is added
+    onAdd: null,
+
+    // when a tag is added
+    onRemove: null,
   };
 
   ///////////////////////////////////////////////////////
@@ -77,6 +68,15 @@
     ///////////////////////////////////////////////////////
 
     //
+    // Sets tags
+    //
+    this.set = function(tags) {
+      this.tags = tags;
+      updateUI();
+      updateValue();
+    };
+
+    //
     // Adds a tag to the list
     //
     this.add = function(tag, _updateUI, _updateValue) {
@@ -96,6 +96,11 @@
       // update the raw value
       if (_updateValue === undefined || _updateValue) {
         updateValue();
+      }
+
+      // event
+      if (that.options.onAdd) {
+        that.options.onAdd.call(that, tagValue);
       }
     };
 
@@ -117,6 +122,11 @@
 
       // update the raw value
       updateValue();
+
+      // event
+      if (that.options.onRemove) {
+        that.options.onRemove.call(that, tag);
+      }
     };
 
     ///////////////////////////////////////////////////////

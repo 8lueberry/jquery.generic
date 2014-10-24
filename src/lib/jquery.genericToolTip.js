@@ -1,18 +1,3 @@
-/*
-* GenericTip - jQuery Plugin
-* Simple tooltip
-*
-* Examples and documentation at:
-*
-* Copyright (c) 2013 Dan LE VAN
-*
-* Version: 1.0 (2013/09/19)
-* Requires: jQuery v1.3+
-*
-* Licensed under the MIT license:
-*   http://www.opensource.org/licenses/mit-license.php
-*/
-
 (function(factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
