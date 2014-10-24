@@ -60,6 +60,7 @@ var configure = function(grunt) {
 
     // grunt-contrib-copy
     copy: {
+
       examples: {
         files: [{
           cwd: 'src/examples/',
@@ -97,6 +98,9 @@ var configure = function(grunt) {
         files: {
           '<%= paths.examples %>/genericBox.css': [
             'src/examples/genericBox/*.styl',
+          ],
+          '<%= paths.examples %>/index.css': [
+            'src/examples/*.styl',
           ]
         },
       },
@@ -132,7 +136,7 @@ var configure = function(grunt) {
       },
 
       stylus: {
-        files: ['src/**/*.styl'],
+        files: ['src/*.styl', 'src/**/*.styl'],
         tasks: ['stylus'],
       },
     },
