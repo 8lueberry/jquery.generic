@@ -16,7 +16,64 @@
   <body>
 
     <div>
-      <h1>GenericBox</h1>
+
+      <div class="header gb">
+        <div class="gbBox">
+          <div class="gbClose"></div>
+          <div class="popup">
+            <h1 class="title">GenericBox</h1>
+            <div>
+
+              <script>
+                $(function() {
+
+                  $('button#button-try').on('click', function() {
+                    $('#popup-example').gb().show();
+                  });
+
+                  $('button#button-style').on('click', function() {
+                    $('.example6 .popup').gb().show();
+                  });
+
+                  $('button#button-animate').on('click', function() {
+                    $('.example7 button').click();
+                  });
+
+                  $('button#button-multi').on('click', function() {
+                    $('.example5 >button').click();
+                  });
+
+                  $('button#button-modal').on('click', function() {
+                    $('.example9 >button').click();
+                  });
+                })
+              </script>
+
+              <div class="overlay-animate-opacity popup-animate-scale popup-center">
+                <div id="popup-example" class="popup">
+                  <h1>This is a popup</h1>
+
+                  <div>
+                    You can close it by
+                    <ul>
+                      <li>Pressing escape key</li>
+                      <li>Clicking the background</li>
+                      <li>Clicking the close button</li>
+                      <li>or throwing your computer through the window</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <button id="button-try">Try it</button>
+              <button id="button-style">Style it</button>
+              <button id="button-animate">Animate it</button>
+              <button id="button-multi">Multiple popups</button>
+              <button id="button-modal">Modal</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <h2>Download</h2>
 
@@ -25,12 +82,9 @@
 
         <ul>
           <li>
-            <a href="https://raw.githubusercontent.com/danlevan/jquery.generic/master/lib/jquery.genericBox.min.js" download>jquery.genericBox.min.js</a>
+            <a href="https://raw.githubusercontent.com/danlevan/jquery.generic/master/lib/jquery.genericBox.min.js" download>jquery.genericBox.min.js</a> <a href="https://raw.githubusercontent.com/danlevan/jquery.generic/master/lib/jquery.genericBox.min.js.map" download>map</a>
           <li>
             <a href="https://raw.githubusercontent.com/danlevan/jquery.generic/master/lib/jquery.genericBox.js" download>jquery.genericBox.js</a>
-          </li>
-          <li>
-            <a href="https://raw.githubusercontent.com/danlevan/jquery.generic/master/lib/jquery.genericBox.min.js.map" download>map</a></li>
           </li>
         </ul>
 
@@ -50,56 +104,6 @@
 
       <div>
         So, why another library? There are many popup/modal jQuery libraries available but most of them either do too much, have obscure styling settings, are buggy or aren't flexible enough. We believe that styling should not be part of the library and left to the css. If you're going to learn how to style the popup, might as well learn it with css.
-      </div>
-
-      <div>
-
-        <script>
-          $(function() {
-
-            $('button#button-try').on('click', function() {
-              $('#popup-example').gb().show();
-            });
-
-            $('button#button-style').on('click', function() {
-              $('.example6 .popup').gb().show();
-            });
-
-            $('button#button-animate').on('click', function() {
-              $('.example7 button').click();
-            });
-
-            $('button#button-multi').on('click', function() {
-              $('.example5 >button').click();
-            });
-
-            $('button#button-modal').on('click', function() {
-              $('.example9 >button').click();
-            });
-          })
-        </script>
-
-        <div class="overlay-animate-opacity popup-animate-scale popup-center">
-          <div id="popup-example" class="popup">
-            <h1>This is a popup</h1>
-
-            <div>
-              You can close it by
-              <ul>
-                <li>Pressing escape key</li>
-                <li>Clicking the background</li>
-                <li>Clicking the close button</li>
-                <li>or throwing your computer through the window</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <button id="button-try">Try it</button>
-        <button id="button-style">Style it</button>
-        <button id="button-animate">Animate it</button>
-        <button id="button-multi">Multiple popups</button>
-        <button id="button-modal">Modal</button>
       </div>
 
       <h2>Requirement</h2>
@@ -900,11 +904,11 @@ $('#popup').gb({
 
               setTimeout(function() {
                 $('.example5 .popup2').gb().show();
-              }, 200);
+              }, 400);
 
               setTimeout(function() {
                 $('.example5 .popup3').gb().show();
-              }, 400);
+              }, 800);
             });
 
             $('.example5 .popup1 button').on('click', function() {

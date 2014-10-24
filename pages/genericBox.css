@@ -586,6 +586,27 @@ body >div >div >div,
 body hr >div >div {
   margin: 10px 0;
 }
+div.header {
+  margin: 50px 0;
+}
+div.header >.gbBox {
+  position: relative;
+  border: solid 1px #ccc;
+}
+div.header >.gbBox >.popup {
+  display: block;
+}
+div.header >.gbBox >.popup >h1 {
+  font-size: 72px;
+  margin: 0;
+  padding: 0;
+}
+div.header >.gbBox >.popup >div {
+  text-align: center;
+}
+div.header >.gbBox >.popup >div >div {
+  text-align: left;
+}
 pre.prettyprint {
   padding: 10px;
   font-size: 14px;
