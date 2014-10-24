@@ -18,8 +18,38 @@
     <div>
       <h1>GenericBox</h1>
 
+      <h2>Download</h2>
+
       <div>
-        GenericBox is a tiny jQuery popup plugin that doesn't handle any styling or animations in JavaScript. Instead, everything is customizable via css by you. The plugin only handles the html skeleton, events and key binding. The way it should be.
+        Latest version: 0.1.0
+
+        <ul>
+          <li>
+            <a href="https://raw.githubusercontent.com/danlevan/jquery.generic/master/lib/jquery.genericBox.min.js" download>jquery.genericBox.min.js</a>
+          <li>
+            <a href="https://raw.githubusercontent.com/danlevan/jquery.generic/master/lib/jquery.genericBox.js" download>jquery.genericBox.js</a>
+          </li>
+          <li>
+            <a href="https://raw.githubusercontent.com/danlevan/jquery.generic/master/lib/jquery.genericBox.min.js.map" download>map</a></li>
+          </li>
+        </ul>
+
+        <a href="https://github.com/danlevan/jquery.generic">View on GitHub</a>
+      </div>
+
+    </div>
+
+    <hr />
+
+    <div>
+      <h2>What is it?</h2>
+
+      <div>
+        GenericBox is a tiny jQuery popup plugin that doesn't handle any styling or animations in JavaScript. Instead, everything is customizable via css by you. The plugin only handles the html skeleton, events and key binding.
+      </div>
+
+      <div>
+        So, why another library? There are many popup/modal jQuery libraries available but most of them either do too much, have obscure styling settings, are buggy or aren't flexible enough. We believe that styling should not be part of the library and left to the css. If you're going to learn how to style the popup, might as well learn it with css.
       </div>
 
       <div>
@@ -72,19 +102,6 @@
         <button id="button-modal">Modal</button>
       </div>
 
-      <h2>Download</h2>
-
-      <div>
-        Latest version: 0.1.0
-
-        <a href="#">Minified</a>
-        <a href="#">Normal</a>
-      </div>
-
-      <div>
-        <a href="https://github.com/danlevan/jquery.generic">View on GitHub</a>
-      </div>
-
       <h2>Requirement</h2>
 
       <div>
@@ -96,7 +113,7 @@
       <div>
         <ul>
           <li>Extremely flexible</li>
-          <li>Lightweight: 1k .min.gz</li>
+          <li>Lightweight: 1.5k .min.gz</li>
           <li>No obscure styling options to be passed</li>
           <li>Styles and anims entirely in css, by you</li>
           <li>Supports animations libraries like <a href="http://daneden.github.io/animate.css/">animate.css</a></li>
@@ -128,6 +145,7 @@
       <ul>
         <li><a href="#quick">Quick example</a></li>
         <li><a href="#how">How does it work</a></li>
+        <li><a href="#api">Methods</a></li>
         <li><a href="#option">Options</a></li>
         <li>
           <a href="#event">Events</a>
@@ -150,6 +168,7 @@
             <li><a href="#example8">example8: Animation libraries</a></li>
             <li><a href="#example9">example9: Modal</a></li>
             <li><a href="#example10">example10: Prevent action</a></li>
+            <li><a href="#example11">example11: Initializing multiple popup in one call</a></li>
           </ul>
         </li>
       </ul>
@@ -245,7 +264,7 @@
 
         <div>
           Animations, centering, etc need more complex styling.
-          See below for more examples.
+          <a href="#examples">See below for examples</a>
         </div>
 
       <h2>Step 3</h2>
@@ -265,13 +284,7 @@
           Style it and hide it (you're free to style it the way you want)
 <pre class="prettyprint lang-css">
 #popup {
-  /* hidden */
-  display: none;
-
-  /*
-  max-height: 400px; // good practice
-  overflow: auto;
-  */
+  display: none; /* hidden */
   ...
 }
 </pre>
@@ -312,7 +325,7 @@ $(function() {
       <h1>How does it work?</h1>
 
       <div>
-
+        Your html popup
 <pre class="prettyprint lang-html">
 &lt;!-- your popup -->
 &lt;div id="popup">
@@ -376,6 +389,64 @@ $(function() {
 
     </div>
 
+    <div>
+      When calling the chained jQuery function for the first time, the skeleton is built to the DOM and the instance of genericBox is returned. Subsequent calls to gb() will return the initial instance.
+<pre class="prettyprint lang-js">
+  var instance1 = $('#popup').gb({...});
+
+  // here, the options are ignored because it's being called a second time
+  var instance2 = $('#popup').gb({...});
+
+  // instance1 === instance2 are the same instance
+</pre>
+      This allows you to forget about keeping an instance and do something like
+
+<pre class="prettyprint lang-js">
+  $('button').on('click', function() { // can click the button multiple times
+    $('#popup')
+      .gb({...}) // only read the options the first click
+      .show(); // show it
+  });
+</pre>
+    </div>
+
+    <hr />
+
+    <div>
+      <a name="api"></a>
+      <h1>Methods</h1>
+
+      <table>
+        <tr>
+          <th>show()</th>
+          <td>Shows the popup</td>
+        </tr>
+        <tr>
+          <th>hide()</th>
+          <td>Hides the popup</td>
+        </tr>
+        <tr>
+          <th>on(eventName, fn)</th>
+          <td>Attach a handler to an event (<a href="#event">See the list of events here</a>)</td>
+        </tr>
+        <tr>
+          <th>one(eventName, fn)</th>
+          <td>Attach a handler to an event once and then detach automatically after the first call (<a href="#event">See the list of events here</a>)</td>
+        </tr>
+        <tr>
+          <th>off(eventName, fn)</th>
+          <td>Detach a handler from an event (<a href="#event">See the list of events here</a>)</td>
+        </tr>
+      </table>
+
+      <h2>Usage example</h2>
+<pre class="prettyprint lang-js">
+  $('#popup')
+    .gb()
+    .show(); // show it
+</pre>
+    </div>
+
     <hr />
 
     <div>
@@ -407,10 +478,10 @@ $(function() {
           </td>
         </tr>
         <tr>
-          <th>hideOnEsc</th>
+          <th>hideKey</th>
           <td>
-            (bool) Whether to hide the popup when the esc key is pressed.
-            <div>Default: true</div>
+            (Number) The keycode that triggers the hiding of the popup. If null is passed, no keys are listened (useful for modal).
+            <div>Default: 27 (esc)</div>
           </td>
         </tr>
         <tr>
@@ -478,7 +549,7 @@ $(function() {
 
         <h2>As an html data attribute</h2>
 <pre class="prettyprint lang-html">
-&lt;div id="popup" data-gb='{"hideOnEsc": false, "hideOnClickOverlay": false}'>
+&lt;div id="popup" data-gb='{"hideKey": null, "hideOnClickOverlay": false}'>
   ...
 &lt;/div>
 </pre>
@@ -487,7 +558,7 @@ $(function() {
 <pre class="prettyprint lang-js">
 $('#popup').gb({
    hideOnClickOverlay: false,
-   hideOnEsc: false,
+   hideKey: null,
  }).show();
 </pre>
       </div>
@@ -603,25 +674,24 @@ $('#popup').gb({
                   log('hide started');
                 },
 
-                // animation events
-                onanimationStart: function() {
+                onAnimationStart: function() {
                   log('(animation started)');
                 },
-                onanimationEnd: function() {
+                onAnimationEnd: function() {
                   log('(animation ended)');
                 },
 
-                onshowAnimationStart: function() {
+                onShowAnimationStart: function() {
                   log('show animation started');
                 },
-                onshowAnimationEnd: function() {
+                onShowAnimationEnd: function() {
                   log('show animation ended');
                 },
 
-                onhideAnimationStart: function() {
+                onHideAnimationStart: function() {
                   log('hide animation started');
                 },
-                onhideAnimationEnd: function() {
+                onHideAnimationEnd: function() {
                   log('hide animation ended');
                 },
               })
@@ -1158,7 +1228,7 @@ $('#popup').gb({
               // options can also be passed like this
               // $('.example9 .popup').gb({
               //   hideOnClickOverlay: false,
-              //   hideOnEsc: false,
+              //   hideKey: null,
               // }).show();
             });
 
@@ -1168,7 +1238,7 @@ $('#popup').gb({
           });
         </script>
 
-        <div class="popup" data-gb='{"hideOnEsc": false, "hideOnClickOverlay": false}'>
+        <div class="popup" data-gb='{"hideKey": null, "hideOnClickOverlay": false}'>
 
           <h1>Modal popup</h1>
 
@@ -1224,6 +1294,38 @@ $('#popup').gb({
 
           <div class="message"></div>
 
+        </div>
+      </div>
+
+      <a name="example11"></a>
+      <div class="example11 overlay-animate-opacity popup-animate-scale popup-center">
+        <h2>example11: Initializing multiple popup in one call</h2>
+
+        <div>
+          Initializing of multiple popup at once is done with jQuery selectors.
+        </div>
+
+        <button>Click</button>
+
+        <script>
+          $(function() {
+            $('.example11 >button').on('click', function() {
+
+              $('.example11 .popup') // selects the 2 popups
+                .gb() // returns the array of 2 elements (gb instance)
+                .each(function() {
+                  this.show();
+                });
+            });
+          });
+        </script>
+
+        <div class="popup popup1">
+          Hello one
+        </div>
+
+        <div class="popup popup2">
+          Hello two
         </div>
       </div>
 

@@ -6,7 +6,7 @@
     "Dan Le Van <danlevan@gmail.com>"
   ],
   "description": "Generic UI suite for jquery",
-  "main": "lib/jquery.genericBox.js",
+  "main": "lib/jquery.genericBox.min.js",
   "keywords": [
     "jquery",
     "jquery.generic",

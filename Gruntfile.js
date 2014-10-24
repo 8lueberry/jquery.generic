@@ -10,7 +10,7 @@ var configure = function(grunt) {
 
     // system paths
     paths: {
-      examples: path.join(__dirname, 'examples'),
+      examples: path.join(__dirname, 'pages'),
       lib: path.join(__dirname, 'lib'),
     },
 
@@ -23,17 +23,16 @@ var configure = function(grunt) {
       js: '' +
         '/*\n' +
         ' * Generic - jQuery Plugin\n' +
-        ' * Simple ui controllers\n' +
         ' *\n' +
-        ' * Examples and documentation at:\n' +
+        ' * Examples and documentation at: danlevan.github.io/jquery.generic\n' +
         ' *\n' +
-        ' * Copyright (c) 2013 Dan LE VAN\n' +
+        ' * Copyright (c) 2014 Dan LE VAN\n' +
         ' *\n' +
         ' * Version: ' + version + ' (' + date.toDateString() + ')\n' +
-        ' * Requires: jQuery v1.3+\n' +
+        ' * Requires: jQuery v1.7+\n' +
         ' *' +
         ' * Licensed under the MIT license:\n' +
-        ' *   http://www.opensource.org/licenses/mit-license.php\n' +
+        ' *   https://raw.github.com/danlevan/jquery.generic/master/LICENSE\n' +
         ' */\n',
     },
 
@@ -48,18 +47,19 @@ var configure = function(grunt) {
       ]
     },
 
+    // grunt-contrib-concat
+    concat: {
+      options: {
+        banner: '<%= banner.js %>',
+      },
+      lib: {
+        src: ['src/lib/jquery.genericBox.js'],
+        dest: '<%= paths.lib %>/jquery.genericBox.js',
+      },
+    },
+
     // grunt-contrib-copy
     copy: {
-
-      lib: {
-        files: [{
-          dest: '<%= paths.lib %>/',
-          src: 'src/lib/jquery.genericBox.js',
-          expand: true,
-          flatten: true,
-        }],
-      },
-
       examples: {
         files: [{
           cwd: 'src/examples/',
@@ -123,7 +123,7 @@ var configure = function(grunt) {
     watch: {
       lib: {
         files: ['src/lib/*.js'],
-        tasks: ['copy:lib', 'uglify:lib'],
+        tasks: ['concat:lib', 'uglify:lib'],
       },
 
       examples: {
@@ -151,7 +151,7 @@ var configure = function(grunt) {
     [
       'clean:examples',
       'clean:lib',
-      'copy:lib',
+      'concat:lib',
       'uglify:lib',
       'stylus',
       'copy:examples',
