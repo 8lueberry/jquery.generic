@@ -213,7 +213,7 @@
         .removeClass(that.options.css.visible);
 
       // event after hide
-      that._trigger('hide');
+      trigger('hide');
 
       that.isVisible = false;
 
