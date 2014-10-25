@@ -1,9 +1,9 @@
 {
-  "name": "jquery.generic",
+  "name": "jquery-generic",
   "version": "0.1.0",
   "description": "Generic jquery plugins for modern webapps. CSS3 animations and HTML5 driven.",
   "author": "Dan Le Van",
-  "homepage": "https://github.com/danlevan/jquery.generic",
+  "homepage": "http://danlevan.github.io/jquery.generic/",
   "keywords": [
     "jquery",
     "jquery.generic",
@@ -13,8 +13,8 @@
     "type": "git",
     "url": "git://github.com/danlevan/jquery.generic.git"
   },
-  "bugs": "",
-  "contributors": "",
+  "bugs": "https://github.com/danlevan/jquery.generic/issues",
+  "contributors": "https://github.com/danlevan/jquery.generic/graphs/contributors",
   "licenses": [
     {
       "type": "MIT",
@@ -22,10 +22,6 @@
     }
   ],
   "main": "./lib",
-  "scripts": {
-    "start": "node src/index",
-    "test": "NODE_ENV=test ./node_modules/.bin/mocha tests/**"
-  },
   "engineStrict": true,
   "dependencies": {},
   "optionalDependencies": {},

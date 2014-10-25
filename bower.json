@@ -5,7 +5,7 @@
   "authors": [
     "Dan Le Van <danlevan@gmail.com>"
   ],
-  "description": "Generic UI suite for jquery.",
+  "description": "Generic jquery plugins for modern webapps. CSS3 animations and HTML5 driven.",
   "main": "lib/jquery.genericBox.min.js",
   "keywords": [
     "jquery",
