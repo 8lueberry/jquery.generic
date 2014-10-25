@@ -95,7 +95,7 @@ var configure = function(grunt) {
       },
 
       lib: [
-        'src/**/*.js',
+        'src/lib/genericBox.js',
       ],
     },
 

@@ -19,6 +19,10 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "Gruntfile.js",
+    "package.json",
+    "src/.*",
+    "src/**/.*"
   ]
 }
