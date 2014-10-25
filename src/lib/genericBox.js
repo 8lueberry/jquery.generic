@@ -74,7 +74,7 @@
     lockBackgroundScroll: true,
 
     // when gb is initialized (DOM ready)
-    onInitialized: null,
+    onInitialize: null,
 
     // before show is starting (DOM not ready)
     onShowStart: null,
@@ -176,7 +176,7 @@
 
     // register events
     registerEvents();
-    trigger('initialized');
+    trigger('initialize');
 
     // if gb is called gb().show(), we have to make sure that the content is
     // flushed to the DOM or the css animation will fail
