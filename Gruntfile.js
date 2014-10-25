@@ -174,6 +174,7 @@ var configure = function(grunt) {
     'default',
     'Build release',
     [
+      'jshint',
       'clean:pages',
       'clean:lib',
       'concat:box',
