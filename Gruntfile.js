@@ -34,7 +34,7 @@ var configure = function(grunt) {
         ' *\n' +
         ' * Copyright (c) 2014 Dan LE VAN\n' +
         ' *\n' +
-        ' * Version: ' + version + ' (' + date.toDateString() + ')\n' +
+        ' * Version: <%= pkg.version %> (' + date.toDateString() + ')\n' +
         ' * Requires: jQuery v1.7+\n' +
         ' *' +
         ' * Licensed under the MIT license:\n' +
