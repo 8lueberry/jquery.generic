@@ -61,6 +61,7 @@
       wrap: 'gb',
       close: 'gbClose',
       box: 'gbBox',
+      popup: 'gbPopup',
       overlay: 'gbOverlay',
       visible: 'visible',
     },
@@ -68,8 +69,8 @@
     // hide box on overlay click
     hideOnClickOverlay: true,
 
-    // hide box on key press
-    hideKey: 27, // esc
+    // hide box on esc key
+    hideOnEsc: true,
 
     // remove the focus on the button clicked
     blurTrigger: true,
@@ -157,11 +158,8 @@
         .addClass(that.options.css.visible);
 
       // listen to keyboard
-      if (that.options.hideKey) {
-
-        // bind the event first (LIFO)
-        bindFirst(window, 'keydown.gb', onKeyPress);
-      }
+      // bind the event first (LIFO)
+      bindFirst(window, 'keydown.gb', onKeyPress);
 
       // register overlay click
       if (that.options.hideOnClickOverlay) {
@@ -199,9 +197,7 @@
       }
 
       // unregister keypress event
-      if (that.options.hideKey) {
-        $(window).off('keydown.gb', onKeyPress);
-      }
+      $(window).off('keydown.gb', onKeyPress);
 
       // unregister overlay click
       if (that.options.hideOnClickOverlay) {
@@ -224,7 +220,7 @@
     // Event binding
     //
     that.on = function on(name, fn) {
-      bindEvent(name, fn);
+      that.$container.on(name, fn);
 
       return that; // chaining
     };
@@ -233,7 +229,7 @@
     // Event binding one
     //
     that.one = function one(name, fn) {
-      bindEventOnce(name, fn);
+      that.$container.one(name, fn);
 
       return that; // chaining
     };
@@ -242,7 +238,7 @@
     // Event unbinding
     //
     that.off = function(name, fn) {
-      unbindEvent(name, fn);
+      that.$container.off(name, fn);
 
       return that;
     };
@@ -264,6 +260,8 @@
     function buildBody() {
       // element
       that.$el
+        .addClass(that.options.css.popup)
+
         // display the element (hidden by the wrapper)
         .css({
           'display': 'block',
@@ -305,27 +303,6 @@
 
         // after the element (for z-index)
         .prependTo(that.$wrapper);
-    }
-
-    //
-    // Binds an event
-    //
-    function bindEvent(name, fn) {
-      that.$container.on(name, fn);
-    }
-
-    //
-    // Binds an event once
-    //
-    function bindEventOnce(name, fn) {
-      that.$container.one(name, fn);
-    }
-
-    //
-    // unbinds an event
-    //
-    function unbindEvent(name, fn) {
-      that.$container.off(name, fn);
     }
 
     //
@@ -403,7 +380,7 @@
           name = name[0].toLowerCase() + name.slice(1);
 
           // attach event
-          bindEvent(name, value);
+          that.$container.on(name, value);
         }
       });
 
@@ -440,24 +417,31 @@
       );
     }
 
+    var keys = {
+      ESC: 27,
+    };
+
     //
     // Handler for key press
     //
     function onKeyPress(e) {
 
       switch (e.keyCode) {
-        case that.options.hideKey:
-          that.hide();
-          break;
+        case keys.ESC:
+
+          if (that.options.hideOnEsc) {
+            that.hide();
+          }
+
+          // handled, don't bubble up
+          e.stopImmediatePropagation();
+          e.preventDefault();
+          return;
 
         // proceed
         default:
-          return;
+          break;
       }
-
-      // handled, don't bubble up
-      e.stopImmediatePropagation();
-      e.preventDefault();
     }
 
     //
