@@ -203,6 +203,7 @@
             <li><a href="#example9">example9: Modal</a></li>
             <li><a href="#example10">example10: Prevent action</a></li>
             <li><a href="#example11">example11: Initializing multiple popup in one call</a></li>
+            <li><a href="#example12">example12: Create dynamic content</a></li>
           </ul>
         </li>
         <li><a href="#other">Other plugins</a></li>
@@ -1475,6 +1476,45 @@ $('#popup').gb({
         <div class="popup popup2">
           Hello two
         </div>
+      </div>
+
+      <a name="example12"></a>
+      <div class="example12 overlay-static popup-center">
+        <h2>example12: Create dynamic box</h2>
+
+        <div>
+          You can create your popup box on the fly.
+        </div>
+
+        <button>Popup</button>
+
+        <script>
+          $(function() {
+            $('.example12 >button').on('click', function() {
+
+              // build dynamic content
+              $('<div>')
+                .css({
+                  width: '400px',
+                  height: '200px',
+                  'background-color': '#fff',
+                  padding: '10px',
+                })
+                .html('Hello world')
+
+                // put it after the button
+                .insertAfter(this)
+
+                // call gb
+                .gb({
+                  onHide: function() {
+                    $(this).remove(); // destroy item
+                  },
+                })
+                .show();
+            });
+          });
+        </script>
       </div>
 
     </div>
