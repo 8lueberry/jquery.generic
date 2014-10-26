@@ -403,9 +403,7 @@
       // animation end events
       that.$wrapper.on(
         'webkitAnimationEnd mozAnimationEnd MSAnimationEnd ' +
-        'oanimationend animationend ' +
-        'webkitTransitionEnd MSTransitionEnd otransitionend oTransitionEnd ' +
-        'transitionend',
+        'oanimationend animationend',
         function() {
           trigger('animationEnd');
 
@@ -414,6 +412,21 @@
           }
           else {
             trigger('hideAnimationEnd');
+          }
+        }
+      );
+
+      // partial support for transitions
+      that.$wrapper.on(
+        'webkitTransitionEnd MSTransitionEnd otransitionend transitionend',
+        function() {
+          trigger('transitionEnd');
+
+          if (that.isVisible) {
+            trigger('showTransitionEnd');
+          }
+          else {
+            trigger('hideTransitionEnd');
           }
         }
       );
