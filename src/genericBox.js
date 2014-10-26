@@ -58,12 +58,12 @@
 
   $.fn.gb.defaults = {
     css: {
-      wrap: 'gb',
-      close: 'gbClose',
-      box: 'gbBox',
-      popup: 'gbPopup',
-      overlay: 'gbOverlay',
-      visible: 'visible',
+      container:  'gb-container',
+      close:      'gb-close',
+      box:        'gb-box',
+      popup:      'gb-popup',
+      overlay:    'gb-overlay',
+      visible:    'visible',
     },
 
     // hide box on overlay click
@@ -258,28 +258,29 @@
     // Build the skeleton
     //
     function buildBody() {
+
       // element
       that.$el
         .addClass(that.options.css.popup)
 
-        // display the element (hidden by the wrapper)
+        // display the element (hidden by the box)
         .css({
           'display': 'block',
           'pointer-events': 'auto',
         });
 
-      // wrapper
+      // box
       that.$el
         .wrap('<div class="' + that.options.css.box + '">');
 
-      that.$wrapper = that.$el.parent()
+      that.$box = that.$el.parent()
         .css({
           'pointer-events': 'none',
         });
 
       // container
-      that.$container = that.$wrapper
-        .wrap('<div class="' + that.options.css.wrap + '">')
+      that.$container = that.$box
+        .wrap('<div class="' + that.options.css.container + '">')
         .parent();
 
       // overlay
@@ -287,7 +288,7 @@
         .addClass(that.options.css.overlay)
 
         // in the wrapper but before the element
-        .insertBefore(that.$wrapper);
+        .insertBefore(that.$box);
 
       // close button
       that.$close = $('<div class="' + that.options.css.close + '">')
@@ -302,7 +303,7 @@
         })
 
         // after the element (for z-index)
-        .prependTo(that.$wrapper);
+        .prependTo(that.$box);
     }
 
     //
@@ -385,7 +386,7 @@
       });
 
       // animation start events
-      that.$wrapper.on(
+      that.$box.on(
         'webkitAnimationStart mozAnimationStart MSAnimationStart ' +
         'oanimationstart animationstart',
         function() {
@@ -401,7 +402,7 @@
       );
 
       // animation end events
-      that.$wrapper.on(
+      that.$box.on(
         'webkitAnimationEnd mozAnimationEnd MSAnimationEnd ' +
         'oanimationend animationend',
         function() {
@@ -417,7 +418,7 @@
       );
 
       // partial support for transitions
-      that.$wrapper.on(
+      that.$box.on(
         'webkitTransitionEnd MSTransitionEnd otransitionend transitionend',
         function() {
           trigger('transitionEnd');

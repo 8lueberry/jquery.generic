@@ -10,19 +10,19 @@
  * * Licensed under the MIT license:
  *   https://raw.github.com/danlevan/jquery.generic/master/LICENSE
  */
-.gb-options .gb {
+.gb .gb-container {
 /* hidden */
   position: fixed;
   top: -999px;
   left: -999px;
 }
-.gb-options .gb.visible {
+.gb .gb-container.visible {
 /* visible */
   position: fixed;
   top: 0;
   left: 0;
 }
-.gb-options .gb .gbOverlay {
+.gb .gb-container .gb-overlay {
 /* style */
   background-color: rgba(0,0,0,0.6);
 /* full screen */
@@ -33,19 +33,19 @@
   top: -999px;
   left: -999px;
 }
-.gb-options .gb.visible .gbOverlay {
+.gb .gb-container.visible .gb-overlay {
 /* visible */
   position: fixed;
   top: 0;
   left: 0;
 }
-.gb-options .gb.visible .gbBox {
+.gb .gb-container.visible .gb-box {
 /* position on screen */
   position: fixed;
   top: 0;
   left: 0;
 }
-.gb-options .gb .gbClose {
+.gb .gb-container .gb-close {
 /* size and shape */
   width: 20px;
   height: 20px;
@@ -59,10 +59,13 @@
   background-color: #e84e40;
   cursor: pointer;
 }
-.gb-options .gb .gbClose:hover {
+.gb .gb-container .gb-close:hover {
   background-color: #c42618;
 }
-.gb-options.overlay-fade .gb .gbOverlay {
+.gb .gb-container .gb-popup {
+  background-color: #fff;
+}
+.gb.overlay-fade .gb-container .gb-overlay {
 /* hidden */
   visibility: hidden;
   opacity: 0;
@@ -75,7 +78,7 @@
   -ms-transition: opacity 0.3s linear, visibility 0s linear 0.3s, left 0s linear 0.3s, top 0s linear 0.3s;
   transition: opacity 0.3s linear, visibility 0s linear 0.3s, left 0s linear 0.3s, top 0s linear 0.3s;
 }
-.gb-options.overlay-fade .gb.visible .gbOverlay {
+.gb.overlay-fade .gb-container.visible .gb-overlay {
 /* visible */
   visibility: visible;
   opacity: 1;
@@ -88,17 +91,17 @@
   -ms-transition: opacity 0.3s linear;
   transition: opacity 0.3s linear;
 }
-.gb-options.overlay-light .gb .gbOverlay {
+.gb.overlay-light .gb-container .gb-overlay {
   background-color: rgba(0,0,0,0.2);
 }
-.gb-options.overlay-white .gb .gbOverlay {
+.gb.overlay-white .gb-container .gb-overlay {
   background-color: rgba(255,255,255,0.8);
 }
-.gb-options.close-hide .gb .gbBox .gbClose {
+.gb.close-hide .gb-container .gb-box .gb-close {
 /* hidden */
   display: none;
 }
-.gb-options.center .gb {
+.gb.center .gb-container {
 /* center */
   display: -webkit-box;
   display: -moz-box;
@@ -121,25 +124,25 @@
   width: 100%;
   height: 100%;
 }
-.gb-options.center .gb.visible .gbBox {
+.gb.center .gb-container.visible .gb-box {
   position: relative;
   top: 0;
   left: 0;
 }
-.gb-options.fullscreen .gb.visible .gbBox {
+.gb.fullscreen .gb-container.visible .gb-box {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
-.gb-options.fullscreen .gb .gbClose {
+.gb.fullscreen .gb-container .gb-close {
   position: absolute;
   top: 30px;
   right: 30px;
   z-index: 101;
 }
-.gb-options.fullscreen .gb .gbPopup {
+.gb.fullscreen .gb-container .gb-popup {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -147,7 +150,7 @@
   left: 20px;
   z-index: 100;
 }
-.gb-options.scale .gb {
+.gb.scale .gb-container {
 /* hide delay */
   -webkit-transition: top 0s linear 0.1s, left 0s linear 0.1s;
   -moz-transition: top 0s linear 0.1s, left 0s linear 0.1s;
@@ -155,7 +158,7 @@
   -ms-transition: top 0s linear 0.1s, left 0s linear 0.1s;
   transition: top 0s linear 0.1s, left 0s linear 0.1s;
 }
-.gb-options.scale .gb.visible {
+.gb.scale .gb-container.visible {
 /* no delay */
   -webkit-transition: none;
   -moz-transition: none;
@@ -163,7 +166,7 @@
   -ms-transition: none;
   transition: none;
 }
-.gb-options.scale .gb .gbBox {
+.gb.scale .gb-container .gb-box {
 /* hidden */
   visibility: hidden;
   opacity: 0;
@@ -181,7 +184,7 @@
   -ms-transition: -ms-transform 0.1s ease-out, opacity 0s linear 0.1s, visibility 0s linear 0.1s, top 0s linear 0.1s, left 0s linear 0.1s;
   transition: transform 0.1s ease-out, opacity 0s linear 0.1s, visibility 0s linear 0.1s, top 0s linear 0.1s, left 0s linear 0.1s;
 }
-.gb-options.scale .gb.visible .gbBox {
+.gb.scale .gb-container.visible .gb-box {
 /* visible */
   visibility: visible;
   opacity: 1;
@@ -199,7 +202,7 @@
   -ms-transition: -ms-transform 0.1s ease-out;
   transition: transform 0.1s ease-out;
 }
-.gb-options.anim-1s .gb {
+.gb.anim-1s .gb-container {
 /* hide delay */
   -webkit-transition: top 0s linear 1s, left 0s linear 1s;
   -moz-transition: top 0s linear 1s, left 0s linear 1s;
@@ -207,7 +210,7 @@
   -ms-transition: top 0s linear 1s, left 0s linear 1s;
   transition: top 0s linear 1s, left 0s linear 1s;
 }
-.gb-options.anim-1s .gb.visible {
+.gb.anim-1s .gb-container.visible {
 /* no delay */
   -webkit-transition: none;
   -moz-transition: none;
@@ -215,7 +218,7 @@
   -ms-transition: none;
   transition: none;
 }
-.gb-options.anim-1s .gb .gbOverlay {
+.gb.anim-1s .gb-container .gb-overlay {
 /* animation for opacity */
   -webkit-transition: opacity 0.3s linear 0.7s, visibility 0s linear 1s, left 0s linear 1s, top 0s linear 1s;
   -moz-transition: opacity 0.3s linear 0.7s, visibility 0s linear 1s, left 0s linear 1s, top 0s linear 1s;
@@ -223,7 +226,7 @@
   -ms-transition: opacity 0.3s linear 0.7s, visibility 0s linear 1s, left 0s linear 1s, top 0s linear 1s;
   transition: opacity 0.3s linear 0.7s, visibility 0s linear 1s, left 0s linear 1s, top 0s linear 1s;
 }
-.gb-options.anim-1s .gb.visible .gbOverlay {
+.gb.anim-1s .gb-container.visible .gb-overlay {
 /* animation for opacity */
   -webkit-transition: opacity 0.3s linear;
   -moz-transition: opacity 0.3s linear;
