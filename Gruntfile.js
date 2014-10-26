@@ -18,6 +18,21 @@ var configure = function(grunt) {
     // banner
     //
     banner: {
+      css: '' +
+        '/*\n' +
+        ' * Generic - jQuery Plugin\n' +
+        ' *\n' +
+        ' * Example and documentation at: http://danlevan.github.io/jquery.generic\n' +
+        ' *\n' +
+        ' * Copyright (c) 2014 Dan LE VAN\n' +
+        ' *\n' +
+        ' * Version: <%= pkg.version %> (' + date.toDateString() + ')\n' +
+        ' * Requires: jQuery v1.7+\n' +
+        ' *' +
+        ' * Licensed under the MIT license:\n' +
+        ' *   https://raw.github.com/danlevan/jquery.generic/master/LICENSE\n' +
+        ' */\n',
+
       js: '' +
         '/*\n' +
         ' * Generic - jQuery Plugin\n' +
@@ -43,13 +58,20 @@ var configure = function(grunt) {
 
     // grunt-contrib-concat
     concat: {
-      options: {
-        banner: '<%= banner.js %>',
-      },
-
       box: {
+        options: {
+          banner: '<%= banner.js %>',
+        },
         src: ['src/genericBox.js'],
         dest: '<%= paths.lib %>/jquery.genericBox.js',
+      },
+
+      'box-styl': {
+        options: {
+          banner: '<%= banner.css %>',
+        },
+        src: ['src/gbTemplate.styl'],
+        dest: '<%= paths.lib %>/gbTemplate.styl',
       },
     },
 
@@ -62,6 +84,26 @@ var configure = function(grunt) {
       lib: [
         'src/genericBox.js',
       ],
+    },
+
+    // grunt-contrib-stylus
+    stylus: {
+      compile: {
+        options: {
+          compress: false,
+          paths: [
+            'src',
+          ],
+          import: ['nib', 'nib/vendor'],
+          banner: '<%= banner.css %>',
+        },
+
+        files: {
+          '<%= paths.lib %>/gbTemplate.css': [
+            'src/gbTemplate.styl',
+          ]
+        },
+      },
     },
 
     // grunt-contrib-uglify
@@ -95,7 +137,9 @@ var configure = function(grunt) {
       'jshint',
       'clean:lib',
       'concat:box',
+      'concat:box-styl',
       'uglify:box',
+      'stylus',
     ]
   );
 };
