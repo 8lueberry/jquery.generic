@@ -69,7 +69,10 @@ var configure = function(grunt) {
 
         files: {
           '<%= paths.pages %>/genericBox.css': [
-            'src/genericBox/*.styl',
+            'src/genericBox/genericBox.styl',
+          ],
+          '<%= paths.pages %>/gbExamples.css': [
+            'src/genericBox/gbExamples.styl',
           ],
           '<%= paths.index %>/index.css': [
             'src/*.styl',

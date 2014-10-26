@@ -1,0 +1,225 @@
+/*******************************************************************************
+ * Default popup
+ ******************************************************************************/
+
+.popup
+
+  /* hidden by default */
+  display none
+
+  /* style */
+  background-color #fff
+  padding 30px
+
+  h1
+    margin 5px 0 10px 0
+
+  h1, h2, h3
+    text-align center
+
+  ul
+    padding 0 40px
+
+  >div
+    text-align center
+    margin 0 0 10px 0
+
+/*******************************************************************************
+ * example1: Fixed position
+ ******************************************************************************/
+
+.example1 .gb .gb-container.visible .gb-box
+
+  /* position on screen */
+  fixed top 100px left 100px
+
+/*******************************************************************************
+ * example6: Custom styles
+ ******************************************************************************/
+
+.example6 .gb-container .popup
+
+  /* style */
+  background-color #343434
+  color #fff
+
+  border solid 8px #fff
+  border-radius 10px
+  box-shadow 0 2px 10px rgba(0,0,0,.6)
+  padding 30px
+  width 490px
+
+  /* button style */
+  button
+    border-radius 5px
+    border solid 2px #91a7ff
+    background-color #5677fc
+    color #fff
+    cursor pointer
+    outline none
+
+    &:hover
+      background-color darken(@background-color, 10)
+
+    &:active
+      color darken(@color, 15)
+      background-color darken(@background-color, 15)
+
+/* white overlay */
+.example6 .gb-container .gb-overlay
+
+  /* style */
+  background rgba(255,255,255,.9)
+
+/* black circle with an X, positioned top left */
+.example6 .gb-container .gb-close
+
+  /* style */
+  text-align center
+  background-color #000
+  color #fff
+  border solid 3px #fff
+  box-shadow 0 0 5px rgba(0,0,0,.8)
+  cursor pointer
+
+  /* size & shape */
+  size 28px 28px
+  border-radius 30px
+  line-height 1
+
+  /* position top left outside the box a little */
+  absolute top -15px left -10px
+
+  &:before /* close button x sign */
+    content "\00D7"
+    font-weight bold
+    font-family Arial, sans-serif
+    font-size 28px
+
+  &:hover
+    color #e84e40
+
+  &:active
+    color #e51c23
+
+/*******************************************************************************
+ * example7: Custom animations
+ ******************************************************************************/
+
+.example7 .gb-container
+  fixed top -999px left -999px
+  transition left 0s linear 1.5s, top 0s linear 1.5s
+
+.example7 .gb-container.visible
+  fixed top left
+  transition none
+
+.example7 .gb-container .gb-overlay
+
+  /* transparent */
+  background rgba(0,0,0,.6)
+
+  /* full screen */
+  display block
+  fixed top left
+  size 100% 100%
+
+  /* hidden */
+  visibility hidden
+  transition visibility 0s linear 1.5s
+
+  /* animation */
+  animation-name zoomOut
+  animation-duration 1s
+  animation-delay .5s
+  animation-fill-mode both
+
+.example7 .gb-container.visible .gb-overlay
+
+  /* visible */
+  visibility visible
+  transition none
+
+  /* animation */
+  animation-name fadeIn
+  animation-duration .5s
+  animation-delay 0s
+  animation-fill-mode both
+
+.example7 .gb-container .gb-box
+
+  /* animation */
+  animation-name zoomOutUp
+  animation-duration 1s
+  animation-fill-mode both
+
+.example7 .gb-container.visible .gb-box
+
+  /* animation */
+  backface-visibility: visible !important;
+  animation-name bounce
+  transform-origin center bottom
+  animation-duration 1s
+  animation-fill-mode both
+
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    transform: translate3d(0,0,0);
+  }
+
+  40%, 43% {
+    transition-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    transform: translate3d(0, -30px, 0);
+  }
+
+  70% {
+    transition-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    transform: translate3d(0, -15px, 0);
+  }
+
+  90% {
+    transform: translate3d(0,-4px,0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomOutUp {
+  40% {
+    opacity: 1;
+    transform: scale3d(.475, .475, .475) translate3d(0, 60px, 0);
+    animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale3d(.1, .1, .1) translate3d(0, -2000px, 0);
+    transform-origin: center bottom;
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+  }
+}
+
+@keyframes zoomOut {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

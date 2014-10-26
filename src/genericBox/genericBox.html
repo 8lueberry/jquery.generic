@@ -3,14 +3,15 @@
   <head>
     <title>genericBox</title>
 
+    <link rel="stylesheet" href="../lib/gbTemplate.css" />
+    <link rel="stylesheet" href="gbExamples.css" />
     <link rel="stylesheet" href="genericBox.css" />
+
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" />
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="../lib/jquery.genericBox.min.js"></script>
-
-    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert"></script>
   </head>
 
   <body>
@@ -18,75 +19,79 @@
     <div>
 
       <div class="header gb">
-        <div class="gbBox">
-          <div class="gbClose"></div>
-          <div class="popup">
-            <h1 class="title">GenericBox</h1>
-            <div>
+        <div class="gb-container">
+          <div class="gb-box">
+            <div class="gb-close"></div>
+            <div class="popup">
+              <h1 class="title">GenericBox</h1>
+              <div>
 
-              <script>
-                $(function() {
+                <script>
+                  $(function() {
 
-                  $('button#button-try').on('click', function() {
-                    $('#popup-example').gb().show();
-                  });
+                    $('button#button-try').on('click', function() {
+                      $('#popup-example').gb().show();
+                    });
 
-                  $('button#button-style').on('click', function() {
-                    $('.example6 .popup').gb().show();
-                  });
+                    $('button#button-style').on('click', function() {
+                      $('.example6 .popup').gb().show();
+                    });
 
-                  $('button#button-animate').on('click', function() {
-                    $('.example7 >button').click();
-                  });
+                    $('button#button-animate').on('click', function() {
+                      $('.example7 >button').click();
+                    });
 
-                  $('button#button-multi').on('click', function() {
-                    $('.example5 >button').click();
-                  });
+                    $('button#button-multi').on('click', function() {
+                      $('.example5 >button').click();
+                    });
 
-                  $('button#button-modal').on('click', function() {
-                    $('.example9 >button').click();
-                  });
-                })
-              </script>
+                    $('button#button-modal').on('click', function() {
+                      $('.example9 >button').click();
+                    });
+                  })
+                </script>
 
-              <div class="overlay-animate-opacity popup-animate-scale popup-center">
-                <div id="popup-example" class="popup">
-                  <h1>This is a popup</h1>
+                <div class="gb overlay-fade center scale">
+                  <div id="popup-example" class="popup">
+                    <h1>This is a popup</h1>
 
-                  <div>
-                    It can be closed in different manners
+                    <div>
+                      It can be closed in different manners
+                    </div>
+
+                    <ul>
+                      <li>Pressing escape key</li>
+                      <li>Clicking the background</li>
+                      <li>Clicking the close button</li>
+                      <li>or throwing your computer through the window</li>
+                    </ul>
                   </div>
-
-                  <ul>
-                    <li>Pressing escape key</li>
-                    <li>Clicking the background</li>
-                    <li>Clicking the close button</li>
-                    <li>or throwing your computer through the window</li>
-                  </ul>
                 </div>
-              </div>
 
-              <button id="button-try">Try it</button>
-              <button id="button-style">Style it</button>
-              <button id="button-animate">Animate it</button>
-              <button id="button-multi">Multiple popups</button>
-              <button id="button-modal">Modal</button>
+                <button id="button-try">Try it</button>
+                <button id="button-style">Style it</button>
+                <button id="button-animate">Animate it</button>
+                <button id="button-multi">Multiple popups</button>
+                <button id="button-modal">Modal</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
+      <!--
       <div>
         <iframe src="http://ghbtns.com/github-btn.html?user=danlevan&repo=jquery.generic&type=watch"
   allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
         <iframe src="http://ghbtns.com/github-btn.html?user=danlevan&repo=jquery.generic&type=fork"
   allowtransparency="true" frameborder="0" scrolling="0" width="53" height="20"></iframe>
       </div>
+      -->
 
       <h2>Download</h2>
 
       <div>
-        Latest version: 0.1.1
+        Latest version: 0.1.2
 
         <ul>
           <li>
@@ -96,29 +101,28 @@
           </li>
         </ul>
 
-      </div>
+        (Optional)
+        <ul>
+          <li>
+            <a href="../lib/gbTemplate.css" download>gbTemplate.css</a>
+            (<a href="../lib/gbTemplate.styl" download>stylus</a>)
+          </li>
+        </ul>
 
-      <h2>npm</h2>
-
-      <div>
+        npm
         <pre class="prettyprint lang-html">npm install jquery-generic</pre>
-      </div>
 
-      <h2>Bower</h2>
-
-      <div>
+        Bower
         <pre class="prettyprint lang-html">bower install jquery-generic</pre>
       </div>
 
     </div>
 
-    <hr />
-
     <div>
       <h2>Bug tracker</h2>
 
       <div>
-        <a class="small" href="https://github.com/danlevan/jquery.generic/issues">https://github.com/danlevan/jquery.generic/issues</a>
+        <a href="https://github.com/danlevan/jquery.generic/issues">https://github.com/danlevan/jquery.generic/issues</a>
       </div>
 
     </div>
@@ -178,17 +182,22 @@
     <div>
       <ul>
         <li><a href="#quick">Getting started</a></li>
-        <li><a href="#how">How does it work</a></li>
-        <li><a href="#api">Methods</a></li>
-        <li><a href="#option">Options</a></li>
         <li>
-          <a href="#event">Events</a>
+          <a href="#how">How it works</a>
           <ul>
-            <li><a href="#eventAction">See it in action</a></li>
-            <li><a href="#eventAttach">How to attach to an event</a></li>
-            <li><a href="#eventCancel">Cancel a default action</a></li>
+            <li><a href="#api">Methods</a></li>
+            <li><a href="#option">Options</a></li>
+            <li>
+              <a href="#event">Events</a>
+              <ul>
+                <li><a href="#eventAction">See it in action</a></li>
+                <li><a href="#eventAttach">How to attach to an event</a></li>
+                <li><a href="#eventCancel">Cancel a default action</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
+        <li><a href="#helper">Optional css</a></li>
         <li>
           <a href="#examples">Examples</a>
           <ul>
@@ -219,133 +228,75 @@
 
       <h2>Step 1</h2>
 
-        <div>
-          Include jquery and jquery.genericBox
+      <div>
+        Include jquery and jquery.genericBox
 
 <pre class="prettyprint lang-html">
-&lt;!-- cdn -->
-&lt;script src="//code.jquery.com/jquery-1.11.0.min.js">&lt;/script>
+&lt;!-- Optional css, add this inside the head -->
+&lt;link rel="stylesheet" href="path/to/gbTemplate.css" />
 
-&lt;!-- replace path -->
-&lt;script src="/path/to/jquery.genericBox.min.js">&lt;/script>
+&lt;!-- Add this at the end, before the closing body tag -->
+&lt;script src="//code.jquery.com/jquery-1.11.0.min.js">&lt;/script>
+&lt;script src="path/to/jquery.genericBox.min.js">&lt;/script>
 </pre>
-        </div>
+
+        If you're in a hurry and just want to try it asap, copy paste this
+
+<pre style="font-size: 12px;">
+&lt;link rel="stylesheet" href="http://danlevan.github.io/jquery.generic/lib/gbTemplate.css" />
+&lt;script src="http://code.jquery.com/jquery-1.11.0.min.js">&lt;/script>
+&lt;script src="http://danlevan.github.io/jquery.generic/lib/jquery.genericBox.min.js">&lt;/script>
+</pre>
+
+      </div>
 
       <h2>Step 2</h2>
+      <div>
+        Create a div with the popup content and hide it
 
-        <div>
-          Build your css skeleton (here's a simple example)
+<pre class="prettyprint lang-html">
+&lt;div class="gb overlay-fade center scale"> &lt;!-- defined in the optional css -->
 
-<pre class="prettyprint lang-css">
-/**************************************************
- * GenericBox container
- *************************************************/
-.gb {
-  /* hidden */
-  display: none;
-}
-
-.gb.visible {
-  /* visible */
-  display: block;
-}
-
-/**************************************************
- * Overlay (dark transparent overlay)
- *************************************************/
-.gb .gbOverlay {
-  /* full screen */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* style */
-  background: rgba(0,0,0,0.6);
-}
-
-/**************************************************
- * Close button (red round, top right button)
- *************************************************/
-.gb .gbClose {
-  /* size and shape */
-  width: 20px;
-  height: 20px;
-  border-radius: 20px;
-  /* position top right */
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  /* style */
-  background-color: #e84e40;
-  cursor: pointer;
-}
-
-.gb .gbClose:hover {
-  background-color: #e53929;
-}
-
-/**************************************************
- * Container (popup and close button container)
- *************************************************/
-.gb .gbBox {
-  /* position on screen */
-  position: fixed;
-  top: 100px;
-  left: 100px;
-}
+  &lt;!-- your popup, style it the way you want -->
+  &lt;div id="#popup" style="display:none;">
+    ...
+  &lt;/div>
+&lt;/div>
 </pre>
-        </div>
-
-        <div>
-          Animations or centering need more complex styling.
-          <a href="#examples">See below for examples</a>
-        </div>
+      </div>
 
       <h2>Step 3</h2>
 
         <div>
-          Create a div with the popup content
-
-<pre class="prettyprint lang-html">
-&lt;!-- your popup -->
-&lt;div id="#popup">
-  ...
-&lt;/div>
-</pre>
-        </div>
-
-        <div>
-          Style it and hide it (you're free to style it the way you want)
-<pre class="prettyprint lang-css">
-#popup {
-  display: none; /* hidden */
-  ...
-}
-</pre>
-        </div>
-
-      <h2>Step 4</h2>
-
-        <div>
           Call genericBox
 <pre class="prettyprint lang-js">
-$('#popup').gb().show();
+$(function() {
+  ...
+  $('#popup').gb().show();
+})
 </pre>
         </div>
 
       <h2>That's it</h2>
 
-        <script>
-          $(function() {
-            $('button#button-example').on('click', function() {
-              $('.example1 >button').click();
-            });
-          })
-        </script>
+        <div id="getting-started">
+          <button>Click here</button> to see the result.
 
-        <div>
-          <button id="button-example">Click here</button> to see the result.
+          <script>
+            $(function() {
+              $('#getting-started >button').on('click', function() {
+                $('#getting-started .popup').gb().show();
+              });
+            })
+          </script>
+
+          <div class="gb gb overlay-fade center scale">
+            <div class="popup">
+              <h1>
+                Hello world
+              </h1>
+            </div>
+          </div>
         </div>
 
     </div>
@@ -355,7 +306,7 @@ $('#popup').gb().show();
     <div>
 
       <a name="how"></a>
-      <h1>How does it work?</h1>
+      <h1>How it works</h1>
 
       <div>
         Your html popup
@@ -369,12 +320,12 @@ $('#popup').gb().show();
           becomes
 
 <pre class="prettyprint lang-html">
-&lt;div class="gb">
-  &lt;div class="overlay">&lt;/div>
-  &lt;div class="gbBox">
-    &lt;div class="gbClose">&lt;/div>
+&lt;div class="gb-container">
+  &lt;div class="gb-overlay">&lt;/div>
+  &lt;div class="gb-box">
+    &lt;div class="gb-close">&lt;/div>
     &lt;!-- your popup -->
-    &lt;div id="popup">
+    &lt;div id="popup" class="gb-popup">
       ...
     &lt;/div>
   &lt;/div>
@@ -384,12 +335,12 @@ $('#popup').gb().show();
           and when show() is called, the class 'visible' is added to the root container
 
 <pre class="prettyprint lang-html">
-&lt;div class="gb visible">
-  &lt;div class="overlay">&lt;/div>
-  &lt;div class="gbBox">
-    &lt;div class="gbClose">&lt;/div>
+&lt;div class="gb-container visible">
+  &lt;div class="gb-overlay">&lt;/div>
+  &lt;div class="gb-box">
+    &lt;div class="gb-close">&lt;/div>
     &lt;!-- your popup -->
-    &lt;div id="popup">
+    &lt;div id="popup" class="gb-popup">
       ...
     &lt;/div>
   &lt;/div>
@@ -398,24 +349,29 @@ $('#popup').gb().show();
 
         <ul>
           <li>
-            <pre>&lt;div class="gb">&lt;/div></pre>
+            <pre>&lt;div class="gb-container">&lt;/div></pre>
             <div>Contains all the popup elements</div>
             <div>When visible, the class 'visible' is added to this element</div>
           </li>
           <li>
-            <pre>&lt;div class="overlay">&lt;/div></pre>
+            <pre>&lt;div class="gb-overlay">&lt;/div></pre>
             <div>Overlay background element</div>
             <div>Usually styled to be full screen with a dark or bright color</div>
           </li>
           <li>
-            <pre>&lt;div class="gbBox">&lt;/div></pre>
+            <pre>&lt;div class="gb-box">&lt;/div></pre>
             <div>Contains the close button and your popup</div>
             <div>Apply animations to this element so that your box and the close button is affected. You can also use this to center your popup.</div>
           </li>
           <li>
-            <pre>&lt;div class="gbClose">&lt;/div></pre>
+            <pre>&lt;div class="gb-close">&lt;/div></pre>
             <div>The close button</div>
-            <div>Since it's inside 'gbBox', it's easy to position it at the top, left, right or bottom</div>
+            <div>Since it's inside 'gb-box', it's easy to position it at the top, left, right or bottom</div>
+          </li>
+          <li>
+            <pre>&lt;div id="popup" class="gb-popup">&lt;/div></pre>
+            <div>Your popup</div>
+            <div>The class 'gb-popup' is added to your popup</div>
           </li>
         </ul>
       </div>
@@ -443,11 +399,9 @@ $('#popup').gb().show();
 </pre>
     </div>
 
-    <hr />
-
     <div>
       <a name="api"></a>
-      <h1>Methods</h1>
+      <h2>Methods</h2>
 
       <table>
         <tr>
@@ -472,7 +426,7 @@ $('#popup').gb().show();
         </tr>
       </table>
 
-      <h2>Usage example</h2>
+      <h3>Usage example</h3>
 <pre class="prettyprint lang-js">
   $('#popup')
     .gb()
@@ -480,12 +434,10 @@ $('#popup').gb().show();
 </pre>
     </div>
 
-    <hr />
-
     <div>
 
       <a name="option"></a>
-      <h1>Options</h1>
+      <h2>Options</h2>
 
       <table>
         <tr>
@@ -495,9 +447,9 @@ $('#popup').gb().show();
             Default:
 <pre>{
   wrap: 'gb',
-  close: 'gbClose',
-  box: 'gbBox',
-  overlay: 'gbOverlay',
+  close: 'gb-close',
+  box: 'gb-box',
+  overlay: 'gb-overlay',
   visible: 'visible',
 }</pre>
           </div>
@@ -506,28 +458,28 @@ $('#popup').gb().show();
         <tr>
           <th><code>hideOnClickOverlay</code></th>
           <td>
-            (bool) Whether to hide the popup when the overlay is clicked.
+            (Boolean) Whether to hide the popup when the overlay is clicked.
             <div>Default: true</div>
           </td>
         </tr>
         <tr>
-          <th><code>hideKey</code></th>
+          <th><code>hideOnEsc</code></th>
           <td>
-            (Number) The keycode that triggers the hiding of the popup. If null is passed, no keys are listened (useful for modal).
-            <div>Default: 27 (esc)</div>
+            (Boolean) Whether to hide the popup when the esc key is pressed.
+            <div>Default: true</div>
           </td>
         </tr>
         <tr>
           <th><code>lockBackgroundScroll</code></th>
           <td>
-            (bool) Whether to disable scrolling of the body when the popup is shown.
+            (Boolean) Whether to disable scrolling of the body when the popup is shown.
             <div>Default: true</div>
           </td>
         </tr>
         <tr>
           <th><code>blurTrigger</code></th>
           <td>
-            (bool) Whether to blur (unfocus) the body button, preventing the body button to be pressed by accidental keyboard events.
+            (Boolean) Whether to blur (unfocus) the body button, preventing the body button to be pressed by accidental keyboard events.
             <div>Default: true</div>
           </td>
         </tr>
@@ -578,31 +530,29 @@ $('#popup').gb().show();
       </table>
 
       <div>
-        There are 2 ways to pass options to the plugin
-
-        <h2>As an html data attribute</h2>
+        <h3>Option passed as html data attribute</h3>
 <pre class="prettyprint lang-html">
-&lt;div id="popup" data-gb='{"hideKey": null, "hideOnClickOverlay": false}'>
+&lt;div id="popup" data-gb='{"hideOnEsc": true, "hideOnClickOverlay": false}'>
   ...
 &lt;/div>
 </pre>
-        <h2>Or directly when constructing the genericBox</h2>
+        <h3>or option passed when constructing the genericBox</h3>
 
 <pre class="prettyprint lang-js">
-$('#popup').gb({
-   hideOnClickOverlay: false,
-   hideKey: null,
- }).show();
+$('#popup')
+  .gb({
+     hideOnClickOverlay: false,
+     hideOnEsc: true,
+   })
+   .show();
 </pre>
       </div>
     </div>
 
-    <hr />
-
     <div>
 
       <a name="event"></a>
-      <h1>Events</h1>
+      <h2>Events</h2>
 
       <table>
         <tr>
@@ -651,97 +601,117 @@ $('#popup').gb({
         </tr>
       </table>
 
+      <div>
+        Note that transition events are not supported yet. This is due to the difference in behavior of every browsers. You can still use at your own risk.
+        <ul>
+          <li>transitionEnd</li>
+          <li>showTransitionEnd</li>
+          <li>hideTransitionEnd</li>
+        </ul>
+
+        PS: There are no transitionStart events supported by any browsers.
+      </div>
+
       <!--
         example
       -->
-      <div class="example-event overlay-static">
+      <div class="example-event">
         <a name="eventAction"></a>
-        <h2>See it in action</h2>
-        <button class="animation">Click</button>
+        <h3>See it in action</h3>
 
-        <script>
-          $(function() {
+        <div>
+          <button class="animation">Click</button>
 
-            function log(message) {
-              $('.example-event .log').append('<div>' + message + '</div>');
-            }
+          <script>
+            $(function() {
 
-            function animate(anim) {
-              $('.example-event .gbBox')
-                .addClass(anim + ' animated')
-                .one(
-                  'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
-                  function() {
+              function log(message) {
+                $('.example-event .log').append('<div>' + message + '</div>');
+              }
 
-                    // reset animation class
-                    $(this)
-                      .removeClass()
-                      .addClass('gbBox');
-                  });
-            }
+              $('.example-event button').on('click', function() {
+                log('--- button clicked ---');
 
-            $('.example-event button').on('click', function() {
-              log('--- button clicked ---');
+                $('.example-event .popup').gb({
 
-              $('.example-event .popup').gb({
+                  onInitialize: function() {
+                    log('genericBox initialized');
+                  },
 
-                onInitialize: function() {
-                  log('genericBox initialized');
-                },
+                  onShow: function() {
+                    log('show ready');
+                  },
+                  onHide: function() {
+                    log('hide ready');
+                  },
 
-                onShow: function() {
-                  log('show ready');
+                  onShowStart: function() {
+                    log('show started');
 
-                  animate('bounceIn');
-                },
-                onHide: function() {
-                  log('hide ready');
+                    $('.example-event .gb-box').addClass('bounceIn animated');
+                  },
+                  onHideStart: function() {
+                    log('hide started');
 
-                  animate('bounceOut');
-                },
+                    $('.example-event .gb-box').addClass('bounceOut animated');
+                  },
 
-                onShowStart: function() {
-                  log('show started');
-                },
-                onHideStart: function() {
-                  log('hide started');
-                },
+                  onAnimationStart: function() {
+                    log('(animation started)');
+                  },
+                  onAnimationEnd: function() {
+                    log('(animation ended)');
 
-                onAnimationStart: function() {
-                  log('(animation started)');
-                },
-                onAnimationEnd: function() {
-                  log('(animation ended)');
-                },
+                    $('.example-event .gb-box')
+                      .removeClass('bounceIn bounceOut animated');
+                  },
 
-                onShowAnimationStart: function() {
-                  log('show animation started');
-                },
-                onShowAnimationEnd: function() {
-                  log('show animation ended');
-                },
+                  onShowAnimationStart: function() {
+                    log('show animation started');
+                  },
+                  onShowAnimationEnd: function() {
+                    log('show animation ended');
+                  },
 
-                onHideAnimationStart: function() {
-                  log('hide animation started');
-                },
-                onHideAnimationEnd: function() {
-                  log('hide animation ended');
-                },
-              })
-              .show();
-            });
-          })
-        </script>
+                  onHideAnimationStart: function() {
+                    log('hide animation started');
+                  },
+                  onHideAnimationEnd: function() {
+                    log('hide animation ended');
+                  },
 
-        <div class="log"></div>
+                  // these do now work so well
+                  onTransitionEnd: function() {
+                    log('(transition ended)');
+                  },
 
-        <div class="popup">
-          Popup
+                  // these do now work so well
+                  onShowTransitionEnd: function() {
+                    log('show transition ended');
+                  },
+
+                  // these do now work so well
+                  onHideTransitionEnd: function() {
+                    log('hide transition ended');
+                  },
+                })
+                .show();
+              });
+            })
+          </script>
+
+          <div class="log"></div>
+
+          <div class="gb overlay-fade overlay-light anim-1s">
+            <div class="popup" style="width:200px; height:50px;">
+              Popup
+            </div>
+          </div>
         </div>
       </div>
 
       <a name="eventAttach"></a>
-      <h2>How to attach to an event</h2>
+      <h3>How to attach to an event</h3>
 
       <div>
         As an option (see the <a href="#option">options documentation</a>)
@@ -760,9 +730,9 @@ $('#popup').gb({
       <div>
         Attach to an existing instance
 <pre class="prettyprint lang-js">
-var gbPopup = $('#popup').gb();
+var gb-popup = $('#popup').gb();
 ...
-gbPopup
+gb-popup
   .on('show', function() {
     console.log('Showing popup');
   })
@@ -775,17 +745,19 @@ gbPopup
       </div>
 
       <a name="eventCancel"></a>
-      <h2>Cancel a default action</h2>
+      <h3>Cancel a default action</h3>
 
       <div>
         You can cancel showing and hiding on the 'showStart' and 'hideStart' events.
 <pre class="prettyprint lang-js">
-$('#popup').gb({
-   onHideStart: function(e) {
-     console.log('Cancel hiding');
-     e.preventAction();
-   }
- }).show();
+$('#popup')
+  .gb({
+     onHideStart: function(e) {
+       console.log('Cancel hiding');
+       e.preventAction();
+     }
+   })
+   .show();
 </pre>
       </div>
 
@@ -793,13 +765,166 @@ $('#popup').gb({
 
     <hr />
 
-    <div>
+    <div class="helper">
+
+      <a name="helper"></a>
+      <h1>Optional css</h1>
+
+      <div>
+        The optional css is the starting point to customize your popup. It contains all the logic for centering, full screen, animations etc. All the examples use this helper css.
+      </div>
+
+      <div>
+        It was written using <a href="http://learnboost.github.io/stylus/">Stylus</a> and you can download the source here <a href="../lib/gbTemplate.styl">gbTemplate.styl</a>.
+      </div>
+
+      <h2>How to use</h2>
+
+      <div>Wrap your popup with a container with the 'gb' class</div>
+
+<pre class="prettyprint lang-html">
+&lt;div class="gb --any options--">
+
+  &lt;!-- your popup -->
+  &lt;div id="popup">
+  &lt;/div>
+
+&lt;/div>
+</pre>
+
+      <div>
+        Then add the wanted options. You can mix and match the options.
+
+        <script>
+          $(function() {
+
+            var quotes = [
+              'Bonjour',
+              'Hola',
+              'Guten tag',
+              'Ciao',
+              'Namaste',
+              'Salaam',
+              'Ohayo',
+              'Marhaba',
+            ];
+
+            $('.helper button').click(function() {
+              $(this).next().find('.popup')
+                .html('<h1>' +
+                  quotes[Math.floor(Math.random()*quotes.length)] +
+                  '</h1>'
+                )
+                .gb()
+                .show();
+            })
+          });
+        </script>
+
+        <table>
+          <tr>
+            <th><code>overlay-fade</code></th>
+            <td>
+              Light fading transition of the overlay on show and hide
+              <div>
+                <button>Try it</button>
+                <div class="gb overlay-fade">
+                  <div class="popup"><h1></h1></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th><code>overlay-light</code></th>
+            <td>
+              Lighten the overlay (not as dark but still transparent)
+              <div>
+                <button>Try it</button>
+                <div class="gb overlay-light">
+                  <div class="popup"><h1></h1></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th><code>overlay-white</code></th>
+            <td>
+              Use a bright overlay
+              <div>
+                <button>Try it</button>
+                <div class="gb overlay-white">
+                  <div class="popup"><h1></h1></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th><code>close-hide</code></th>
+            <td>
+              Hides the close button
+              <div>
+                <button>Try it</button>
+                <div class="gb close-hide">
+                  <div class="popup"><h1></h1></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th><code>center</code></th>
+            <td>
+              Centers the popup
+              <div>
+                <button>Try it</button>
+                <div class="gb center">
+                  <div class="popup"><h1></h1></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th><code>fullscreen</code></th>
+            <td>
+              Makes the popup full screen
+              <div>
+                <button>Try it</button>
+                <div class="gb fullscreen">
+                  <div class="popup"><h1></h1></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th><code>scale</code></th>
+            <td>
+              Light appearing animation of the box. It complements well the 'overlay-fade' and 'center' options.
+
+              <div>
+                <button>Try it</button>
+                <div class="gb overlay-fade scale center">
+                  <div class="popup"><h1></h1></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th><code>anim-1s</code></th>
+            <td>Helper class for 1 second animations</td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+
+    <hr />
+
+    <div class="examples">
 
       <a name="examples"></a>
       <h1>Examples</h1>
 
       <div>
-        See the page source and refer to the <a href="genericBox.css">css</a> for the example code.
+        See the page source and refer to the <a href="../lib/gbTemplate.css">optional css</a> for the example code. See the <a href="helper">optional css section</a> for more information.
       </div>
 
       <!--
@@ -809,7 +934,7 @@ $('#popup').gb({
       <div class="example1">
         <h2>example1: Fixed position</h2>
 
-        <div>This is the simplest example. It shows the popup on a fixed position.</div>
+        <div>This is the simplest example. It shows the popup on a fixed position. See the <a href="gbExamples.css">css</a> for the code.</div>
 
         <button>Popup</button>
 
@@ -821,17 +946,22 @@ $('#popup').gb({
           })
         </script>
 
-        <div class="popup">
-          <h1>This is a simple example...</h1>
-          The popup is at a fixed position on the screen
+        <div class="gb">
+          <div id="popup-example1" class="popup">
+            <h1>This is a simple example...</h1>
+            <div>
+              The popup is at a fixed position on the screen
+            </div>
+          </div>
         </div>
+
       </div>
 
       <!--
         example2
       -->
       <a name="example2"></a>
-      <div class="example2 overlay-static popup-center">
+      <div class="example2">
         <h2>example2: Center screen</h2>
 
         <div>
@@ -852,18 +982,22 @@ $('#popup').gb({
           })
         </script>
 
-        <div class="popup">
-          <h1>With flexbox</h1>
-
-          We can finally easily center horizontally and vertically
+        <div class="gb center">
+          <div class="popup">
+            <h1>With flexbox</h1>
+            <div>
+              We can finally easily center horizontally and vertically
+            </div>
+          </div>
         </div>
+
       </div>
 
       <!--
         example3
       -->
       <a name="example3"></a>
-      <div class="example3 overlay-static">
+      <div class="example3">
         <h2>example3: Full screen</h2>
 
         <div>
@@ -881,9 +1015,14 @@ $('#popup').gb({
           })
         </script>
 
-        <div class="popup">
-          <h1>Full screen content</h1>
-          Resizing the browser will also resize the popup, without any javascript.
+        <div class="gb fullscreen">
+          <div class="popup">
+            <h1>Full screen content</h1>
+
+            <div>
+              Resizing the browser will also resize the popup, without any javascript.
+            </div>
+          </div>
         </div>
       </div>
 
@@ -891,7 +1030,7 @@ $('#popup').gb({
         example4
       -->
       <a name="example4"></a>
-      <div class="example4 overlay-animate-opacity popup-animate-scale popup-center">
+      <div class="example4">
         <h2>example4: Common scenario (simple animation)</h2>
 
         <div>
@@ -908,10 +1047,13 @@ $('#popup').gb({
           })
         </script>
 
-        <div class="popup">
-          <h1>Simple animations</h1>
-
-          Makes a smooth transition
+        <div class="gb overlay-fade center scale">
+          <div class="popup" style="width:400px; height:150px;">
+            <h1>Simple animations</h1>
+            <div>
+              Makes a smooth transition
+            </div>
+          </div>
         </div>
       </div>
 
@@ -919,7 +1061,7 @@ $('#popup').gb({
         example5
       -->
       <a name="example5"></a>
-      <div class="example5 overlay-animate-opacity popup-animate-scale popup-center">
+      <div class="example5">
         <h2>example5: Multiple popup</h2>
 
         <div>Multiple popups are supported by default. You can also specify a z-index if needed.</div>
@@ -928,61 +1070,78 @@ $('#popup').gb({
 
         <script>
           $(function() {
+
             $('.example5 >button').on('click', function() {
-              $('.example5 .popup1').gb().show();
+
+              $('.example5 .popup1')
+                .gb()
+                .show();
 
               setTimeout(function() {
-                $('.example5 .popup2').gb().show();
+                $('.example5 .popup2')
+                  .gb()
+                  .show();
               }, 400);
 
               setTimeout(function() {
-                $('.example5 .popup3').gb().show();
+                $('.example5 .popup3')
+                  .gb()
+                  .show();
               }, 800);
             });
 
             $('.example5 .popup1 button').on('click', function() {
-              $('.example5 .popup2').gb().show();
+              $('.example5 .popup2')
+                .gb()
+                .show();
             });
 
             $('.example5 .popup2 button').on('click', function() {
-              $('.example5 .popup3').gb().show();
+              $('.example5 .popup3')
+                .gb()
+                .show();
             });
           })
         </script>
 
-        <div class="popup popup1">
+        <div class="gb overlay-fade center scale">
+          <div class="popup popup1" style="width:600px; height:200px;">
 
-          <h1>And since everything is css...</h1>
+            <h1>And since everything is css...</h1>
 
-          <div>
-            z-index can be specified if needed.
+            <div>
+              z-index can be specified if needed.
+            </div>
+
+            <div>
+              <button>Open popup</button>
+            </div>
           </div>
 
-          <div>
-            <button>Open popup</button>
+          <div class="popup popup2" style="width:550px; height:150px;">
+            <h1>Click on the overlay also</h1>
+            <div>
+              <button>Open popup</button>
+            </div>
+          </div>
+
+          <div class="popup popup3" style="width:500px; height:100px;">
+            <h2>Notice how the esc key works</h2>
           </div>
         </div>
 
-        <div class="popup popup2">
-          <h1>Click on the overlay also</h1>
-          <div>
-            <button>Open popup</button>
-          </div>
-        </div>
-
-        <div class="popup popup3">
-          <h2>Notice how the esc key works</h2>
-        </div>
       </div>
 
       <!--
         example6
       -->
       <a name="example6"></a>
-      <div class="example6 overlay-animate-opacity popup-animate-scale popup-center">
+      <div class="example6">
         <h2>example6: Custom styles</h2>
 
-        <div>Everything is customizable. You only need to know css.</div>
+        <div>
+          Everything is customizable. You only need to know css. See the <a href="gbExamples.css">css</a> for the code.
+        </div>
 
         <button>Popup</button>
 
@@ -998,42 +1157,44 @@ $('#popup').gb({
           })
         </script>
 
-        <div class="popup">
-          <h1>Freedom !!</h1>
-          <ul>
-            <li>
-              You can style the box
-            </li>
-            <li>
-              You can style the close button
-            </li>
-            <li>
-              You can position the close button
-            </li>
-            <li>
-              You can style the background
-            </li>
-          </ul>
+        <div class="gb overlay-fade center scale">
+          <div class="popup">
+            <h1>Freedom !!</h1>
+            <ul>
+              <li>
+                You can style the box
+              </li>
+              <li>
+                You can style the close button
+              </li>
+              <li>
+                You can position the close button
+              </li>
+              <li>
+                You can style the background
+              </li>
+            </ul>
 
-          <div>
-            If you don't like the close button, make your own
-          </div>
+            <div>
+              If you don't like the close button, make your own
+            </div>
 
-          <div>
-            <button>close button</button>
+            <div>
+              <button>close button</button>
+            </div>
           </div>
         </div>
       </div>
 
       <!--
-        example7
+        example7: css animation
       -->
       <a name="example7"></a>
-      <div class="example7 popup-center">
+      <div class="example7">
         <h2>example7: Custom animations</h2>
 
         <div>
-          Animations can be css or javascript
+          Animations can be css or javascript. See the <a href="gbExamples.css">css</a> file for the code.
         </div>
 
         <button>css</button>
@@ -1046,20 +1207,30 @@ $('#popup').gb({
           })
         </script>
 
-        <div class="popup">
-          <h1>Any animation you want</h1>
-          <ul>
-            <li>
-              Different animations for <strong>show</strong> and <strong>hide</strong>.
-            </li>
-            <li>
-              You can also animate the overlay (<strong>show</strong> and <strong>hide</strong> also)
-            </li>
-          </ul>
+        <div class="gb center">
+          <div class="popup">
+            <h1>Any animation you want</h1>
+            <ul>
+              <li>
+                Different animations for <strong>show</strong> and <strong>hide</strong>.
+              </li>
+              <li>
+                You can also animate the overlay (<strong>show</strong> and <strong>hide</strong> also)
+              </li>
+            </ul>
+          </div>
         </div>
+
       </div>
 
+      <!--
+        example7: js animation
+      -->
       <div class="example7-js">
+        <h2>example7: Custom animations (part 2)</h2>
+
+        <div>This example only uses javascript.</div>
+
         <button>javascript</button>
 
         <script>
@@ -1070,8 +1241,8 @@ $('#popup').gb({
                 // initialize the animation
                 onInitialize: function() {
                   var $container = $(this);
-                  var $overlay = $container.find('.gbOverlay');
-                  var $gbBox = $container.find('.gbBox');
+                  var $overlay = $container.find('.gb-overlay');
+                  var $gbBox = $container.find('.gb-box');
 
                   $overlay.css({
                     position: 'fixed',
@@ -1096,8 +1267,8 @@ $('#popup').gb({
                 // animate show
                 onShow: function() {
                   var $container = $(this);
-                  var $overlay = $container.find('.gbOverlay');
-                  var $gbBox = $container.find('.gbBox');
+                  var $overlay = $container.find('.gb-overlay');
+                  var $gbBox = $container.find('.gb-box');
 
                   $container.show();
 
@@ -1126,8 +1297,8 @@ $('#popup').gb({
                 // animate hide
                 onHide: function(e) {
                   var $container = $(this);
-                  var $overlay = $container.find('.gbOverlay');
-                  var $gbBox = $container.find('.gbBox');
+                  var $overlay = $container.find('.gb-overlay');
+                  var $gbBox = $container.find('.gb-box');
 
                   $gbBox.animate(
                     {
@@ -1155,10 +1326,12 @@ $('#popup').gb({
           })
         </script>
 
-        <div class="popup">
-          <h1>Any animation you want</h1>
-          <div>
-            Using 'show' and 'hideStart' event to call the wanted animations.
+        <div class="gb">
+          <div class="popup">
+            <h1>Any animation you want</h1>
+            <div>
+              Using 'show' and 'hideStart' event to call the wanted animations.
+            </div>
           </div>
         </div>
       </div>
@@ -1167,7 +1340,7 @@ $('#popup').gb({
         example8
       -->
       <a name="example8"></a>
-      <div class="example8 popup-center">
+      <div class="example8">
         <h2>example8: Animation libraries</h2>
 
         <div>
@@ -1238,6 +1411,10 @@ $('#popup').gb({
             </optgroup>
           </select>
 
+          (show animation)
+        </div>
+
+        <div>
           <select class="out">
             <optgroup label="Attention Seekers">
               <option value="bounce">bounce</option>
@@ -1300,6 +1477,8 @@ $('#popup').gb({
               <option value="zoomOutUp">zoomOutUp</option>
             </optgroup>
           </select>
+
+          (hide animation)
         </div>
 
         <button>Popup</button>
@@ -1309,7 +1488,7 @@ $('#popup').gb({
 
             // add the animation to the box
             function animate(anim) {
-              $('.example8 .gbBox')
+              $('.example8 .gb-box')
                 .addClass(anim + ' animated')
                 .one(
                   'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
@@ -1318,7 +1497,7 @@ $('#popup').gb({
                     // reset animation class
                     $(this)
                       .removeClass()
-                      .addClass('gbBox');
+                      .addClass('gb-box');
                   });
             };
 
@@ -1338,22 +1517,25 @@ $('#popup').gb({
           })
         </script>
 
-        <div class="popup">
-          <h1>This is a css animation</h1>
-          <div>
-            It uses the <a href="http://daneden.github.io/animate.css/">animate.css</a> css library.
-          </div>
-          <div>
-            If you want to use JavaScript animations, you can easily plug it in using the 'show' and 'hideStart' events.
+        <div class="gb overlay-fade anim-1s center">
+          <div class="popup" style="width:600px; height:300px">
+            <h1>This is a css animation</h1>
+            <div>
+              It uses the <a href="http://daneden.github.io/animate.css/">animate.css</a> css library.
+            </div>
+            <div>
+              If you want to use JavaScript animations, you can easily plug it in using the 'show' and 'hideStart' events.
+            </div>
           </div>
         </div>
+
       </div>
 
       <!--
         example9
       -->
       <a name="example9"></a>
-      <div class="example9 overlay-animate-opacity popup-animate-scale popup-center">
+      <div class="example9">
         <h2>example9: Modal</h2>
 
         <div>
@@ -1374,11 +1556,6 @@ $('#popup').gb({
               // options are passed on the data-gb attributes
               $('.example9 .popup').gb().show();
 
-              // options can also be passed like this
-              // $('.example9 .popup').gb({
-              //   hideOnClickOverlay: false,
-              //   hideKey: null,
-              // }).show();
             });
 
             $('.example9 .popup button').on('click', function() {
@@ -1387,18 +1564,20 @@ $('#popup').gb({
           });
         </script>
 
-        <div class="popup" data-gb='{"hideKey": null, "hideOnClickOverlay": false}'>
+        <div class="gb overlay-fade close-hide center scale">
+          <div class="popup" data-gb='{"hideOnEsc": false, "hideOnClickOverlay": false}'>
 
-          <h1>Modal popup</h1>
+            <h1>Modal popup</h1>
 
-          <ul>
-            <li>Click on the background doesn't close</li>
-            <li>Default close button is hidden</li>
-            <li>Esc key not listened</li>
-          </ul>
+            <ul>
+              <li>Click on the background doesn't close</li>
+              <li>Default close button is hidden</li>
+              <li>Esc key not listened</li>
+            </ul>
 
-          <div>
-            <button>close</button>
+            <div style="text-align: right;">
+              <button>close</button>
+            </div>
           </div>
         </div>
       </div>
@@ -1407,7 +1586,7 @@ $('#popup').gb({
         example10
       -->
       <a name="example10"></a>
-      <div class="example10 overlay-animate-opacity popup-animate-scale popup-center">
+      <div class="example10">
         <h2>example10: Prevent action</h2>
 
         <div>Show or hide a popup can be prevented when a condition is not met.</div>
@@ -1433,21 +1612,23 @@ $('#popup').gb({
           });
         </script>
 
-        <div class="popup">
+        <div class="gb overlay-fade center scale">
+          <div class="popup" style="width:500px;">
 
-          <h1>Check the checkbox</h1>
+            <h1>Check the checkbox</h1>
 
-          <div>
-            <label><input type="checkbox" />close the popup</label>
+            <div>
+              <label><input type="checkbox" />close the popup</label>
+            </div>
+
+            <div class="message" style="height: 50px; color: #e51c23"></div>
+
           </div>
-
-          <div class="message"></div>
-
         </div>
       </div>
 
       <a name="example11"></a>
-      <div class="example11 overlay-animate-opacity popup-animate-scale popup-center">
+      <div class="example11">
         <h2>example11: Initializing multiple popup in one call</h2>
 
         <div>
@@ -1469,17 +1650,20 @@ $('#popup').gb({
           });
         </script>
 
-        <div class="popup popup1">
-          Hello one
+        <div class="gb overlay-fade center scale">
+          <div class="popup" style="width:500px; height:300px;">
+            Hello one
+          </div>
+
+          <div class="popup" style="width:400px; height:200px;">
+            Hello two
+          </div>
         </div>
 
-        <div class="popup popup2">
-          Hello two
-        </div>
       </div>
 
       <a name="example12"></a>
-      <div class="example12 overlay-static popup-center">
+      <div class="example12">
         <h2>example12: Create dynamic box</h2>
 
         <div>
@@ -1487,6 +1671,8 @@ $('#popup').gb({
         </div>
 
         <button>Popup</button>
+
+        <div id="dynamic-container" class="gb overlay-fade center scale"></div>
 
         <script>
           $(function() {
@@ -1497,13 +1683,13 @@ $('#popup').gb({
                 .css({
                   width: '400px',
                   height: '200px',
-                  'background-color': '#fff',
                   padding: '10px',
+                  'background-color': '#fff',
                 })
                 .html('Hello world')
 
                 // put it after the button
-                .insertAfter(this)
+                .appendTo('#dynamic-container')
 
                 // call gb
                 .gb({
@@ -1539,6 +1725,9 @@ $('#popup').gb({
       </div>
     </div>
 
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert"></script>
+
+    <!--
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -1547,7 +1736,7 @@ $('#popup').gb({
 
       ga('create', 'UA-56056086-1', 'auto');
       ga('send', 'pageview');
-
     </script>
+    -->
   </body>
 </html>
