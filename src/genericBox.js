@@ -58,18 +58,19 @@
 
   $.fn.gb.defaults = {
     css: {
-      wrap: 'gb',
-      close: 'gbClose',
-      box: 'gbBox',
-      overlay: 'gbOverlay',
-      visible: 'visible',
+      container:  'gb-container',
+      close:      'gb-close',
+      box:        'gb-box',
+      popup:      'gb-popup',
+      overlay:    'gb-overlay',
+      visible:    'visible',
     },
 
     // hide box on overlay click
     hideOnClickOverlay: true,
 
-    // hide box on key press
-    hideKey: 27, // esc
+    // hide box on esc key
+    hideOnEsc: true,
 
     // remove the focus on the button clicked
     blurTrigger: true,
@@ -157,11 +158,8 @@
         .addClass(that.options.css.visible);
 
       // listen to keyboard
-      if (that.options.hideKey) {
-
-        // bind the event first (LIFO)
-        bindFirst(window, 'keydown.gb', onKeyPress);
-      }
+      // bind the event first (LIFO)
+      bindFirst(window, 'keydown.gb', onKeyPress);
 
       // register overlay click
       if (that.options.hideOnClickOverlay) {
@@ -199,9 +197,7 @@
       }
 
       // unregister keypress event
-      if (that.options.hideKey) {
-        $(window).off('keydown.gb', onKeyPress);
-      }
+      $(window).off('keydown.gb', onKeyPress);
 
       // unregister overlay click
       if (that.options.hideOnClickOverlay) {
@@ -224,7 +220,7 @@
     // Event binding
     //
     that.on = function on(name, fn) {
-      bindEvent(name, fn);
+      that.$container.on(name, fn);
 
       return that; // chaining
     };
@@ -233,7 +229,7 @@
     // Event binding one
     //
     that.one = function one(name, fn) {
-      bindEventOnce(name, fn);
+      that.$container.one(name, fn);
 
       return that; // chaining
     };
@@ -242,7 +238,7 @@
     // Event unbinding
     //
     that.off = function(name, fn) {
-      unbindEvent(name, fn);
+      that.$container.off(name, fn);
 
       return that;
     };
@@ -262,26 +258,29 @@
     // Build the skeleton
     //
     function buildBody() {
+
       // element
       that.$el
-        // display the element (hidden by the wrapper)
+        .addClass(that.options.css.popup)
+
+        // display the element (hidden by the box)
         .css({
           'display': 'block',
           'pointer-events': 'auto',
         });
 
-      // wrapper
+      // box
       that.$el
         .wrap('<div class="' + that.options.css.box + '">');
 
-      that.$wrapper = that.$el.parent()
+      that.$box = that.$el.parent()
         .css({
           'pointer-events': 'none',
         });
 
       // container
-      that.$container = that.$wrapper
-        .wrap('<div class="' + that.options.css.wrap + '">')
+      that.$container = that.$box
+        .wrap('<div class="' + that.options.css.container + '">')
         .parent();
 
       // overlay
@@ -289,7 +288,7 @@
         .addClass(that.options.css.overlay)
 
         // in the wrapper but before the element
-        .insertBefore(that.$wrapper);
+        .insertBefore(that.$box);
 
       // close button
       that.$close = $('<div class="' + that.options.css.close + '">')
@@ -304,28 +303,7 @@
         })
 
         // after the element (for z-index)
-        .prependTo(that.$wrapper);
-    }
-
-    //
-    // Binds an event
-    //
-    function bindEvent(name, fn) {
-      that.$container.on(name, fn);
-    }
-
-    //
-    // Binds an event once
-    //
-    function bindEventOnce(name, fn) {
-      that.$container.one(name, fn);
-    }
-
-    //
-    // unbinds an event
-    //
-    function unbindEvent(name, fn) {
-      that.$container.off(name, fn);
+        .prependTo(that.$box);
     }
 
     //
@@ -403,12 +381,12 @@
           name = name[0].toLowerCase() + name.slice(1);
 
           // attach event
-          bindEvent(name, value);
+          that.$container.on(name, value);
         }
       });
 
       // animation start events
-      that.$wrapper.on(
+      that.$box.on(
         'webkitAnimationStart mozAnimationStart MSAnimationStart ' +
         'oanimationstart animationstart',
         function() {
@@ -424,7 +402,7 @@
       );
 
       // animation end events
-      that.$wrapper.on(
+      that.$box.on(
         'webkitAnimationEnd mozAnimationEnd MSAnimationEnd ' +
         'oanimationend animationend',
         function() {
@@ -438,7 +416,26 @@
           }
         }
       );
+
+      // partial support for transitions
+      that.$box.on(
+        'webkitTransitionEnd MSTransitionEnd otransitionend transitionend',
+        function() {
+          trigger('transitionEnd');
+
+          if (that.isVisible) {
+            trigger('showTransitionEnd');
+          }
+          else {
+            trigger('hideTransitionEnd');
+          }
+        }
+      );
     }
+
+    var keys = {
+      ESC: 27,
+    };
 
     //
     // Handler for key press
@@ -446,18 +443,21 @@
     function onKeyPress(e) {
 
       switch (e.keyCode) {
-        case that.options.hideKey:
-          that.hide();
-          break;
+        case keys.ESC:
+
+          if (that.options.hideOnEsc) {
+            that.hide();
+          }
+
+          // handled, don't bubble up
+          e.stopImmediatePropagation();
+          e.preventDefault();
+          return;
 
         // proceed
         default:
-          return;
+          break;
       }
-
-      // handled, don't bubble up
-      e.stopImmediatePropagation();
-      e.preventDefault();
     }
 
     //
