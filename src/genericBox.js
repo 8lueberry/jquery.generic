@@ -387,9 +387,7 @@
       // animation start events
       that.$wrapper.on(
         'webkitAnimationStart mozAnimationStart MSAnimationStart ' +
-        'oanimationstart animationstart' +
-        'webkitTransitionStart mozTransitionStart MSTransitionStart ' +
-        'otransitionstart transitionstart',
+        'oanimationstart animationstart',
         function() {
           trigger('animationStart');
 
@@ -405,9 +403,9 @@
       // animation end events
       that.$wrapper.on(
         'webkitAnimationEnd mozAnimationEnd MSAnimationEnd ' +
-        'oanimationend animationend' +
-        'webkitTransitionEnd mozTransitionEnd MSTransitionEnd ' +
-        'otransitionend transitionend',
+        'oanimationend animationend ' +
+        'webkitTransitionEnd MSTransitionEnd otransitionend oTransitionEnd ' +
+        'transitionend',
         function() {
           trigger('animationEnd');
 
