@@ -281,8 +281,8 @@
       that.selectedDate = null;
 
       // specified a selected date in the option
-      if (that.options.selectDate
-        && !isNaN(that.options.selectDate.getTime())
+      if (that.options.selectDate &&
+        !isNaN(that.options.selectDate.getTime())
       ) {
         updateSelection(that.options.selectDate, 'init');
 
