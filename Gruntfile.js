@@ -73,6 +73,22 @@ var configure = function(grunt) {
         src: ['src/gbTemplate.styl'],
         dest: '<%= paths.lib %>/gbTemplate.styl',
       },
+
+      dateTimePicker: {
+        options: {
+          banner: '<%= banner.js %>',
+        },
+        src: ['src/genericDateTimePicker.js'],
+        dest: '<%= paths.lib %>/jquery.genericDateTimePicker.js',
+      },
+
+      'dateTimePicker-styl': {
+        options: {
+          banner: '<%= banner.css %>',
+        },
+        src: ['src/gdtTemplate.styl'],
+        dest: '<%= paths.lib %>/gdtTemplate.styl',
+      },
     },
 
     // grunt-contrib-jshint
@@ -83,6 +99,7 @@ var configure = function(grunt) {
 
       lib: [
         'src/genericBox.js',
+        'src/genericDateTimePicker.js',
       ],
     },
 
@@ -101,7 +118,10 @@ var configure = function(grunt) {
         files: {
           '<%= paths.lib %>/gbTemplate.css': [
             'src/gbTemplate.styl',
-          ]
+          ],
+          '<%= paths.lib %>/gdtTemplate.css': [
+            'src/gdtTemplate.styl',
+          ],
         },
       },
     },
@@ -112,15 +132,25 @@ var configure = function(grunt) {
         banner: '<%= banner.js %>',
       },
 
-      box: {
+      lib: {
         options: {
           sourceMap: true,
         },
         files: {
           '<%= paths.lib %>/jquery.genericBox.min.js': [
-          'src/genericBox.js', ]
+          'src/genericBox.js', ],
+          '<%= paths.lib %>/jquery.genericDateTimePicker.min.js': [
+          'src/genericDateTimePicker.js', ],
         },
       }
+    },
+
+    // grunt-contrib-watch
+    watch: {
+      stylus: {
+        files: ['src/*.styl'],
+        tasks: ['stylus'],
+      },
     },
   });
 
@@ -138,7 +168,9 @@ var configure = function(grunt) {
       'clean:lib',
       'concat:box',
       'concat:box-styl',
-      'uglify:box',
+      'concat:dateTimePicker',
+      'concat:dateTimePicker-styl',
+      'uglify:lib',
       'stylus',
     ]
   );
