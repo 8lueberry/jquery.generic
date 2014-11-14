@@ -1,0 +1,545 @@
+/*******************************************************************************
+ * example3: Custom style 1
+ ******************************************************************************/
+.example3 {
+  font-size: 16px;
+/* layout and size */
+/* inner element align and sizing */
+/* box */
+/* close: black circle with an X, positioned top left */
+/* time */
+/* hover */
+/* weekend */
+/* outside */
+/* selected */
+}
+.example3 .gdt-container {
+/* hidden */
+  position: fixed;
+  top: -999px;
+  left: -999px;
+}
+.example3 .gdt-container.visible {
+/* visible */
+  position: relative;
+  top: 0;
+  auto: 0;
+  left: 0;
+  auto: 0;
+}
+.example3 .gdt-box {
+/* position */
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 450px;
+}
+.example3 .gdt-calendar {
+  display: inline-block;
+}
+.example3 .gdt-time {
+  display: inline-block;
+  margin-left: 15px;
+  width: 140px;
+  height: 220px;
+  overflow: auto;
+}
+.example3 .gdt-year,
+.example3 .gdt-month,
+.example3 .gdt-calendar {
+  text-align: center;
+}
+.example3 .gdt-time {
+  text-align: right;
+}
+.example3 ol {
+  margin: 0;
+  padding: 0;
+}
+.example3 li {
+  list-style: none;
+}
+.example3 .gdt-year {
+  font-size: 1.2em;
+}
+.example3 .gdt-year li {
+  padding: 0 10px;
+}
+.example3 .gdt-year li.selected {
+  font-size: 2.5em;
+}
+.example3 .gdt-month {
+  font-size: 0.8em;
+}
+.example3 .gdt-month li {
+  padding: 0 4px;
+  text-transform: uppercase;
+}
+.example3 .gdt-month li.selected {
+  font-size: 2em;
+}
+.example3 .gdt-year li,
+.example3 .gdt-month li {
+  display: inline-block;
+  vertical-align: middle;
+}
+.example3 .gdt-time li {
+  padding: 5px 25px 5px 15px;
+  font-size: 1.2em;
+}
+.example3 .gdt-calendar table {
+  margin: 0;
+  padding: 0;
+  border-spacing: 0;
+}
+.example3 .gdt-calendar table th,
+.example3 .gdt-calendar table td,
+.example3 .gdt-calendar table td span {
+  width: 35px;
+  height: 35px;
+}
+.example3 .gdt-calendar table td span {
+  display: inline-block;
+  line-height: 35px;
+  -webkit-border-radius: 35px;
+  border-radius: 35px;
+}
+.example3 .gdt-close,
+.example3 .gdt-year li,
+.example3 .gdt-month li,
+.example3 .gdt-calendar td,
+.example3 .gdt-time li {
+  cursor: pointer;
+}
+.example3 .gdt-box {
+  background-color: #343434;
+  color: #fff;
+  border: solid 8px #fff;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+  padding: 15px;
+}
+.example3 .gdt-close {
+/* style */
+  text-align: center;
+  background-color: #000;
+  color: #fff;
+  border: solid 3px #fff;
+  -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.8);
+  box-shadow: 0 0 5px rgba(0,0,0,0.8);
+  cursor: pointer;
+/* size & shape */
+  width: 28px;
+  height: 28px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  line-height: 1;
+/* position top left outside the box a little */
+  position: absolute;
+  top: -20px;
+  left: -20px;
+}
+.example3 .gdt-close:before {
+  content: "\00D7";
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  font-size: 28px;
+}
+.example3 .gdt-close:hover {
+  color: #e84e40;
+  background-color: #000;
+}
+.example3 .gdt-close:active {
+  color: #e51c23;
+}
+.example3 .gdt-time {
+  background-color: #444;
+  border-width: 0;
+}
+.example3 .gdt-calendar td:hover span,
+.example3 .gdt-time li:hover {
+  background-color: #242424;
+}
+.example3 .gdt-calendar td:nth-child(1),
+.example3 .gdt-calendar td:nth-child(7) {
+  background-color: #444;
+}
+.example3 .gdt-calendar td:nth-child(1):hover span,
+.example3 .gdt-calendar td:nth-child(7):hover span {
+  background-color: #333;
+}
+.example3 .gdt-year li.outside,
+.example3 .gdt-month li.outside,
+.example3 .gdt-calendar td.outside,
+.example3 .gdt-calendar td.outside-month,
+.example3 .gdt-time li.outside {
+  color: #555;
+}
+.example3 .gdt-year li.selected,
+.example3 .gdt-month li.selected,
+.example3 .gdt-calendar td.today {
+  color: #03a9f4;
+}
+.example3 .gdt-calendar td.selected span,
+.example3 .gdt-calendar td.selected:hover span,
+.example3 .gdt-time li.selected {
+  background-color: #03a9f4;
+  color: #fff;
+}
+/*******************************************************************************
+ * example4
+ ******************************************************************************/
+.example4 .gdt-container {
+/* hidden */
+  position: fixed;
+  top: -999px;
+  left: -999px;
+}
+.example4 .gdt-container.visible {
+/* visible */
+  position: relative;
+  top: 0;
+  auto: 0;
+  left: 0;
+  auto: 0;
+}
+.example4 .gdt-box {
+/* position */
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: auto;
+}
+.example4 .gdt-close,
+.example4 .gdt-year,
+.example4 .gdt-month,
+.example4 .gdt-time {
+  display: none;
+}
+.example4 .gdt-calendar {
+  display: inline-block;
+}
+.example4 .gdt-calendar table {
+  margin: 0;
+  padding: 0;
+  border-spacing: 0;
+}
+.example4 .gdt-calendar table th,
+.example4 .gdt-calendar table td,
+.example4 .gdt-calendar table td span {
+  width: 35px;
+  height: 35px;
+}
+.example4 .gdt-calendar table td span {
+  display: inline-block;
+  line-height: 35px;
+  -webkit-border-radius: 35px;
+  border-radius: 35px;
+}
+.example4 .gdt-calendar td {
+  cursor: pointer;
+}
+.example4 .gdt-box {
+  background-color: #fff;
+  color: #000;
+  border: none;
+  -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+  padding: 10px 6px;
+}
+.example4 .gdt-calendar table th {
+  font-size: 0.8em;
+  text-transform: uppercase;
+  color: #343434;
+  height: auto;
+  padding-bottom: 10px;
+}
+.example4 .gdt-calendar td:hover span {
+  background-color: #eee;
+}
+.example4 .gdt-calendar td.today {
+  color: inherit;
+  font-weight: bold;
+}
+.example4 .gdt-calendar td.outside,
+.example4 .gdt-calendar td.outside-month {
+  color: #eee;
+}
+.example4 .gdt-calendar td.outside:hover span,
+.example4 .gdt-calendar td.outside-month:hover span {
+  background-color: transparent;
+}
+.example4 .gdt-calendar td.selected span,
+.example4 .gdt-calendar td.selected:hover span {
+  background-color: #03a9f4;
+  color: #fff;
+}
+/*******************************************************************************
+ * example5
+ ******************************************************************************/
+.example5 .gdt-container {
+/* hidden */
+  position: fixed;
+  top: -999px;
+  left: -999px;
+}
+.example5 .gdt-container.visible {
+/* visible */
+  position: relative;
+  top: 0;
+  auto: 0;
+  left: 0;
+  auto: 0;
+}
+.example5 .gdt-box {
+/* position */
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: auto;
+}
+.example5 .gdt-close,
+.example5 .gdt-year {
+  display: none;
+}
+.example5 .gdt-picker {
+  padding-top: 20px;
+}
+.example5 .gdt-calendar {
+  margin: 0 10px 10px 10px;
+}
+.example5 .buttons {
+  margin: 20px 10px;
+}
+.example5 .summary {
+  padding: 10px;
+}
+.example5 .gdt-calendar,
+.example5 .time-summary {
+  display: inline-block;
+  vertical-align: top;
+}
+.example5 .time-summary {
+  margin: 0 10px;
+}
+.example5 .time-picker {
+  margin-top: 20px;
+}
+.example5 .month-picker,
+.example5 .time-picker {
+  position: relative;
+}
+.example5 .gdt-month,
+.example5 .gdt-time {
+  width: 150px;
+  height: 270px;
+  overflow: auto;
+  margin-bottom: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  padding: 5px 10px;
+  z-index: 2;
+}
+.example5 .gdt-month {
+  left: 140px;
+}
+.example5 ol,
+.example5 ul {
+  margin: 0;
+  padding: 0;
+}
+.example5 ol li,
+.example5 ul li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.example5 .gdt-year,
+.example5 .gdt-month,
+.example5 .gdt-calendar {
+  text-align: center;
+}
+.example5 .gdt-month {
+  font-size: 1.2em;
+}
+.example5 .gdt-time {
+  text-align: right;
+}
+.example5 .gdt-time li {
+  padding-right: 15px;
+  font-size: 1.2em;
+}
+.example5 .gdt-calendar table {
+  margin: 0;
+  padding: 0;
+  border-spacing: 0;
+}
+.example5 .gdt-calendar table th,
+.example5 .gdt-calendar table td,
+.example5 .gdt-calendar table td span {
+  width: 35px;
+  height: 35px;
+}
+.example5 .gdt-calendar table td span {
+  display: inline-block;
+  line-height: 35px;
+  -webkit-border-radius: 35px;
+  border-radius: 35px;
+}
+.example5 .gdt-calendar td,
+.example5 .month-picker span,
+.example5 .gdt-month li,
+.example5 .time-picker span,
+.example5 .gdt-time li {
+  cursor: pointer;
+}
+.example5 .gdt-box {
+  background-color: #fff;
+  color: #000;
+  border: none;
+  -webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+}
+.example5 .month-picker span {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.example5 .time-picker span {
+  border: solid 1px #ccc;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  padding: 3px 8px;
+}
+.example5 .gdt-month,
+.example5 .gdt-time {
+  background-color: #fff;
+  border: solid 1px #ccc;
+}
+.example5 .gdt-calendar table th {
+  font-size: 0.8em;
+  text-transform: uppercase;
+  color: #343434;
+  height: auto;
+  padding-bottom: 10px;
+}
+.example5 .gdt-calendar td:hover span {
+  background-color: #eee;
+}
+.example5 .gdt-calendar td.today {
+  color: inherit;
+  font-weight: bold;
+}
+.example5 .gdt-calendar td.outside,
+.example5 .gdt-calendar td.outside-month,
+.example5 .gdt-time .outside {
+  color: #eee;
+}
+.example5 .gdt-calendar td.outside:hover span,
+.example5 .gdt-calendar td.outside-month:hover span,
+.example5 .gdt-time .outside:hover span {
+  background-color: transparent;
+}
+.example5 .gdt-calendar td.selected span,
+.example5 .gdt-calendar td.selected:hover span,
+.example5 .gdt-time li.selected {
+  background-color: #03a9f4;
+  color: #fff;
+}
+.example5 .calendar {
+  width: 100px;
+  height: 100px;
+  border: solid 1px #ccc;
+  display: inline-block;
+  margin-top: 10px;
+}
+.clock {
+  position: relative;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  border: solid 8px #ccc;
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  background-color: #fff;
+}
+.clock:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  background-color: #666;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
+}
+.clock .hour {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -30% -3px 0;
+  padding: 30% 3px 0;
+  background-color: #666;
+  -webkit-border-radius: 3px 3px 0 0;
+  border-radius: 3px 3px 0 0;
+  -webkit-transform-origin: 50% 100%;
+  -moz-transform-origin: 50% 100%;
+  -o-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+  -webkit-transition: -webkit-transform 1s ease-out;
+  -moz-transition: -moz-transform 1s ease-out;
+  -o-transition: -o-transform 1s ease-out;
+  -ms-transition: -ms-transform 1s ease-out;
+  transition: transform 1s ease-out;
+}
+.clock .minute {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -40% -2px 0;
+  padding: 40% 2px 0;
+  background-color: #666;
+  -webkit-border-radius: 2px 2px 0 0;
+  border-radius: 2px 2px 0 0;
+  -webkit-transform-origin: 50% 100%;
+  -moz-transform-origin: 50% 100%;
+  -o-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+  -webkit-transition: -webkit-transform 1.2s ease-out;
+  -moz-transition: -moz-transform 1.2s ease-out;
+  -o-transition: -o-transform 1.2s ease-out;
+  -ms-transition: -ms-transform 1.2s ease-out;
+  transition: transform 1.2s ease-out;
+}
+.clock .second {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -40% -1px 0;
+  padding: 40% 1px 0;
+  background-color: #f00;
+  -webkit-transform-origin: 50% 100%;
+  -moz-transform-origin: 50% 100%;
+  -o-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+}
+/* display inline */
+.inline .gdt-box {
+  position: relative;
+  display: inline-block;
+}

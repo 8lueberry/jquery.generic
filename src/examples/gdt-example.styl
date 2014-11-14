@@ -1,0 +1,503 @@
+@import 'nib'
+
+/*******************************************************************************
+ * example3: Custom style 1
+ ******************************************************************************/
+
+.example3
+
+  font-size 16px
+
+  /* layout and size */
+
+  .gdt-container
+
+    /* hidden */
+    fixed top -999px left -999px
+
+  .gdt-container.visible
+
+    /* visible */
+    relative top auto left auto
+
+  .gdt-box
+
+    /* position */
+    absolute top 2px left /* relative to container */
+    width 450px
+
+  .gdt-calendar
+    display inline-block
+
+  .gdt-time
+    display inline-block
+    margin-left 15px
+    size 140px 220px
+    overflow auto
+
+  /* inner element align and sizing */
+
+  .gdt-year
+  .gdt-month
+  .gdt-calendar
+    text-align center
+
+  .gdt-time
+    text-align right
+
+  ol
+    margin 0
+    padding 0
+
+  li
+    list-style none
+
+  .gdt-year
+    font-size 1.2em
+
+    li
+      padding 0 10px
+
+      &.selected
+        font-size 2.5em
+
+  .gdt-month
+    font-size .8em
+
+    li
+      padding 0 4px
+      text-transform uppercase
+
+      &.selected
+        font-size 2em
+
+  .gdt-year li
+  .gdt-month li
+    display inline-block
+    vertical-align middle
+
+  .gdt-time li
+    padding 5px 25px 5px 15px
+    font-size 1.2em
+
+  .gdt-calendar table
+    margin 0
+    padding 0
+    border-spacing 0
+
+    th, td, td span
+      size 35px 35px
+
+    td span
+      display inline-block
+      line-height 35px
+      border-radius 35px
+
+  .gdt-close
+  .gdt-year li
+  .gdt-month li
+  .gdt-calendar td
+  .gdt-time li
+    cursor pointer
+
+  /* box */
+  .gdt-box
+    background-color #343434
+    color #fff
+
+    border solid 8px #fff
+    border-radius 10px
+    box-shadow 0 2px 10px rgba(0,0,0,.6)
+    padding 15px
+
+  /* close: black circle with an X, positioned top left */
+  .gdt-close
+
+    /* style */
+    text-align center
+    background-color #000
+    color #fff
+    border solid 3px #fff
+    box-shadow 0 0 5px rgba(0,0,0,.8)
+    cursor pointer
+
+    /* size & shape */
+    size 28px 28px
+    border-radius 30px
+    line-height 1
+
+    /* position top left outside the box a little */
+    absolute top -20px left -20px
+
+    &:before /* close button x sign */
+      content "\00D7"
+      font-weight bold
+      font-family Arial, sans-serif
+      font-size 28px
+
+    &:hover
+      color #e84e40
+      background-color #000
+
+    &:active
+      color #e51c23
+
+  /* time */
+  .gdt-time
+    background-color #444
+    border-width 0
+
+  /* hover */
+  .gdt-calendar td:hover span
+  .gdt-time li:hover
+    background-color #242424
+
+  /* weekend */
+  .gdt-calendar td:nth-child(1)
+  .gdt-calendar td:nth-child(7)
+    background-color #444
+
+    &:hover span
+      background-color #333
+
+  /* outside */
+  .gdt-year li.outside
+  .gdt-month li.outside
+  .gdt-calendar td.outside
+  .gdt-calendar td.outside-month
+  .gdt-time li.outside
+    color #555
+
+  /* selected */
+  .gdt-year li.selected
+  .gdt-month li.selected
+  .gdt-calendar td.today
+    color #03A9F4
+
+  .gdt-calendar td.selected span
+  .gdt-calendar td.selected:hover span
+  .gdt-time li.selected
+    background-color #03A9F4
+    color #fff
+
+/*******************************************************************************
+ * example4
+ ******************************************************************************/
+
+.example4
+
+  /* layout and size */
+
+  .gdt-container
+
+    /* hidden */
+    fixed top -999px left -999px
+
+  .gdt-container.visible
+
+    /* visible */
+    relative top auto left auto
+
+  .gdt-box
+
+    /* position */
+    absolute top 2px left /* relative to container */
+    width auto
+
+  .gdt-close
+  .gdt-year
+  .gdt-month
+  .gdt-time
+    display none
+
+  .gdt-calendar
+    display inline-block
+
+  /* inner element align and sizing */
+
+  .gdt-calendar table
+    margin 0
+    padding 0
+    border-spacing 0
+
+    th, td, td span
+      size 35px 35px
+
+    td span
+      display inline-block
+      line-height 35px
+      border-radius 35px
+
+  .gdt-calendar td
+    cursor pointer
+
+  /* box */
+  .gdt-box
+    background-color #fff
+    color #000
+
+    border none
+    box-shadow 1px 1px 4px rgba(0,0,0,0.4)
+    padding 10px 6px
+
+  /* calendar header */
+  .gdt-calendar table th
+    font-size 0.8em
+    text-transform uppercase
+    color #343434
+    height auto
+    padding-bottom 10px
+
+  /* hover */
+  .gdt-calendar td:hover span
+    background-color #eee
+
+  /* today */
+  .gdt-calendar td.today
+    color inherit
+    font-weight bold
+
+  /* outside */
+  .gdt-calendar td.outside
+  .gdt-calendar td.outside-month
+    color #eee
+
+    &:hover span
+      background-color transparent
+
+  /* selected */
+  .gdt-calendar td.selected span
+  .gdt-calendar td.selected:hover span
+    background-color #03A9F4
+    color #fff
+
+/*******************************************************************************
+ * example5
+ ******************************************************************************/
+
+.example5
+
+  .gdt-container
+
+    /* hidden */
+    fixed top -999px left -999px
+
+  .gdt-container.visible
+
+    /* visible */
+    relative top auto left auto
+
+  .gdt-box
+
+    /* position */
+    absolute top 2px left /* relative to container */
+    width auto
+
+  .gdt-close
+  .gdt-year
+    display none
+
+  .gdt-picker
+    padding-top 20px
+
+  .gdt-calendar
+    margin 0 10px 10px 10px
+
+  .buttons
+    margin 20px 10px
+
+  .summary
+    padding 10px
+
+  .gdt-calendar
+  .time-summary
+    display inline-block
+    vertical-align top
+
+  .time-summary
+    margin 0 10px
+
+  .time-picker
+    margin-top 20px
+
+  .month-picker
+  .time-picker
+    position relative
+
+  .gdt-month
+  .gdt-time
+    size 150px 270px
+    overflow auto
+    margin-bottom 10px
+    absolute top left
+    display none
+    padding 5px 10px
+    z-index 2
+
+  .gdt-month
+    left 140px
+
+  /* inner element align and sizing */
+
+  ol, ul
+    margin 0
+    padding 0
+
+    li
+      list-style none
+      margin 0
+      padding 0
+
+  .gdt-year
+  .gdt-month
+  .gdt-calendar
+    text-align center
+
+  .gdt-month
+    font-size 1.2em
+
+  .gdt-time
+    text-align right
+
+  .gdt-time li
+    padding-right 15px
+    font-size 1.2em
+
+  .gdt-calendar table
+    margin 0
+    padding 0
+    border-spacing 0
+
+    th, td, td span
+      size 35px 35px
+
+    td span
+      display inline-block
+      line-height 35px
+      border-radius 35px
+
+  .gdt-calendar td
+  .month-picker span
+  .gdt-month li
+  .time-picker span
+  .gdt-time li
+    cursor pointer
+
+  /* box */
+  .gdt-box
+    background-color #fff
+    color #000
+
+    border none
+    box-shadow 1px 1px 4px rgba(0,0,0,0.4)
+
+  .month-picker span
+    font-size 1.5em
+    font-weight bold
+
+  .time-picker span
+    border solid 1px #ccc
+    border-radius 3px
+    padding 3px 8px
+
+  .gdt-month
+  .gdt-time
+    background-color #fff
+    border solid 1px #ccc
+
+  /* calendar header */
+  .gdt-calendar table th
+    font-size 0.8em
+    text-transform uppercase
+    color #343434
+    height auto
+    padding-bottom 10px
+
+  /* hover */
+  .gdt-calendar td:hover span
+    background-color #eee
+
+  /* today */
+  .gdt-calendar td.today
+    color inherit
+    font-weight bold
+
+  /* outside */
+  .gdt-calendar td.outside
+  .gdt-calendar td.outside-month
+  .gdt-time .outside
+    color #eee
+
+    &:hover span
+      background-color transparent
+
+  /* selected */
+  .gdt-calendar td.selected span
+  .gdt-calendar td.selected:hover span
+  .gdt-time li.selected
+    background-color #03A9F4
+    color #fff
+
+
+  /* Custom */
+  .calendar
+    size 100px 100px
+    border solid 1px #ccc
+    display inline-block
+    margin-top 10px
+
+$clockSize = 100px
+$hourSize = 3px
+$minuteSize = 2px
+$secondSize = 1px
+$dotSize = 12px
+
+  .clock
+    relative top right
+    size $clockSize $clockSize
+
+    border solid 8px #ccc
+    border-radius $clockSize
+    background-color #fff
+
+    &:after
+      content ''
+      absolute top 50% left 50%
+      size $dotSize $dotSize
+      margin (-($dotSize/2)) 0 0 (-($dotSize/2))
+      background-color #666
+      border-radius $dotSize
+
+    .hour
+      size 0 0
+      absolute top 50% left 50%
+      margin -30% (-($hourSize)) 0
+      padding 30% $hourSize 0
+      background-color #666
+      border-radius $hourSize $hourSize 0 0
+      transform-origin 50% 100%
+      transition transform 1s ease-out
+
+    .minute
+      size 0 0
+      absolute top 50% left 50%
+      margin -40% (-($minuteSize)) 0
+      padding 40% $minuteSize 0
+      background-color #666
+      border-radius $minuteSize $minuteSize 0 0
+      transform-origin 50% 100%
+      transition transform 1.2s ease-out
+
+    .second
+      size 0 0
+      absolute top 50% left 50%
+      margin -40% (-($secondSize)) 0
+      padding 40% $secondSize 0
+      background-color #f00
+      transform-origin 50% 100%
+
+/* display inline */
+.inline
+  .gdt-box
+    position relative
+    display inline-block

@@ -10,10 +10,8 @@
   "keywords": [
     "jquery",
     "jquery.generic",
-    "genericbox",
-    "GenericBox"
+    "genericbox"
   ],
-  "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
