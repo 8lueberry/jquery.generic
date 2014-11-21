@@ -289,7 +289,7 @@
         .wrap('<div class="' + that.options.css.container +
           (styles ?
             ' ' + that.options.css.style + ' ' +
-            that.$el.data(that.options.data.style) :
+            styles :
             '') +
           '">')
         .parent();

@@ -68,17 +68,13 @@
       The picker updates automatically when you type
     </div>
 
-    <div class="gdt center">
-      <input type="text" />
-    </div>
+    <input type="text" data-style="center" />
 
     <div class="space-top space-bottom">
       Automatically selects the date from the input value.
     </div>
 
-    <div class="gdt center">
-      <input type="text" value="2015/08/28 1:00pm" />
-    </div>
+    <input type="text" value="2015/08/28 1:00pm" data-style="center" />
 
     <script>
       $(function() {
@@ -96,13 +92,9 @@
 
     <div></div>
 
-    <div class="gdt inline">
-      <input type="text" style="margin-bottom: 20px;" data-gdt='{ "inline": true, "hideOnEsc": false }' />
-    </div>
+    <input type="text" style="margin-bottom: 20px;" data-gdt='{ "inline": true, "hideOnEsc": false }' data-style="inline" />
 
-    <div class="gdt inline time-hide">
-      <input type="text" style="margin: 20px 0;" data-gdt='{ "inline": true, "hideOnEsc": false }' />
-    </div>
+    <input type="text" style="margin: 20px 0;" data-gdt='{ "inline": true, "hideOnEsc": false }' data-style="inline time-bottom" />
 
     <script>
       $(function() {
@@ -136,9 +128,7 @@
       Entirely customizable via css.
     </div>
 
-    <div class="inline">
-      <input type="hidden" data-gdt='{ "inline": true, "hideOnEsc": false }' />
-    </div>
+    <input type="hidden" data-gdt='{ "inline": true, "hideOnEsc": false }' data-style="inline" />
 
     <script>
       $(function() {
@@ -164,9 +154,7 @@
 
     <div class="space-bottom">You can keep it simple</div>
 
-    <div class="inline">
-      <input type="hidden" data-gdt='{ "inline": true, "hideOnEsc": false }' />
-    </div>
+    <input type="hidden" data-gdt='{ "inline": true, "hideOnEsc": false }' data-style="inline" />
 
     <script>
       $(function() {
@@ -190,22 +178,19 @@
 
     <div class="space-top space-bottom">Or move, hide, add anything</div>
 
-    <div class="inline">
-
-      <div class="buttons">
-        <button class="today">Today</button>
-        <button class="tomorrow">Tomorrow</button>
-        <button class="next-week">Next week</button>
-        <button class="next-month">Next month</button>
-      </div>
-
-      <div class="clock">
-        <div class="hour"></div>
-        <div class="minute"></div>
-      </div>
-
-      <input type="hidden" data-gdt='{ "inline": true, "hideOnEsc": false }' />
+    <div class="buttons">
+      <button class="today">Today</button>
+      <button class="tomorrow">Tomorrow</button>
+      <button class="next-week">Next week</button>
+      <button class="next-month">Next month</button>
     </div>
+
+    <div class="clock">
+      <div class="hour"></div>
+      <div class="minute"></div>
+    </div>
+
+    <input type="hidden" data-gdt='{ "inline": true, "hideOnEsc": false }' data-style="inline" />
 
     <script>
       $(function() {

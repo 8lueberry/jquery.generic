@@ -2,18 +2,18 @@
 @import '../../bower_components/google-material-color/dist/palette.styl'
 
 $colorSelect = palette('Light Blue')
+$colorSelectAlt = palette('Light Blue', '800')
 $colorToday = default
 $colorWeekend = palette('Grey', '50')
-$colorHover = palette('Grey', '50')
-$colorOutside = palette('Red', '50')
+$colorHover = palette('Grey', '100')
+$colorOutside = palette('Grey', '200')
 $colorOutsideMonth = palette('Grey', '200')
 
-$sizeBoxWidth = 450px
 $sizeTimeWidth = 140px
 $sizeTimeHeight = 220px
 $sizeClose = 20px
 
-.gdt
+.gdt-style
 
   font-size 16px
 
@@ -23,21 +23,20 @@ $sizeClose = 20px
 
   /* layout and size */
 
-  .gdt-container
+  &.gdt-container
 
     /* hidden */
     fixed top -999px left -999px
 
-  .gdt-container.visible
+  &.gdt-container.visible
 
     /* visible */
-    relative top auto left auto
+    relative top left
 
   .gdt-box
 
     /* position */
     absolute top 2px left /* relative to container */
-    width $sizeBoxWidth
     z-index 1 /* on top of body stuff */
 
     /* style */
@@ -78,8 +77,12 @@ $sizeClose = 20px
       padding 0 10px
 
       &.selected
-        background-color transparent
-        color $colorSelect
+        background-color $colorSelectAlt
+        color palette('White', 'Secondary Text')
+        border-radius 3px
+
+      &.outside
+        color $colorOutside
 
   .gdt-month
 
@@ -91,15 +94,19 @@ $sizeClose = 20px
     li
       display inline-block
       vertical-align middle
-      padding-right 8px
+      padding 2px 4px
       text-transform uppercase
 
       &:last-child
         padding-right 0
 
       &.selected
-        background-color transparent
-        color $colorSelect
+        background-color $colorSelectAlt
+        color palette('White', 'Secondary Text')
+        border-radius 2px
+
+      &.outside
+        color $colorOutside
 
   .gdt-calendar
 
@@ -130,7 +137,7 @@ $sizeClose = 20px
           display inline-block
           line-height 35px
           border-radius 35px
-
+          
           &:hover
             background-color $colorHover
 
@@ -167,10 +174,10 @@ $sizeClose = 20px
     /* style */
     border solid 1px #eee
     text-align right
+    font-size 1.2em
 
     li
       padding 5px 25px 5px 15px
-      font-size 1.2em
 
       &:hover
         background-color $colorHover
@@ -217,12 +224,12 @@ $sizeClose = 20px
 
   &.close-hide
 
-    .gdt-container .gdt-box .gdt-close
+    .gdt-box .gdt-close
 
       /* hidden */
       display none
 
-    .gdt-container .gdt-box
+    .gdt-box
 
       padding-top 15px
 
@@ -232,28 +239,52 @@ $sizeClose = 20px
 
   &.time-hide
 
-    .gdt-container .gdt-box .gdt-time
+    .gdt-box .gdt-time
 
       /* hidden */
       display none
 
-    .gdt-container .gdt-box .gdt-calendar
+    .gdt-box .gdt-calendar
       display block
 
-    .gdt-container .gdt-box
-      width $sizeBoxWidth - $sizeTimeWidth
-
-    .gdt-container .gdt-box .gdt-month
-      font-size 0.7em
-
-      li
-        padding-right 3px
-
-    .gdt-container .gdt-box .gdt-year
-      font-size 1.4em
+    .gdt-box .gdt-month
+      width 250px
+      margin 20px auto 0 auto
+      font-weight bold
 
       li
-        padding 0 5px
+        padding 3px 5px
+
+    .gdt-box .gdt-year
+      li
+        &:first-child
+        &:last-child
+          display none
+
+      li.selected
+        font-size 1.4em
+        font-weight bold
+
+    .gdt-box .gdt-calendar
+      th
+        font-weight normal
+        color palette('Grey')
+
+  /*****************************************************************************
+   * Time bottom
+   ****************************************************************************/
+
+  &.time-bottom
+
+    // size the box
+    @extend .gdt-style.time-hide
+
+    .gdt-box .gdt-time
+      display block
+      height 30px
+      margin 15px auto 0 auto
+      //font-size 1em
+
 
   /*****************************************************************************
    * Center
@@ -261,6 +292,7 @@ $sizeClose = 20px
 
   &.center
 
-    .gdt-container .gdt-box
+    .gdt-box
+      width 450px
       margin 0 auto
       right 0

@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2014 Dan Le Van
  *
- * Version: 0.1.2 (Thu Nov 13 2014)
+ * Version: 0.1.2 (Wed Nov 19 2014)
  * Requires: jQuery v1.7+
  * * Licensed under the MIT license:
  *   https://raw.github.com/danlevan/jquery.generic/master/LICENSE
@@ -80,11 +80,16 @@
       month: 'gdt-month',
       calendar: 'gdt-calendar',
       time: 'gdt-time',
+      style: 'gdt-style',
       visible: 'visible',
       outside: 'outside',
       'outside-month': 'outside-month',
       selected: 'selected',
       today: 'today',
+    },
+
+    data: {
+      style: 'style',
     },
 
     // hide box on esc key
@@ -272,9 +277,41 @@
     // Selects a date
     //
     this.selectDate = function(selectedDate) {
+
+      // get
+      if (!selectedDate) {
+        return that.selectedDate;
+      }
+
+      // set
       updateSelection(selectedDate);
 
-      return that;
+      return that; // chaining
+    };
+
+    //
+    // Get/Set the out date
+    //
+    this.outsideDates = function(dates) {
+
+      // get
+      if (!dates) {
+        return {
+          minDate: that.options.minDate,
+          maxDate: that.options.maxDate,
+          disabledDates: that.options.disabledDates,
+        };
+      }
+
+      // set
+      that.options.minDate = parseDate(dates.minDate);
+      that.options.maxDate = parseDate(dates.maxDate);
+      that.options.disabledDates = dates.disabledDates;
+
+      redrawCalendar();
+      redrawTime();
+
+      return that; // chaining
     };
 
     ///////////////////////////////////////////////////////
@@ -354,7 +391,12 @@
     function buildBody() {
 
       // container
-      that.$container = $('<div class="' + that.options.css.container + '">');
+      var styles = that.$el.data(that.options.data.style);
+      that.$container = $('<div class="' + that.options.css.container +
+        (styles ?
+          ' ' + that.options.css.style + ' ' + styles :
+          '') +
+      '">');
 
       // box
       that.$box = $('<div class="' + that.options.css.box + '">')
@@ -699,7 +741,7 @@
       }
 
       // don't close if a date or time is not selected
-      if (!that.selectedDate || !that.selectedTime) {
+      if (!that.selectedDate || that.selectedTime === null) {
         return;
       }
 
@@ -737,12 +779,6 @@
     //
     function updateInput() {
 
-      // need a date and time to update
-      if (!that.selectedDate || !that.selectedTime) {
-        that.$el.val('');
-        return;
-      }
-
       // merge date and time
       var dateValue = new Date(that.selectedDate);
       if (that.selectedTime !== null) {
@@ -758,9 +794,7 @@
       that.$el.val(value);
       that.$el.trigger('change', value); // need to manually call this
 
-      trigger('change', {
-        value: dateValue,
-      });
+      trigger('change', dateValue);
     }
 
     //
@@ -1157,6 +1191,8 @@
     if (that.options.inline) {
       that.show();
     }
+
+    return that;
   }
 
 }));

@@ -5,12 +5,12 @@
  *
  * Copyright (c) 2014 Dan Le Van
  *
- * Version: 0.1.2 (Thu Nov 13 2014)
+ * Version: 0.1.2 (Fri Nov 21 2014)
  * Requires: jQuery v1.7+
  * * Licensed under the MIT license:
  *   https://raw.github.com/danlevan/jquery.generic/master/LICENSE
  */
-.gdt {
+.gdt-style {
   font-size: 16px;
 /*****************************************************************************
    * Default
@@ -30,29 +30,29 @@
    * Time hide
    ****************************************************************************/
 /*****************************************************************************
+   * Time bottom
+   ****************************************************************************/
+/*****************************************************************************
    * Center
    ****************************************************************************/
 }
-.gdt .gdt-container {
+.gdt-style.gdt-container {
 /* hidden */
   position: fixed;
   top: -999px;
   left: -999px;
 }
-.gdt .gdt-container.visible {
+.gdt-style.gdt-container.visible {
 /* visible */
   position: relative;
   top: 0;
-  auto: 0;
   left: 0;
-  auto: 0;
 }
-.gdt .gdt-box {
+.gdt-style .gdt-box {
 /* position */
   position: absolute;
   top: 2px;
   left: 0;
-  width: 450px;
   z-index: 1;
 /* style */
   background-color: #fff;
@@ -60,7 +60,7 @@
   border: solid 1px rgba(0,0,0,0.1);
   padding: 20px 15px 15px 15px;
 }
-.gdt .gdt-close {
+.gdt-style .gdt-close {
 /* position */
   position: absolute;
   top: 5px;
@@ -72,102 +72,112 @@
   -webkit-border-radius: 20px;
   border-radius: 20px;
 }
-.gdt .gdt-close:hover {
+.gdt-style .gdt-close:hover {
   background-color: #c42618;
 }
-.gdt .gdt-picker {
+.gdt-style .gdt-picker {
 /* style */
   margin: 0;
 }
-.gdt .gdt-year {
+.gdt-style .gdt-year {
 /* style */
   font-size: 1.6em;
   text-align: center;
 }
-.gdt .gdt-year li {
+.gdt-style .gdt-year li {
   display: inline-block;
   vertical-align: middle;
   padding: 0 10px;
 }
-.gdt .gdt-year li.selected {
-  background-color: transparent;
-  color: #03a9f4;
+.gdt-style .gdt-year li.selected {
+  background-color: #0277bd;
+  color: rgba(255,255,255,0.7);
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
 }
-.gdt .gdt-month {
+.gdt-style .gdt-year li.outside {
+  color: #eee;
+}
+.gdt-style .gdt-month {
 /* style */
   font-size: 0.9em;
   text-align: center;
   margin-top: 10px;
 }
-.gdt .gdt-month li {
+.gdt-style .gdt-month li {
   display: inline-block;
   vertical-align: middle;
-  padding-right: 8px;
+  padding: 2px 4px;
   text-transform: uppercase;
 }
-.gdt .gdt-month li:last-child {
+.gdt-style .gdt-month li:last-child {
   padding-right: 0;
 }
-.gdt .gdt-month li.selected {
-  background-color: transparent;
-  color: #03a9f4;
+.gdt-style .gdt-month li.selected {
+  background-color: #0277bd;
+  color: rgba(255,255,255,0.7);
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
 }
-.gdt .gdt-calendar {
+.gdt-style .gdt-month li.outside {
+  color: #eee;
+}
+.gdt-style .gdt-calendar {
 /* position */
   display: inline-block;
   margin-top: 20px;
 /* style */
   text-align: center;
 }
-.gdt .gdt-calendar table {
+.gdt-style .gdt-calendar table {
   margin: 0;
   padding: 0;
   border-spacing: 0;
   width: 100%;
 }
-.gdt .gdt-calendar table th,
-.gdt .gdt-calendar table td,
-.gdt .gdt-calendar table td span {
+.gdt-style .gdt-calendar table th,
+.gdt-style .gdt-calendar table td,
+.gdt-style .gdt-calendar table td span {
   width: 35px;
   height: 35px;
 }
-.gdt .gdt-calendar table th {
+.gdt-style .gdt-calendar table th {
   font-size: 1em;
   font-weight: bold;
   text-transform: uppercase;
 }
-.gdt .gdt-calendar table td span {
+.gdt-style .gdt-calendar table td span {
   display: inline-block;
   line-height: 35px;
   -webkit-border-radius: 35px;
   border-radius: 35px;
 }
-.gdt .gdt-calendar table td span:hover {
+.gdt-style .gdt-calendar table td span:hover {
+  background-color: #f5f5f5;
+}
+.gdt-style .gdt-calendar table td:nth-child(1),
+.gdt-style .gdt-calendar table td:nth-child(7) {
   background-color: #fafafa;
 }
-.gdt .gdt-calendar table td:nth-child(1),
-.gdt .gdt-calendar table td:nth-child(7) {
-  background-color: #fafafa;
-}
-.gdt .gdt-calendar table td.today {
+.gdt-style .gdt-calendar table td.today {
   color: default;
   font-weight: bold;
 }
-.gdt .gdt-calendar table td.outside-month span {
+.gdt-style .gdt-calendar table td.outside-month span {
   background-color: transparent;
   color: #eee;
 }
-.gdt .gdt-calendar table td.outside span {
+.gdt-style .gdt-calendar table td.outside span {
   background-color: transparent;
-  color: #fde0dc;
+  color: #eee;
   cursor: not-allowed;
 }
-.gdt .gdt-calendar table td.selected span,
-.gdt .gdt-calendar table td.selected span:hover {
+.gdt-style .gdt-calendar table td.selected span,
+.gdt-style .gdt-calendar table td.selected span:hover {
   background-color: #03a9f4;
   color: #fff;
 }
-.gdt .gdt-time {
+.gdt-style .gdt-time {
 /* position */
   display: inline-block;
   margin-left: 15px;
@@ -177,71 +187,90 @@
 /* style */
   border: solid 1px #eee;
   text-align: right;
-}
-.gdt .gdt-time li {
-  padding: 5px 25px 5px 15px;
   font-size: 1.2em;
 }
-.gdt .gdt-time li:hover {
-  background-color: #fafafa;
+.gdt-style .gdt-time li {
+  padding: 5px 25px 5px 15px;
 }
-.gdt .gdt-time li.outside {
+.gdt-style .gdt-time li:hover {
+  background-color: #f5f5f5;
+}
+.gdt-style .gdt-time li.outside {
   background-color: transparent;
-  color: #fde0dc;
+  color: #eee;
 }
-.gdt .gdt-time li.selected {
+.gdt-style .gdt-time li.selected {
   background-color: #03a9f4;
   color: #fff;
 }
-.gdt ol {
+.gdt-style ol {
   margin: 0;
   padding: 0;
 }
-.gdt li {
+.gdt-style li {
   list-style: none;
 }
-.gdt .gdt-close,
-.gdt .gdt-year li,
-.gdt .gdt-month li,
-.gdt .gdt-calendar td,
-.gdt .gdt-time li {
+.gdt-style .gdt-close,
+.gdt-style .gdt-year li,
+.gdt-style .gdt-month li,
+.gdt-style .gdt-calendar td,
+.gdt-style .gdt-time li {
   cursor: pointer;
 }
-.gdt.inline .gdt-box {
+.gdt-style.inline .gdt-box {
   position: relative;
   display: inline-block;
   z-index: 0;
 }
-.gdt.close-hide .gdt-container .gdt-box .gdt-close {
+.gdt-style.close-hide .gdt-box .gdt-close {
 /* hidden */
   display: none;
 }
-.gdt.close-hide .gdt-container .gdt-box {
+.gdt-style.close-hide .gdt-box {
   padding-top: 15px;
 }
-.gdt.time-hide .gdt-container .gdt-box .gdt-time {
+.gdt-style.time-hide .gdt-box .gdt-time,
+.gdt-style.time-bottom .gdt-box .gdt-time {
 /* hidden */
   display: none;
 }
-.gdt.time-hide .gdt-container .gdt-box .gdt-calendar {
+.gdt-style.time-hide .gdt-box .gdt-calendar,
+.gdt-style.time-bottom .gdt-box .gdt-calendar {
   display: block;
 }
-.gdt.time-hide .gdt-container .gdt-box {
-  width: 310px;
+.gdt-style.time-hide .gdt-box .gdt-month,
+.gdt-style.time-bottom .gdt-box .gdt-month {
+  width: 250px;
+  margin: 20px auto 0 auto;
+  font-weight: bold;
 }
-.gdt.time-hide .gdt-container .gdt-box .gdt-month {
-  font-size: 0.7em;
+.gdt-style.time-hide .gdt-box .gdt-month li,
+.gdt-style.time-bottom .gdt-box .gdt-month li {
+  padding: 3px 5px;
 }
-.gdt.time-hide .gdt-container .gdt-box .gdt-month li {
-  padding-right: 3px;
+.gdt-style.time-hide .gdt-box .gdt-year li:first-child,
+.gdt-style.time-bottom .gdt-box .gdt-year li:first-child,
+.gdt-style.time-hide .gdt-box .gdt-year li:last-child,
+.gdt-style.time-bottom .gdt-box .gdt-year li:last-child {
+  display: none;
 }
-.gdt.time-hide .gdt-container .gdt-box .gdt-year {
+.gdt-style.time-hide .gdt-box .gdt-year li.selected,
+.gdt-style.time-bottom .gdt-box .gdt-year li.selected {
   font-size: 1.4em;
+  font-weight: bold;
 }
-.gdt.time-hide .gdt-container .gdt-box .gdt-year li {
-  padding: 0 5px;
+.gdt-style.time-hide .gdt-box .gdt-calendar th,
+.gdt-style.time-bottom .gdt-box .gdt-calendar th {
+  font-weight: normal;
+  color: #9e9e9e;
 }
-.gdt.center .gdt-container .gdt-box {
+.gdt-style.time-bottom .gdt-box .gdt-time {
+  display: block;
+  height: 30px;
+  margin: 15px auto 0 auto;
+}
+.gdt-style.center .gdt-box {
+  width: 450px;
   margin: 0 auto;
   right: 0;
 }

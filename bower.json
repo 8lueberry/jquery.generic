@@ -22,5 +22,8 @@
     "package.json",
     "src/.*",
     "src/**/.*"
-  ]
+  ],
+  "devDependencies": {
+    "google-material-color": "~1.2.0"
+  }
 }

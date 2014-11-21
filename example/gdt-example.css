@@ -162,12 +162,12 @@
 .example3 .gdt-time li:hover {
   background-color: #242424;
 }
-.example3 .gdt-calendar td:nth-child(1),
-.example3 .gdt-calendar td:nth-child(7) {
+.example3 .gdt-calendar table td:nth-child(1),
+.example3 .gdt-calendar table td:nth-child(7) {
   background-color: #444;
 }
-.example3 .gdt-calendar td:nth-child(1):hover span,
-.example3 .gdt-calendar td:nth-child(7):hover span {
+.example3 .gdt-calendar table td:nth-child(1):hover span,
+.example3 .gdt-calendar table td:nth-child(7):hover span {
   background-color: #333;
 }
 .example3 .gdt-year li.outside,

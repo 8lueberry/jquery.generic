@@ -1,6 +1,6 @@
 {
   "name": "google-material-color",
-  "version": "0.0.2",
+  "version": "1.2.0",
   "description": "Google material color (http://www.google.com/design/spec/style/color.html) implementation for Sass, Less, Stylus, CSS and JS.",
   "homepage": "https://github.com/danlevan/google-material-color",
   "authors": [
@@ -28,14 +28,14 @@
     "test",
     "tests"
   ],
-  "_release": "0.0.2",
+  "_release": "1.2.0",
   "_resolution": {
     "type": "version",
-    "tag": "v0.0.2",
-    "commit": "53e707ab452d8339659b194bf63112cf582a4ec0"
+    "tag": "v1.2.0",
+    "commit": "e63f8f9536aa5f6eca78562958ed2e8139637c58"
   },
   "_source": "git://github.com/danlevan/google-material-color.git",
-  "_target": "~0.0.2",
+  "_target": "~1.2.0",
   "_originalSource": "google-material-color",
   "_direct": true
 }
