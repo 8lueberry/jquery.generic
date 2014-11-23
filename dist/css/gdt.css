@@ -90,10 +90,7 @@
   padding: 0 10px;
 }
 .gdt-style .gdt-year li.selected {
-  background-color: #0277bd;
-  color: rgba(255,255,255,0.7);
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
+  color: #03a9f4;
 }
 .gdt-style .gdt-year li.outside {
   color: #eee;
@@ -114,10 +111,7 @@
   padding-right: 0;
 }
 .gdt-style .gdt-month li.selected {
-  background-color: #0277bd;
-  color: rgba(255,255,255,0.7);
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
+  color: #03a9f4;
 }
 .gdt-style .gdt-month li.outside {
   color: #eee;
@@ -145,6 +139,7 @@
   font-size: 1em;
   font-weight: bold;
   text-transform: uppercase;
+  color: rgba(0,0,0,0.54);
 }
 .gdt-style .gdt-calendar table td span {
   display: inline-block;
@@ -262,7 +257,7 @@
 .gdt-style.time-hide .gdt-box .gdt-calendar th,
 .gdt-style.time-bottom .gdt-box .gdt-calendar th {
   font-weight: normal;
-  color: #9e9e9e;
+  color: $colorSelectSec;
 }
 .gdt-style.time-bottom .gdt-box .gdt-time {
   display: block;

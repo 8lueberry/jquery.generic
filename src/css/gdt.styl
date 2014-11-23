@@ -2,12 +2,13 @@
 @import '../../bower_components/google-material-color/dist/palette.styl'
 
 $colorSelect = palette('Light Blue')
-$colorSelectAlt = palette('Light Blue', '800')
 $colorToday = default
 $colorWeekend = palette('Grey', '50')
 $colorHover = palette('Grey', '100')
 $colorOutside = palette('Grey', '200')
 $colorOutsideMonth = palette('Grey', '200')
+$colorText = palette('Black', 'Text')
+$colorTextSec = palette('Black', 'Secondary Text')
 
 $sizeTimeWidth = 140px
 $sizeTimeHeight = 220px
@@ -77,9 +78,7 @@ $sizeClose = 20px
       padding 0 10px
 
       &.selected
-        background-color $colorSelectAlt
-        color palette('White', 'Secondary Text')
-        border-radius 3px
+        color $colorSelect
 
       &.outside
         color $colorOutside
@@ -101,9 +100,7 @@ $sizeClose = 20px
         padding-right 0
 
       &.selected
-        background-color $colorSelectAlt
-        color palette('White', 'Secondary Text')
-        border-radius 2px
+        color $colorSelect
 
       &.outside
         color $colorOutside
@@ -130,6 +127,7 @@ $sizeClose = 20px
         font-size 1em
         font-weight bold
         text-transform uppercase
+        color $colorTextSec
 
       td
 
@@ -137,7 +135,7 @@ $sizeClose = 20px
           display inline-block
           line-height 35px
           border-radius 35px
-          
+
           &:hover
             background-color $colorHover
 
@@ -268,7 +266,7 @@ $sizeClose = 20px
     .gdt-box .gdt-calendar
       th
         font-weight normal
-        color palette('Grey')
+        color $colorSelectSec
 
   /*****************************************************************************
    * Time bottom
