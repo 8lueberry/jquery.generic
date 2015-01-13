@@ -25,5 +25,10 @@
   ],
   "devDependencies": {
     "google-material-color": "~1.2.0"
+  },
+  "dependencies": {
+    "github-markdown-css": "~2.0.2",
+    "moment": "~2.9.0",
+    "jquery": "~2.1.3"
   }
 }

@@ -1,22 +1,16 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>[[= layout.title ]]</title>
+    <title>[[= model.title ]]</title>
 
-    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="docs.css" />
-
-    <script src="../lib/jquery/jquery.min.js"></script>
-    <script src="../dist/jquery.[[= layout.lib ]].min.js"></script>
-
-    [[= layout.head ]]
+    <link rel="stylesheet" href="../../lib/github-markdown-css/github-markdown.css" />
 
   </head>
   <body>
 
-    <div class="examples">
-      <h1>[[= layout.title ]]</h1>
-      [[= layout.section ]]
+    <div class="content markdown-body">
+      [[= model.body ]]
     </div>
 
   </body>

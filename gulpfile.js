@@ -189,6 +189,26 @@ gulp.task('build-docs', ['clean-docs', 'build-docs-html', 'build-docs-css']);
 gulp.task('build-docs-html', function() {
   return gulp.src(['docs/*.md'])
     .pipe(markdown())
+    .pipe((function() {
+      return through.obj(function(file, enc, cb) {
+
+        template(
+          'src/docs/_layout.dot',
+          {
+            title: 'Test',
+            body: String(file.contents),
+          },
+          function(err, result) {
+            if (err) {
+              return cb(err);
+            }
+
+            file.contents = new Buffer(result);
+            cb(null, file);
+          }
+        );
+      });
+    })())
     .pipe(gulp.dest(paths.docs));
 });
 
