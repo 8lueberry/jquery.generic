@@ -36,6 +36,5 @@
   },
   "_source": "git://github.com/danlevan/google-material-color.git",
   "_target": "~1.2.0",
-  "_originalSource": "google-material-color",
-  "_direct": true
+  "_originalSource": "google-material-color"
 }

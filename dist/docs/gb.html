@@ -1,0 +1,433 @@
+<h1 id="genericbox">GenericBox</h1>
+<blockquote>
+<p>GenericBox is a tiny jQuery popup plugin that doesn&#39;t handle any styling or animations in the lib. Instead, everything is customizable via css (or javascript) by you. The plugin only handles the html skeleton, events and key bindings.</p>
+</blockquote>
+<h1 id="installation">Installation</h1>
+<ul>
+<li>Download the files you need from the dist directory<ul>
+<li><a href="">jquery.genericBox.min.js</a> (<a href="">map</a>)<ul>
+<li>or <a href="">jquery.genericBox.js</a></li>
+</ul>
+</li>
+<li><a href="">gb.css</a> (Optional)</li>
+</ul>
+</li>
+<li>Bower: <code>$ bower install jquery-generic</code></li>
+<li>NPM: <code>$ npm install jquery-generic</code></li>
+<li>Git: <code>$ git clone git://github.com/danlevan/jquery-generic.git</code></li>
+</ul>
+<h2 id="requirement">Requirement</h2>
+<p>jQuery 1.7+ (<a href="http://jquery.com/download/">download page</a>)</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Extremely flexible</li>
+<li>Lightweight: 1.5k .min.gz</li>
+<li>No obscure styling options to be passed</li>
+<li>Styles and anims entirely in css, by you</li>
+<li>Supports animations libraries like animate.css</li>
+<li>Esc key, overlay click to close</li>
+<li>Multiple popup support (esc key works as expected)</li>
+<li>The background doesn&#39;t scroll when you&#39;re scrolling the popup</li>
+<li>Can be included as an AMD module</li>
+<li>Events (show, hide, animation end...)</li>
+<li>Free to use and modify</li>
+</ul>
+<h2 id="browser-support">Browser support</h2>
+<p>You decide! Animations and styling can entirely be done by css.</p>
+<h1 id="why-another-library-">Why another library?</h1>
+<blockquote>
+<p>There are many popup jQuery plugins available but most of them either do too much, have obscure styling settings, are buggy or aren&#39;t flexible enough. Styling and animations should not be part of the library and you should have full control of your popups. If you&#39;re going to learn how to style a popup, might as well learn it with css.</p>
+</blockquote>
+<h2 id="license">License</h2>
+<p><a href="https://raw.githubusercontent.com/danlevan/jquery.generic/master/LICENSE">MIT</a></p>
+<h1 id="getting-started">Getting started</h1>
+<h2 id="step-1">Step 1</h2>
+<p>Include jquery and jquery.genericBox</p>
+<pre><code class="lang-html">&lt;!-- Optional css, add this inside the head --&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;path/to/gb.css&quot; /&gt;
+
+&lt;!-- Add this at the end, before the closing body tag --&gt;
+&lt;script src=&quot;//code.jquery.com/jquery-1.11.0.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;path/to/jquery.genericBox.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>If you&#39;re in a hurry and just want to try it asap, copy paste this</p>
+<pre><code class="lang-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;http://danlevan.github.io/jquery.generic/lib/gbTemplate.css&quot; /&gt;
+&lt;script src=&quot;http://code.jquery.com/jquery-1.11.0.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;http://danlevan.github.io/jquery.generic/lib/jquery.genericBox.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h2 id="step-2">Step 2</h2>
+<p>Create a div with the popup content and hide it</p>
+<pre><code class="lang-html">&lt;!-- your popup, hide it and style it the way you want --&gt;
+&lt;div id=&quot;#popup&quot; style=&quot;display:none; background-color:#fff; width:400px; height:200px;&quot;&gt;
+  ...
+&lt;/div&gt;
+</code></pre>
+<h2 id="step-3">Step 3</h2>
+<p>Call genericBox</p>
+<pre><code class="lang-js">$(function() {
+  ...
+  $(&#39;#popup&#39;).gb().show();
+})
+</code></pre>
+<h1 id="how-it-works">How it works</h1>
+<p>Your html popup</p>
+<pre><code class="lang-html">&lt;!-- your popup --&gt;
+&lt;div id=&quot;popup&quot;&gt;
+  ...
+&lt;/div&gt;
+</code></pre>
+<p>becomes</p>
+<pre><code class="lang-html">&lt;div class=&quot;gb-container&quot;&gt; &lt;!-- main container --&gt;
+
+  &lt;!-- Overlay background
+    Usually styled to be full screen with a dark or bright color
+  --&gt;
+  &lt;div class=&quot;gb-overlay&quot;&gt;&lt;/div&gt;
+
+  &lt;!-- Contains close and popup
+    Apply animations to this element. You can also use this to center your popup
+  --&gt;
+  &lt;div class=&quot;gb-box&quot;&gt;
+
+    &lt;!-- close button
+      Since it&#39;s inside gb-box, it&#39;s easy to position it at the top, left, ...
+    --&gt;
+    &lt;div class=&quot;gb-close&quot;&gt;&lt;/div&gt;
+
+    &lt;!-- your popup --&gt;
+    &lt;div id=&quot;popup&quot; class=&quot;gb-popup&quot;&gt;
+      ...
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>and when show() is called, the class &#39;visible&#39; is added to the root container</p>
+<pre><code class="lang-html">&lt;div class=&quot;gb-container visible&quot;&gt;
+  ...
+&lt;/div&gt;
+</code></pre>
+<h2 id="note">Note</h2>
+<p>When calling the chained jQuery function for the first time, the skeleton is built to the DOM and the instance of genericBox is returned. Subsequent calls to gb() will return the initial instance.</p>
+<pre><code class="lang-js">var instance1 = $(&#39;#popup&#39;).gb({...});
+
+// here, the options are ignored because it&#39;s being called a second time
+var instance2 = $(&#39;#popup&#39;).gb({...});
+
+// instance1 === instance2 are the same instance
+</code></pre>
+<p>This allows you to forget about keeping an instance and do something like</p>
+<pre><code class="lang-js">$(&#39;button&#39;).on(&#39;click&#39;, function() { // can click the button multiple times
+  $(&#39;#popup&#39;)
+    .gb({...}) // only read the options the first time
+    .show(); // show it, all the time
+});
+</code></pre>
+<h1 id="api">API</h1>
+<h2 id="methods">Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>show()</td>
+<td>Shows the popup</td>
+</tr>
+<tr>
+<td>hide()</td>
+<td>Hides the popup</td>
+</tr>
+<tr>
+<td>on(eventName, handler)</td>
+<td>Attach a handler to an event (See the list of events here)</td>
+</tr>
+<tr>
+<td>one(eventName, handler)</td>
+<td>Attach a handler to an event once and then detach automatically after the first call (See the list of events here )</td>
+</tr>
+<tr>
+<td>off(eventName, handler)</td>
+<td>Detach a handler from an event (See the list of events here)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="usage-example">Usage example</h3>
+<pre><code class="lang-js">$(&#39;#popup&#39;)
+  .gb()
+  .show() // show it
+  .hide(); // hide it
+</code></pre>
+<h2 id="options">Options</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>css</td>
+<td>Object</td>
+<td>You can change the default class name used.</td>
+<td><code>{ wrap: &#39;gb&#39;, close: &#39;gb-close&#39;, box: &#39;gb-box&#39;, overlay: &#39;gb-overlay&#39;, visible: &#39;visible&#39;, }</code></td>
+</tr>
+<tr>
+<td>hideOnClickOverlay</td>
+<td>Boolean</td>
+<td>Whether to hide the popup when the overlay is clicked.</td>
+<td>true</td>
+</tr>
+<tr>
+<td>hideOnEsc</td>
+<td>Boolean</td>
+<td>Whether to hide the popup when the esc key is pressed.</td>
+<td>true</td>
+</tr>
+<tr>
+<td>lockBackgroundScroll</td>
+<td>Boolean</td>
+<td>Whether to disable scrolling of the body when the popup is shown.</td>
+<td>true</td>
+</tr>
+<tr>
+<td>blurTrigger</td>
+<td>Boolean</td>
+<td>Whether to blur (unfocus) the body button, preventing the body button to be pressed by accidental keyboard events.</td>
+<td>true</td>
+</tr>
+<tr>
+<td>onInitialize</td>
+<td>function</td>
+<td>Method binded to the &#39;initialize&#39; event</td>
+<td></td>
+</tr>
+<tr>
+<td>onShow</td>
+<td>function</td>
+<td>Method binded to the &#39;show&#39; event</td>
+<td></td>
+</tr>
+<tr>
+<td>onHide</td>
+<td>function</td>
+<td>Method binded to the &#39;hide&#39; event</td>
+<td></td>
+</tr>
+<tr>
+<td>onShowStart</td>
+<td>function</td>
+<td>Method binded to the &#39;showStart&#39; event</td>
+<td></td>
+</tr>
+<tr>
+<td>onHideStart</td>
+<td>function</td>
+<td>Method binded to the &#39;hideStart&#39; event</td>
+<td></td>
+</tr>
+<tr>
+<td>onAnimationStart</td>
+<td>function</td>
+<td>Method binded to the &#39;animationStart&#39; event</td>
+<td></td>
+</tr>
+<tr>
+<td>onAnimationEnd</td>
+<td>function</td>
+<td>Method binded to the &#39;animationEnd&#39; event</td>
+<td></td>
+</tr>
+<tr>
+<td>onShowAnimationStart</td>
+<td>function</td>
+<td>Method binded to the &#39;showAnimationStart&#39; event</td>
+<td></td>
+</tr>
+<tr>
+<td>onShowAnimationEnd</td>
+<td>function</td>
+<td>Method binded to the &#39;showAnimationEnd&#39; event</td>
+<td></td>
+</tr>
+<tr>
+<td>onHideAnimationStart</td>
+<td>function</td>
+<td>Method binded to the &#39;hideAnimationStart&#39; event</td>
+<td></td>
+</tr>
+<tr>
+<td>onHideAnimationEnd</td>
+<td>function</td>
+<td>Method binded to the &#39;hideAnimationEnd&#39; event</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Option passed as html data attribute</p>
+<pre><code class="lang-html">&lt;div id=&quot;popup&quot; data-gb=&#39;{&quot;hideOnEsc&quot;: true, &quot;hideOnClickOverlay&quot;: false}&#39;&gt;
+  ...
+&lt;/div&gt;
+</code></pre>
+<p>or option passed when constructing the genericBox</p>
+<pre><code class="lang-js">$(&#39;#popup&#39;)
+  .gb({
+     hideOnClickOverlay: false,
+     hideOnEsc: true,
+   })
+   .show();
+</code></pre>
+<h2 id="events">Events</h2>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>initialize</td>
+<td>When genericBox finished building (DOM ready).</td>
+</tr>
+<tr>
+<td>show</td>
+<td>When the popup is showing. If there are no animations, the popup is visible at this point.</td>
+</tr>
+<tr>
+<td>hide</td>
+<td>When the popup is hidden. If there are no animations, the popup is hidden at this point.</td>
+</tr>
+<tr>
+<td>showStart</td>
+<td>Before the popup starts showing.</td>
+</tr>
+<tr>
+<td>hideStart</td>
+<td>Before the popup starts hiding.</td>
+</tr>
+<tr>
+<td>animationStart</td>
+<td>When any animation is starting (show or hide).</td>
+</tr>
+<tr>
+<td>animationEnd</td>
+<td>When any animation ended (show or hide).</td>
+</tr>
+<tr>
+<td>showAnimationStart</td>
+<td>When the show animation is starting.</td>
+</tr>
+<tr>
+<td>showAnimationEnd</td>
+<td>When the show animation ended.</td>
+</tr>
+<tr>
+<td>hideAnimationStart</td>
+<td>When the hide animation is starting.</td>
+</tr>
+<tr>
+<td>hideAnimationEnd</td>
+<td>When the hide animation ended.</td>
+</tr>
+</tbody>
+</table>
+<p>Note that transition events are not supported yet. This is due to the difference in behavior of every browsers. You can still use at your own risk.</p>
+<ul>
+<li>transitionEnd</li>
+<li>showTransitionEnd</li>
+<li>hideTransitionEnd</li>
+</ul>
+<p>PS: There are no transitionStart events supported by any browsers.</p>
+<h3 id="how-to-attach-to-an-event">How to attach to an event</h3>
+<p>As an option (see the options documentation)</p>
+<pre><code class="lang-js">$(&#39;#popup&#39;).gb({
+   onShow: function() {
+     console.log(&#39;Showing popup&#39;);
+   },
+   onHide: function() {
+     console.log(&#39;Hiding popup&#39;);
+   }
+ }).show();
+</code></pre>
+<p>Attach to an existing instance</p>
+<pre><code class="lang-js">var gb-popup = $(&#39;#popup&#39;).gb();
+...
+gb-popup
+  .on(&#39;show&#39;, function() {
+    console.log(&#39;Showing popup&#39;);
+  })
+
+  // yay, chaining
+  .on(&#39;hide&#39;, function() {
+    console.log(&#39;Hiding popup&#39;);
+  });
+</code></pre>
+<h3 id="cancel-a-default-action">Cancel a default action</h3>
+<p>You can cancel showing and hiding on the &#39;showStart&#39; and &#39;hideStart&#39; events.</p>
+<pre><code class="lang-js">$(&#39;#popup&#39;)
+  .gb({
+     onHideStart: function(e) {
+       console.log(&#39;Cancel hiding&#39;);
+       e.preventAction();
+     }
+   })
+   .show();
+</code></pre>
+<h1 id="optional-css">Optional css</h1>
+<p>The optional css is the starting point to customize your popup. It contains all the logic for centering, full screen, animations etc. All the examples use this helper css.
+It was written using Stylus and you can download the source here gbTemplate.styl.</p>
+<h2 id="how-to-use">How to use</h2>
+<p>Add <code>data-style</code> attribute to your popup</p>
+<pre><code class="lang-html">&lt;!-- your popup --&gt;
+&lt;div id=&quot;popup&quot; data-style=&quot;overlay-fade center scale ...&quot;&gt;
+&lt;/div&gt;
+</code></pre>
+<p>You can mix and match the options.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>overlay-fade</td>
+<td>Light fading transition of the overlay on show and hide</td>
+</tr>
+<tr>
+<td>overlay-light</td>
+<td>Lighten the overlay (not as dark but still transparent)</td>
+</tr>
+<tr>
+<td>overlay-white</td>
+<td>Use a bright overlay</td>
+</tr>
+<tr>
+<td>close-hide</td>
+<td>Hides the close button</td>
+</tr>
+<tr>
+<td>center</td>
+<td>Centers the popup</td>
+</tr>
+<tr>
+<td>fullscreen</td>
+<td>Makes the popup full screen</td>
+</tr>
+<tr>
+<td>scale</td>
+<td>Light appearing animation of the box. It complements well the &#39;overlay-fade&#39; and &#39;center&#39; options.</td>
+</tr>
+<tr>
+<td>anim-1s</td>
+<td>Helper class for 1 second animations</td>
+</tr>
+</tbody>
+</table>

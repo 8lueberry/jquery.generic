@@ -1,0 +1,61 @@
+<h1 id="genericdatetime">GenericDateTime</h1>
+<blockquote>
+<p>bla bla bla</p>
+</blockquote>
+<h1 id="installation">Installation</h1>
+<ul>
+<li>Download the files you need from the dist directory<ul>
+<li><a href="">jquery.genericDateTime.min.js</a> (<a href="">map</a>)<ul>
+<li>or <a href="">jquery.genericDateTime.js</a></li>
+</ul>
+</li>
+<li><a href="">gdt.css</a> (Optional)</li>
+</ul>
+</li>
+<li>Bower: <code>$ bower install jquery-generic</code></li>
+<li>NPM: <code>$ npm install jquery-generic</code></li>
+<li>Git: <code>$ git clone git://github.com/danlevan/jquery-generic.git</code></li>
+</ul>
+<h1 id="what-is-it-">What is it?</h1>
+<p>Blah</p>
+<h2 id="requirement">Requirement</h2>
+<p>jQuery 1.7+ (<a href="http://jquery.com/download/">download page</a>)</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Extremely flexible</li>
+<li>No obscure styling options to be passed</li>
+<li>Styles and anims entirely in css, by you</li>
+<li>Supports animations libraries like animate.css</li>
+<li>Can be included as an AMD module</li>
+<li>Events (show, hide, animation end...)</li>
+<li>Free to use and modify</li>
+</ul>
+<h2 id="browser-support">Browser support</h2>
+<p>You decide! Animations and styling can entirely be done by css.</p>
+<h2 id="license">License</h2>
+<p><a href="https://raw.githubusercontent.com/danlevan/jquery.generic/master/LICENSE">MIT</a></p>
+<h1 id="getting-started">Getting started</h1>
+<h2 id="step-1">Step 1</h2>
+<p>Include jquery and jquery.genericDateTime</p>
+<pre><code class="lang-html">&lt;!-- Optional css, add this inside the head --&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;path/to/gdt.css&quot; /&gt;
+
+&lt;!-- Add this at the end, before the closing body tag --&gt;
+&lt;script src=&quot;//code.jquery.com/jquery-1.11.0.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;path/to/jquery.genericDateTime.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h2 id="step-2">Step 2</h2>
+<p>Define an <code>input</code> field in your html and initialize it</p>
+<pre><code class="lang-html">&lt;input id=&quot;my-date-time-input&quot; type=&quot;text&quot; /&gt;
+</code></pre>
+<pre><code class="lang-javascript">$(function() {
+  ...
+  $(&#39;#my-date-time-input&#39;).gdt();
+})
+</code></pre>
+<h2 id="that-s-it">That&#39;s it</h2>
+<p>When your input has the focus, the picker will appear.</p>
+<h1 id="how-it-works">How it works</h1>
+<h1 id="api">API</h1>
+<h2 id="methods">Methods</h2>
+<h2 id="options">Options</h2>

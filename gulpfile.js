@@ -3,6 +3,7 @@ var bower = require('gulp-bower');
 var clean = require('gulp-clean');
 var gulp = require('gulp');
 var header = require('gulp-header');
+var markdown = require('gulp-markdown');
 var nib = require('nib');
 var path = require('path');
 var packageConfig = require('./package.json');
@@ -24,8 +25,8 @@ var paths = {
   distribution: 'dist',
   distributionCss: 'dist/css',
 
-  examples: 'example',
-  pages: 'pages',
+  examples: 'dist/examples',
+  docs: 'dist/docs',
   depencencies: 'lib',
 };
 
@@ -52,28 +53,61 @@ var banner = '' +
  */
 gulp.task('default', ['dev']);
 
+////////////////////////////////////////////////////////////////////////////////
+// CLEAN
+////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Runs the tests
- */
+gulp.task('clean-dist', function() {
+  return gulp.src([
+    path.join(paths.distribution, '*.js'),
+  ], {read: false})
+    .pipe(clean());
+});
+
+gulp.task('clean-dist-css', function() {
+  return gulp.src([
+    path.join(paths.distributionCss, '*.css'),
+  ], {read: false})
+    .pipe(clean());
+});
+
+gulp.task('clean-examples', function() {
+  return gulp.src([
+    path.join(paths.examples, '*'),
+  ], {read: false})
+    .pipe(clean());
+});
+
+gulp.task('clean-docs', function() {
+  return gulp.src([
+    path.join(paths.docs, '*'),
+  ], {read: false})
+    .pipe(clean());
+});
+
+////////////////////////////////////////////////////////////////////////////////
+// Test
+////////////////////////////////////////////////////////////////////////////////
+
 gulp.task('test', function() {});
 
 ////////////////////////////////////////////////////////////////////////////////
 // JS
 ////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('build-js', function() {
+gulp.task('build-js', ['clean-dist', 'build-js-dev', 'build-js-min']);
 
-  // dev version
-  gulp.src('src/js/*.js')
+gulp.task('build-js-dev', function() {
+  return gulp.src('src/js/*.js')
     .pipe(header(banner, packageConfig))
     .pipe(rename(function(path) {
       path.basename = 'jquery.' + path.basename;
     }))
     .pipe(gulp.dest(paths.distribution));
+});
 
-  // min version
-  gulp.src('src/js/*.js')
+gulp.task('build-js-min', function() {
+  return gulp.src('src/js/*.js')
     .pipe(rename(function(path) {
       path.basename = 'jquery.' + path.basename;
       path.extname = '.min.js';
@@ -83,16 +117,14 @@ gulp.task('build-js', function() {
     .pipe(sourcemaps.write('.'))
     .pipe(header(banner, packageConfig))
     .pipe(gulp.dest(paths.distribution));
-
 });
 
 ////////////////////////////////////////////////////////////////////////////////
 // CSS
 ////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('build-css', function() {
-
-  gulp.src('src/css/*.styl')
+gulp.task('build-css', ['clean-dist-css'], function() {
+  return gulp.src('src/css/*.styl')
     .pipe(stylus({
       use: [nib()],
       compress: false,
@@ -102,16 +134,16 @@ gulp.task('build-css', function() {
       path.extname = '.css';
     }))
     .pipe(gulp.dest(paths.distributionCss));
-
 });
 
 ////////////////////////////////////////////////////////////////////////////////
 // EXAMPLES
 ////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('build-examples', function() {
+gulp.task('build-examples', ['clean-examples', 'build-examples-html', 'build-examples-css']);
 
-  gulp.src(
+gulp.task('build-examples-html', function() {
+  return gulp.src(
     [
       'src/examples/*.dot',
       '!src/examples/_example.dot',
@@ -134,8 +166,10 @@ gulp.task('build-examples', function() {
       path.extname = '.html';
     }))
     .pipe(gulp.dest(paths.examples));
+});
 
-  gulp.src('src/examples/*.styl')
+gulp.task('build-examples-css', function() {
+  return gulp.src('src/examples/*.styl')
     .pipe(stylus({
       use: [nib()],
       compress: false,
@@ -147,73 +181,31 @@ gulp.task('build-examples', function() {
 });
 
 ////////////////////////////////////////////////////////////////////////////////
-// PAGES
+// DOCS
 ////////////////////////////////////////////////////////////////////////////////
 
-/**
- * Build the public pages from the docs and examples
- */
-gulp.task('build-pages', function() {
+gulp.task('build-docs', ['clean-docs', 'build-docs-html', 'build-docs-css']);
 
+gulp.task('build-docs-html', function() {
+  return gulp.src(['docs/*.md'])
+    .pipe(markdown())
+    .pipe(gulp.dest(paths.docs));
+});
+
+gulp.task('build-docs-css', function() {
+  return gulp.src('src/docs/*.styl')
+    .pipe(stylus({
+      use: [nib()],
+      compress: false,
+    }))
+    .pipe(rename(function(path) {
+      path.extname = '.css';
+    }))
+    .pipe(gulp.dest(paths.docs));
 });
 
 ////////////////////////////////////////////////////////////////////////////////
-// CLEAN
-////////////////////////////////////////////////////////////////////////////////
-
-gulp.task('clean', ['clean-dist', 'clean-examples', 'clean-pages']);
-
-/**
- * Cleans the distribution folder
- */
-gulp.task('clean-dist', function() {
-  return gulp.src(path.join(paths.distribution, '*'), {read: false})
-    .pipe(clean({force: true}));
-});
-
-/**
- * Cleans the examples
- */
-gulp.task('clean-examples', function() {
-  return gulp.src(path.join(paths.examples, '*'), {read: false})
-    .pipe(clean({force: true}));
-});
-
-/**
- * Cleans the pages
- */
-gulp.task('clean-pages', function() {
-  return gulp.src(path.join(paths.pages, '*'), {read: false})
-    .pipe(clean({force: true}));
-});
-
-////////////////////////////////////////////////////////////////////////////////
-// VERSIONING
-////////////////////////////////////////////////////////////////////////////////
-
-gulp.task('sync', function() {
-  gulp.src('bower.json')
-    .pipe(sync())
-    .pipe(gulp.dest('.'));
-});
-
-////////////////////////////////////////////////////////////////////////////////
-// RELEASE
-////////////////////////////////////////////////////////////////////////////////
-
-/**
- * Builds the dist files
- */
-gulp.task('release', [
-  'clean',
-  'build-js',
-  'build-css',
-  'build-pages',
-  'sync',
-]);
-
-////////////////////////////////////////////////////////////////////////////////
-// DEVELOPMENT
+// DEPENDENCIES
 ////////////////////////////////////////////////////////////////////////////////
 
 gulp.task('dependencies', ['bower']);
@@ -223,21 +215,42 @@ gulp.task('bower', function() {
     .pipe(gulp.dest(paths.depencencies));
 });
 
-/**
- * Watch for development
- */
+////////////////////////////////////////////////////////////////////////////////
+// VERSIONING
+////////////////////////////////////////////////////////////////////////////////
+
+gulp.task('sync', function() {
+  return gulp.src('bower.json')
+    .pipe(sync())
+    .pipe(gulp.dest('.'));
+});
+
+////////////////////////////////////////////////////////////////////////////////
+// DEVELOPMENT
+////////////////////////////////////////////////////////////////////////////////
+
 gulp.task('watch', function() {
   gulp.watch('src/examples/*', ['build-examples']);
   gulp.watch('src/css/*.styl', ['build-css']);
   gulp.watch('src/js/*.js', ['build-js']);
 });
 
-/**
- * Dev on the examples
- */
 gulp.task('dev', [
   'build-examples',
-  'build-pages',
+  'build-docs',
   'dependencies',
   'watch',
+]);
+
+////////////////////////////////////////////////////////////////////////////////
+// RELEASE
+////////////////////////////////////////////////////////////////////////////////
+
+gulp.task('release', [
+  'dependencies',
+  'build-js',
+  'build-css',
+  'build-docs',
+  'build-examples',
+  //'sync',
 ]);
