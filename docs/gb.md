@@ -158,11 +158,11 @@ $('button').on('click', function() { // can click the button multiple times
 # API
 ## Methods
 
-Method                  | Description
---                      | ---
-show()                  | Shows the popup
-hide()                  | Hides the popup
-on(eventName, handler)  | Attach a handler to an event (See the list of events here)
+Method | Description
+--- | ---
+show() | Shows the popup
+hide() | Hides the popup
+on(eventName, handler) | Attach a handler to an event (See the list of events here)
 one(eventName, handler) | Attach a handler to an event once and then detach automatically after the first call (See the list of events here )
 off(eventName, handler) | Detach a handler from an event (See the list of events here)
 
@@ -178,7 +178,7 @@ $('#popup')
 ## Options
 
 Option | Type | Description | Default
--- | -- | -- | --
+--- | --- | --- | ---
 css	| Object | You can change the default class name used. | ```{ wrap: 'gb', close: 'gb-close', box: 'gb-box', overlay: 'gb-overlay', visible: 'visible', }```
 hideOnClickOverlay | Boolean | Whether to hide the popup when the overlay is clicked. | true
 hideOnEsc | Boolean | Whether to hide the popup when the esc key is pressed. | true
@@ -218,7 +218,7 @@ $('#popup')
 ## Events
 
 Event | Description
--- | --
+--- | ---
 initialize | When genericBox finished building (DOM ready).
 show | When the popup is showing. If there are no animations, the popup is visible at this point.
 hide | When the popup is hidden. If there are no animations, the popup is hidden at this point.
@@ -303,7 +303,7 @@ Add ```data-style``` attribute to your popup
 You can mix and match the options.
 
 Option | Description
--- | --
+--- | ---
 overlay-fade | Light fading transition of the overlay on show and hide
 overlay-light | Lighten the overlay (not as dark but still transparent)
 overlay-white | Use a bright overlay
