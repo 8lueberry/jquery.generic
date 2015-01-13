@@ -1,0 +1,19 @@
+---
+layout: _example.dot
+title: GenericBox examples
+lib: gb
+---
+
+[[##head:
+  <link rel="stylesheet" href="gb-style.css" />
+  <link rel="stylesheet" href="gb-example.css" />
+#]]
+
+[[##section:
+
+  <!--
+    example1
+  -->
+
+
+#]]

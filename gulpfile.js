@@ -50,28 +50,8 @@ var banner = '' +
 /**
  * Generates all the plugins
  */
-gulp.task('default', ['dist']);
+gulp.task('default', ['dev']);
 
-/**
- * Builds the dist files
- */
-gulp.task('dist', [
-  'clean',
-  'build-js',
-  'build-css',
-  'build-pages',
-  'sync',
-]);
-
-/**
- * Dev on the examples
- */
-gulp.task('dev', [
-  'build-examples',
-  'build-pages',
-  'dependencies',
-  'watch',
-]);
 
 /**
  * Runs the tests
@@ -131,7 +111,13 @@ gulp.task('build-css', function() {
 
 gulp.task('build-examples', function() {
 
-  gulp.src('src/examples/*.dot', {read: false})
+  gulp.src(
+    [
+      'src/examples/*.dot',
+      '!src/examples/_example.dot',
+    ],
+    {read: false}
+  )
     .pipe((function() {
       return through.obj(function(file, enc, cb) {
         template(file.path, {}, function(err, result) {
@@ -212,6 +198,21 @@ gulp.task('sync', function() {
 });
 
 ////////////////////////////////////////////////////////////////////////////////
+// RELEASE
+////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Builds the dist files
+ */
+gulp.task('release', [
+  'clean',
+  'build-js',
+  'build-css',
+  'build-pages',
+  'sync',
+]);
+
+////////////////////////////////////////////////////////////////////////////////
 // DEVELOPMENT
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -230,3 +231,13 @@ gulp.task('watch', function() {
   gulp.watch('src/css/*.styl', ['build-css']);
   gulp.watch('src/js/*.js', ['build-js']);
 });
+
+/**
+ * Dev on the examples
+ */
+gulp.task('dev', [
+  'build-examples',
+  'build-pages',
+  'dependencies',
+  'watch',
+]);

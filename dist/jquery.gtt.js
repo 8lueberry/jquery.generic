@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2014 Dan Le Van
  *
- * Version: 0.1.2 (Fri Dec 05 2014)
+ * Version: 0.2.0 (Tue Jan 13 2015)
  * Requires: jQuery v1.7+
  * * Licensed under the MIT license:
  *   https://raw.github.com/danlevan/jquery.generic/master/LICENSE

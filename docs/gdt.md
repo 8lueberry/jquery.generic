@@ -10,7 +10,7 @@
   - [gdt.css]() (Optional)
 - Bower: `$ bower install jquery-generic`
 - NPM: `$ npm install jquery-generic`
-- Git: `$ git clone git://github.com/danlevan/google-material-color.git`
+- Git: `$ git clone git://github.com/danlevan/jquery-generic.git`
 
 # What is it?
 
