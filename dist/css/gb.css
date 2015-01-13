@@ -228,7 +228,7 @@
   -ms-transition: opacity 0.3s linear 0.7s, visibility 0s linear 1s, left 0s linear 1s, top 0s linear 1s;
   transition: opacity 0.3s linear 0.7s, visibility 0s linear 1s, left 0s linear 1s, top 0s linear 1s;
 }
-.gb-style.anim-1s .gb-overlay {
+.gb-style.anim-1s.visible .gb-overlay {
 /* animation for opacity */
   -webkit-transition: opacity 0.3s linear;
   -moz-transition: opacity 0.3s linear;
