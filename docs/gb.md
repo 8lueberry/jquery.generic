@@ -1,6 +1,6 @@
-[download-min]: http://danlevan.github.io/jquery.generic/dist/jquery.genericBox.min.js  "Minified version"
-[download-map]: http://danlevan.github.io/jquery.generic/dist/jquery.genericBox.min.js.map  "Minified map file"
-[download-dev]: http://danlevan.github.io/jquery.generic/dist/jquery.genericBox.js  "Not minified version"
+[download-min]: http://danlevan.github.io/jquery.generic/dist/jquery.gb.min.js  "Minified version"
+[download-map]: http://danlevan.github.io/jquery.generic/dist/jquery.gb.min.js.map  "Minified map file"
+[download-dev]: http://danlevan.github.io/jquery.generic/dist/jquery.gb.js  "Not minified version"
 [download-css]: http://danlevan.github.io/jquery.generic/dist/css/gb.css  "Optional css"
 [page-example]: http://danlevan.github.io/jquery.generic/dist/examples/gb.html
 [page-license]: https://raw.githubusercontent.com/danlevan/jquery.generic/master/LICENSE
@@ -16,7 +16,7 @@
 ## Installation
 
 - Directly
-  - [jquery.genericBox.js][download-dev] ([map][download-map], [min][download-min])
+  - [jquery.gb.js][download-dev] ([map][download-map], [min][download-min])
   - [gb.css][download-css] (Optional)
 - Bower: `$ bower install jquery-generic`
 - NPM: `$ npm install jquery-generic`
@@ -62,7 +62,7 @@ Include jquery and genericBox
 
 <!-- Add this at the end, before the closing body tag -->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="http://danlevan.github.io/jquery.generic/dist/jquery.genericBox.min.js"></script>
+<script src="http://danlevan.github.io/jquery.generic/dist/jquery.gb.min.js"></script>
 ```
 
 ## Step 2
