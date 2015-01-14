@@ -27,7 +27,6 @@ var paths = {
 
   examples: 'dist/examples',
   docs: 'dist/docs',
-  depencencies: 'lib',
 };
 
 /**
@@ -235,8 +234,7 @@ gulp.task('build-docs-css', function() {
 gulp.task('dependencies', ['bower']);
 
 gulp.task('bower', function() {
-  return bower()
-    .pipe(gulp.dest(paths.depencencies));
+  return bower();
 });
 
 ////////////////////////////////////////////////////////////////////////////////
