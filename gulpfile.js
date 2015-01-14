@@ -42,7 +42,7 @@ var banner = '' +
   ' *\n' +
   ' * Version: <%= version %> (' + now.toDateString() + ')\n' +
   ' * Requires: jQuery v1.7+\n' +
-  ' *' +
+  ' * \n' +
   ' * Licensed under the MIT license:\n' +
   ' *   https://raw.github.com/danlevan/jquery.generic/master/LICENSE\n' +
   ' */\n';
