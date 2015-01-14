@@ -277,5 +277,5 @@ gulp.task('release', [
   'build-css',
   'build-docs',
   'build-examples',
-  //'sync',
+  'sync',
 ]);
