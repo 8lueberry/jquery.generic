@@ -1,9 +1,8 @@
-Generic
-=======
+# Generic suite
 
 Generic jquery plugins for modern webapps. CSS3 animations and HTML5 driven.
 
-* [GenericBox](http://danlevan.github.io/jquery.generic/pages/genericBox.html)
+* [GenericBox](docs/gb.md)
 * GenericDateTimePicker (soon)
 * GenericTagInput (soon)
 * GenericBubble (soon)

@@ -1,0 +1,313 @@
+---
+layout: _example.dot
+title: GenericDateTime examples
+lib: gdt
+---
+
+[[##head:
+  <script src="../lib/moment/min/moment-with-locales.min.js"></script>
+  <link rel="stylesheet" href="gdt-style.css" />
+  <link rel="stylesheet" href="gdt-example.css" />
+#]]
+
+[[##section:
+
+  <script>
+    $(function() {
+      //
+      // Static
+      //
+
+      function tick(){
+        setTimeout(tick, 1000);
+
+        var now = new Date();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+
+        var second = seconds ? seconds * 6 : 0;
+        var minute = minutes * 6 + Math.floor(hours)*360;
+        var hour = ((hours)/12) * 360;
+
+        $('.style4 .clock .hour').css("transform", "rotate(" + hour + "deg)");
+        $('.style4 .clock .minute').css("transform", "rotate(" + minute + "deg)");
+        $('.style4 .clock .second').css("transform", "rotate(" + second + "deg)");
+      }
+
+      tick();
+    });
+  </script>
+
+  <div class="style4 inline">
+    <div class="clock">
+      <div class="hour"></div>
+      <div class="minute"></div>
+      <div class="second"></div>
+    </div>
+  </div>
+
+  <!--
+    example1
+  -->
+  <a name="example1"></a>
+  <div class="example1">
+    <h2>Default</h2>
+
+    <div class="space-bottom">
+      The picker updates automatically when you type
+    </div>
+
+    <input type="text" data-style="center" />
+
+    <div class="space-top space-bottom">
+      Automatically selects the date from the input value.
+    </div>
+
+    <input type="text" value="2015/08/28 1:00pm" data-style="center" />
+
+    <script>
+      $(function() {
+        $('.example1 input').gdt();
+      })
+    </script>
+  </div>
+
+  <!--
+    example2
+  -->
+  <a name="example2"></a>
+  <div class="example2">
+    <h2>Inline</h2>
+
+    <div></div>
+
+    <input type="text" style="margin-bottom: 20px;" data-gdt='{ "inline": true, "hideOnEsc": false }' data-style="inline" />
+
+    <input type="text" style="margin: 20px 0;" data-gdt='{ "inline": true, "hideOnEsc": false }' data-style="inline time-bottom" />
+
+    <script>
+      $(function() {
+
+        var date = new Date();
+        date.setDate(date.getDate() + 5); // show 5 days later
+        date.setHours(10, 30, 0);
+
+        $('.example2 input').gdt({
+          // minDate: new Date(2014, 10, 8, 14, 29),
+          // maxDate: new Date(2014, 11, 22),
+          // disabledDates: [new Date(2014, 10, 16), new Date(2014, 10, 17), new Date(2014, 10, 18)],
+          selectDate: date,
+          // showCalendar: new Date(2015, 6),
+          // showTime: 14*60 + 30,
+          // showIntervalTime: 15,
+        });
+
+      })
+    </script>
+  </div>
+
+  <!--
+    example3
+  -->
+  <a name="example3"></a>
+  <div class="example3">
+    <h2>Custom styles</h2>
+
+    <div class="space-bottom">
+      Entirely customizable via css.
+    </div>
+
+    <input type="hidden" data-gdt='{ "inline": true, "hideOnEsc": false }' data-style="inline" />
+
+    <script>
+      $(function() {
+
+        var date = new Date();
+        date.setDate(date.getDate() + 5); // show 5 days later
+        date.setHours(10, 30, 0);
+
+        $('.example3 input').gdt({
+          selectDate: date,
+        });
+
+      })
+    </script>
+  </div>
+
+  <!--
+    example4
+  -->
+  <a name="example4"></a>
+  <div class="example4">
+    <h2>Advanced styling</h2>
+
+    <div class="space-bottom">You can keep it simple</div>
+
+    <input type="hidden" data-gdt='{ "inline": true, "hideOnEsc": false }' data-style="inline" />
+
+    <script>
+      $(function() {
+        var date = new Date();
+        date.setDate(date.getDate() + 5); // show 5 days later
+        date.setHours(10, 30, 0);
+
+        $('.example4 input').gdt({
+          selectDate: date,
+        });
+      });
+    </script>
+  </div>
+
+  <!--
+    example5
+  -->
+  <a name="example5"></a>
+  <div class="example5">
+    <h2>Advanced styling</h2>
+
+    <div class="space-top space-bottom">Or move, hide, add anything</div>
+
+    <div class="buttons">
+      <button class="today">Today</button>
+      <button class="tomorrow">Tomorrow</button>
+      <button class="next-week">Next week</button>
+      <button class="next-month">Next month</button>
+    </div>
+
+    <div class="clock">
+      <div class="hour"></div>
+      <div class="minute"></div>
+    </div>
+
+    <input type="hidden" data-gdt='{ "inline": true, "hideOnEsc": false }' data-style="inline" />
+
+    <script>
+      $(function() {
+        var date = new Date();
+        date.setDate(date.getDate() + 5); // show 5 days later
+        date.setHours(10, 30, 0);
+
+        var crazyGdt = $('.example5 input').gdt({
+          selectDate: date,
+          parseEngine: {
+            i18n: {
+              months: moment.localeData('en')._months,
+            },
+          },
+          onInitialize: function(e, arg) {
+            var that = this;
+            that.$calendar
+              .before($('.example5 .buttons'));
+
+            that.$time
+              .wrap('<div class="time-summary">')
+              .wrap('<div class="time-picker">')
+              .after(
+                $('<span class="value">' + that.options.parseEngine.formatTime(date.getHours(), date.getMinutes()) + '</span>')
+                  .on('click', function() {
+                    that.$time.show(that.scrollToTime);
+                  })
+              )
+              .parent().parent() // time-summary
+              .prepend($('.example5 .clock'));
+
+            that.$month
+              //.on('DOMMouseScroll mousewheel.gb', preventScrollPropagation)
+              .wrap('<div class="month-picker">')
+              .after(
+                $('<span class="value">' + that.options.parseEngine.i18n.months[date.getMonth()] + '</span>')
+                  .on('click', function() {
+                    that.$month.show();
+                  })
+              );
+
+            updateClock(date.getHours(), date.getMinutes(), date.getSeconds());
+          },
+          onMonthSelected: function(e, month) {
+            var that = this;
+
+            that.$month
+              .hide()
+            .parent().find('span.value')
+              .html(month.value);
+          },
+          onTimeSelected: function(e, time) {
+            var that = this;
+
+            updateClock(time.hours, time.minutes);
+
+            that.$time
+              .hide()
+            .parent().find('span.value')
+              .html(time.value);
+          },
+        });
+
+        function updateClock(hours, minutes){
+          var minute = minutes * 6 + Math.floor(hours)*360;
+          var hour = ((hours)/12) * 360;
+
+          $('.example5 .clock .hour').css("transform", "rotate(" + hour + "deg)");
+          $('.example5 .clock .minute').css("transform", "rotate(" + minute + "deg)");
+        }
+
+        $('.example5 .buttons')
+          .on('click', 'button.today', function() {
+            var date = new Date();
+            date.setHours(0,0,0,0);
+
+            crazyGdt.selectDate(date);
+          })
+          .on('click', 'button.tomorrow', function() {
+            var date = new Date();
+            date.setHours(0,0,0,0);
+            date.setDate(date.getDate() + 1);
+
+            crazyGdt.selectDate(date);
+          })
+          .on('click', 'button.next-week', function() {
+            var date = new Date();
+            date.setHours(0,0,0,0);
+            date.setDate(date.getDate() + 7);
+
+            crazyGdt.selectDate(date);
+          })
+          .on('click', 'button.next-month', function() {
+            var date = new Date();
+            date.setHours(0,0,0,0);
+            date.setMonth(date.getMonth() + 1);
+
+            crazyGdt.selectDate(date);
+          });
+      })
+
+      //
+      // Helper events
+      //
+      function handleHelperEvents() {
+
+        function selectDay(days, months, years) {
+          return function() {
+            var day = new Date();
+
+            if (days) {
+              day.setDate(day.getDate() + days);
+            }
+
+            if (months) {
+              day.setMonth(day.getMonth() + months);
+            }
+
+            if (years) {
+              day.setFullYear(day.getFullYear() + years);
+            }
+
+            day.setHours(0,0,0,0);
+            updateSelection(day, 'helper');
+          };
+        }
+      }
+    </script>
+  </div>
+#]]

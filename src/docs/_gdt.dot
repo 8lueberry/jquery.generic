@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>[[= model.title ]]</title>
+
+    <link rel="stylesheet" href="docs.css" />
+    <link rel="stylesheet" href="../../lib/github-markdown-css/github-markdown.css" />
+
+  </head>
+  <body>
+
+    <div class="content markdown-body">
+      [[= model.body ]]
+    </div>
+
+  </body>
+</html>

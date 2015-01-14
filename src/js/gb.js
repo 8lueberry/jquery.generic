@@ -63,7 +63,12 @@
       box:        'gb-box',
       popup:      'gb-popup',
       overlay:    'gb-overlay',
+      style:      'gb-style',
       visible:    'visible',
+    },
+
+    data: {
+      style: 'style',
     },
 
     // hide box on overlay click
@@ -279,8 +284,14 @@
         });
 
       // container
+      var styles = that.$el.data(that.options.data.style);
       that.$container = that.$box
-        .wrap('<div class="' + that.options.css.container + '">')
+        .wrap('<div class="' + that.options.css.container +
+          (styles ?
+            ' ' + that.options.css.style + ' ' +
+            styles :
+            '') +
+          '">')
         .parent();
 
       // overlay

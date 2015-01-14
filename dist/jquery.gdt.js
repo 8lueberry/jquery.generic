@@ -1,11 +1,11 @@
 /*
  * Generic - jQuery Plugin
  *
- * Example and documentation at: http://danlevan.github.io/jquery.generic
+ * Example and documentation at: http://danlevan.github.io/jquery.generic/
  *
- * Copyright (c) 2014 Dan LE VAN
+ * Copyright (c) 2014 Dan Le Van
  *
- * Version: 0.1.2 (Thu Nov 06 2014)
+ * Version: 0.2.0 (Wed Jan 14 2015)
  * Requires: jQuery v1.7+
  * * Licensed under the MIT license:
  *   https://raw.github.com/danlevan/jquery.generic/master/LICENSE
@@ -75,22 +75,21 @@
       container: 'gdt-container',
       box: 'gdt-box',
       close: 'gdt-close',
+      picker: 'gdt-picker',
+      year: 'gdt-year',
+      month: 'gdt-month',
+      calendar: 'gdt-calendar',
+      time: 'gdt-time',
+      style: 'gdt-style',
       visible: 'visible',
       outside: 'outside',
+      'outside-month': 'outside-month',
       selected: 'selected',
       today: 'today',
-      calendar: {
-        container: 'gdt-calendar',
-        year: 'gdt-year',
-        month: 'gdt-month',
-        'outside-month': 'outside-month',
-      },
-      time: {
-        container: 'gdt-time',
-      },
-      helper: {
-        container: 'gdt-helper',
-      },
+    },
+
+    data: {
+      style: 'style',
     },
 
     // hide box on esc key
@@ -135,6 +134,9 @@
 
     // when the time is selected
     onTimeSelected: null,
+
+    // when initialized
+    onInitialize: null,
 
     // the 3rd party engine
     parseEngine: {
@@ -259,7 +261,7 @@
 
       // stop listening to keyboard
       if (that.options.hideOnEsc) {
-        $(window).off('keydown.gdt', that, onKeyPress);
+        $(window).off('keydown.gdt');
       }
 
       // hide
@@ -275,9 +277,41 @@
     // Selects a date
     //
     this.selectDate = function(selectedDate) {
+
+      // get
+      if (!selectedDate) {
+        return that.selectedDate;
+      }
+
+      // set
       updateSelection(selectedDate);
 
-      return that;
+      return that; // chaining
+    };
+
+    //
+    // Get/Set the out date
+    //
+    this.outsideDates = function(dates) {
+
+      // get
+      if (!dates) {
+        return {
+          minDate: that.options.minDate,
+          maxDate: that.options.maxDate,
+          disabledDates: that.options.disabledDates,
+        };
+      }
+
+      // set
+      that.options.minDate = parseDate(dates.minDate);
+      that.options.maxDate = parseDate(dates.maxDate);
+      that.options.disabledDates = dates.disabledDates;
+
+      redrawCalendar();
+      redrawTime();
+
+      return that; // chaining
     };
 
     ///////////////////////////////////////////////////////
@@ -357,7 +391,12 @@
     function buildBody() {
 
       // container
-      that.$container = $('<div class="' + that.options.css.container + '">');
+      var styles = that.$el.data(that.options.data.style);
+      that.$container = $('<div class="' + that.options.css.container +
+        (styles ?
+          ' ' + that.options.css.style + ' ' + styles :
+          '') +
+      '">');
 
       // box
       that.$box = $('<div class="' + that.options.css.box + '">')
@@ -367,39 +406,29 @@
       that.$close = $('<div class="' + that.options.css.close + '">')
         .appendTo(that.$box);
 
-      // year
-      that.$calendarYearContainer = $('<div class="' +
-        that.options.css.calendar.year + '">')
+      // picker
+      that.$picker = $('<div class="' + that.options.css.picker + '">')
         .appendTo(that.$box);
+
+      // year
+      that.$year = $('<div class="' +
+        that.options.css.year + '">')
+        .appendTo(that.$picker);
 
       // month
-      that.$calendarMonthContainer = $('<div class="' +
-        that.options.css.calendar.month + '">')
-        .appendTo(that.$box);
-
-      // helper buttons
-      that.$helperContainer = $('<div class="' +
-        that.options.css.helper.container + '">')
-        .html('<ul>' +
-          '<li class="today"><button>Today</button></li>' +
-          '<li class="tomorrow"><button>Tomorrow</button></li>' +
-          '<li class="next-week"><button>Next week</button></li>' +
-          '<li class="next-month"><button>Next month</button></li>' +
-          '<li class="next-year"><button>Next year</button></li>' +
-          '</ul>')
-        .appendTo(that.$box);
+      that.$month = $('<div class="' +
+        that.options.css.month + '">')
+        .appendTo(that.$picker);
 
       // calendar
-      that.$calendarContainer = $('<div class="' +
-        that.options.css.calendar.container + '">')
-        .appendTo(that.$box);
+      that.$calendar = $('<div class="' + that.options.css.calendar + '">')
+        .appendTo(that.$picker);
 
       redrawCalendar();
 
       // time
-      that.$timeContainer = $('<div class="' +
-        that.options.css.time.container + '">')
-        .appendTo(that.$box);
+      that.$time = $('<div class="' + that.options.css.time + '">')
+        .appendTo(that.$picker);
 
       redrawTime();
 
@@ -414,23 +443,35 @@
 
       // from the options, look for any on* property and bind to the event
       $.each(that.options, function(key, value) {
-        if (key.indexOf('on') === 0) {
-
-          // remove on and change the first letter to lower case
-          var name = key.substring(2);
-          name = name[0].toLowerCase() + name.slice(1);
-
-          // attach event
-          that.$container.on(name, value);
+        if (key.indexOf('on') !== 0 || !value) {
+          return;
         }
+
+        // remove on and change the first letter to lower case
+        var name = key.substring(2);
+        name = name[0].toLowerCase() + name.slice(1);
+
+        // attach event
+        that.$container.on(name, $.proxy(value, that));
       });
 
-      that.$close.on('click.gdt', that.hide);
+      // close button
+      that.$close.on('click.gdt', function(e) {
+        that.hide();
+
+        // prevent focus that reshow the box
+        e.stopImmediatePropagation();
+        e.preventDefault();
+      });
 
       // register UI input event
       handleInputEvents();
 
       // maintain focus of the input on box operations
+      that.$box.on('click', function() {
+        that.$el.focus();
+      });
+
       if (!that.options.inline) {
         that.$box
 
@@ -447,10 +488,31 @@
       handleTimeEvents();
 
       that.$container
-        .on('selectedDateChanged', closeIfSelected)
-        .on('selectedTimeChanged', closeIfSelected);
+        .on('selectedDateChanged', function(e, arg) {
 
-      handleHelperEvents();
+          // public event
+          trigger('dateSelected', {
+            date: that.selectedDate,
+          });
+
+          hideIfSelected(arg.e);
+        })
+        .on('selectedTimeChanged', function(e, arg) {
+
+          // public event
+          trigger('timeSelected', {
+            time: that.selectedTime,
+            hours: Math.floor(that.selectedTime/60),
+            minutes: that.selectedTime%60,
+            seconds: 0,
+            value: that.options.parseEngine.formatTime(
+              Math.floor(that.selectedTime/60),
+              that.selectedTime%60
+            ),
+          });
+
+          hideIfSelected(arg.e);
+        });
     }
 
     //
@@ -525,16 +587,16 @@
 
       // handle UI action
 
-      that.$calendarYearContainer
-        .on('DOMMouseScroll mousewheel.gb', preventScroll)
+      that.$year
+        //.on('DOMMouseScroll mousewheel.gb', preventScroll)
         .on('click.gdt', 'li', handleYearSelected);
 
-      that.$calendarMonthContainer
-        .on('DOMMouseScroll mousewheel.gb', preventScroll)
+      that.$month
+        //.on('DOMMouseScroll mousewheel.gb', preventScroll)
         .on('click.gdt', 'li', handleMonthSelected);
 
-      that.$calendarContainer
-        .on('DOMMouseScroll mousewheel.gb', preventScroll)
+      that.$calendar
+        //.on('DOMMouseScroll mousewheel.gb', preventScroll)
         .on('click.gdt', 'td', handleDaySelected);
 
       // handle date selection events
@@ -576,8 +638,14 @@
         return;
       }
 
-      that.currentDate.setMonth($this.data('month'));
+      var month = $this.data('month');
+      that.currentDate.setMonth(month);
       redrawCalendar();
+
+      trigger('monthSelected', {
+        month: month,
+        value: that.options.parseEngine.i18n.months[month],
+      });
     }
 
     //
@@ -592,7 +660,7 @@
       }
 
       // update the css selected
-      that.$calendarContainer
+      that.$calendar
         .find('td.' + that.options.css.selected)
         .removeClass(that.options.css.selected);
 
@@ -603,10 +671,8 @@
       trigger('selectedDateChanged', {
         date: that.selectedDate,
         context: 'popup',
+        e: e,
       });
-
-      // callback
-      trigger('dateSelected', that.selectedDate);
     }
 
     /**
@@ -615,7 +681,7 @@
     function handleTimeEvents() {
 
       // UI action
-      that.$timeContainer
+      that.$time
         .on('DOMMouseScroll mousewheel.gb', preventScrollPropagation)
         .on('click.gdt', 'li', function(e) {
           var $this = $(this);
@@ -626,7 +692,7 @@
           }
 
           // update the css selected
-          that.$timeContainer
+          that.$time
             .find('.' + that.options.css.selected)
             .removeClass(that.options.css.selected);
 
@@ -637,10 +703,8 @@
           trigger('selectedTimeChanged', {
             time: that.selectedTime,
             context: 'popup',
+            e: e,
           });
-
-          // callback
-          trigger('timeSelected', that.selectedTime);
         });
 
       // date selection changed
@@ -656,43 +720,9 @@
     }
 
     //
-    // Helper events
-    //
-    function handleHelperEvents() {
-
-      function selectDay(days, months, years) {
-        return function() {
-          var day = new Date();
-
-          if (days) {
-            day.setDate(day.getDate() + days);
-          }
-
-          if (months) {
-            day.setMonth(day.getMonth() + months);
-          }
-
-          if (years) {
-            day.setFullYear(day.getFullYear() + years);
-          }
-
-          day.setHours(0,0,0,0);
-          updateSelection(day, 'helper');
-        };
-      }
-
-      that.$helperContainer
-        .on('click.gdt', 'li.today button', selectDay(0))
-        .on('click.gdt', 'li.tomorrow button', selectDay(1))
-        .on('click.gdt', 'li.next-week button', selectDay(7))
-        .on('click.gdt', 'li.next-month button', selectDay(null, 1))
-        .on('click.gdt', 'li.next-year button', selectDay(null, null, 1));
-    }
-
-    //
     // Triggers an event
     //
-    function trigger() {
+    function trigger(name, arg) {
       if (!that.$container) {
         return;
       }
@@ -703,7 +733,7 @@
     //
     // Close picker helper
     //
-    function closeIfSelected() {
+    function hideIfSelected(e) {
 
       // inline, don't close
       if (that.options.inline) {
@@ -711,15 +741,16 @@
       }
 
       // don't close if a date or time is not selected
-      if (!that.selectedDate || !that.selectedTime) {
+      if (!that.selectedDate || that.selectedTime === null) {
         return;
       }
 
       that.$el.focus();
       that.hide();
 
-      // e.stopImmediatePropagation();
-      // e.preventDefault();
+      // prevent focus that reshow the box
+      e.stopImmediatePropagation();
+      e.preventDefault();
     }
 
     //
@@ -748,12 +779,6 @@
     //
     function updateInput() {
 
-      // need a date and time to update
-      if (!that.selectedDate || !that.selectedTime) {
-        that.$el.val('');
-        return;
-      }
-
       // merge date and time
       var dateValue = new Date(that.selectedDate);
       if (that.selectedTime !== null) {
@@ -777,15 +802,15 @@
     //
     function redrawCalendar() {
 
-      that.$calendarContainer
+      that.$calendar
         .html('')
         .append(getCalendarHtml(that.currentDate, that.selectedDate));
 
-      that.$calendarYearContainer
+      that.$year
         .html('')
         .append(getYearHtml(that.currentDate));
 
-      that.$calendarMonthContainer
+      that.$month
         .html('')
         .append(getMonthHtml(that.currentDate));
     }
@@ -797,7 +822,7 @@
 
       selectTime(that.selectedTime);
 
-      that.$timeContainer
+      that.$time
         .html('')
         .append(getTimeHtml());
     }
@@ -806,11 +831,11 @@
     // Add the 'selected' class to the selected time
     //
     function selectTime(time) {
-      that.$timeContainer
+      that.$time
         .find('.' + that.options.css.selected)
         .removeClass(that.options.css.selected);
 
-      that.$timeContainer
+      that.$time
         .find('li[data-time=' + time + ']')
         .addClass(that.options.css.selected);
     }
@@ -993,7 +1018,7 @@
 
           // outside of current month
           if (date.getMonth() !== month || date.getYear() !== year) {
-            $col.addClass(that.options.css.calendar['outside-month']);
+            $col.addClass(that.options.css['outside-month']);
           }
 
           // selected
@@ -1091,17 +1116,21 @@
     // Scrolls to the specified time
     //
     function scrollToTime(time) {
-      var $time = that.$timeContainer
+      if (!time) {
+        time = that.selectedTime;
+      }
+
+      var $time = that.$time
         .find('li[data-time=' + time+ ']');
 
       if ($time.length > 0) {
         var scroll = $time.position().top +
-          that.$timeContainer.scrollTop() -
-          that.$timeContainer.position().top - // ajustment
-          that.$timeContainer.outerHeight()/2 + // middle container
+          that.$time.scrollTop() -
+          that.$time.position().top - // ajustment
+          that.$time.outerHeight()/2 + // middle container
           $time.outerHeight()/2; // middle element
 
-        that.$timeContainer.scrollTop(scroll);
+        that.$time.scrollTop(scroll);
       }
     }
 
@@ -1162,6 +1191,8 @@
     if (that.options.inline) {
       that.show();
     }
+
+    return that;
   }
 
 }));

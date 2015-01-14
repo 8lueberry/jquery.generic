@@ -1,0 +1,296 @@
+@import 'nib'
+@import '../../bower_components/google-material-color/dist/palette.styl'
+
+$colorSelect = palette('Light Blue')
+$colorToday = default
+$colorWeekend = palette('Grey', '50')
+$colorHover = palette('Grey', '100')
+$colorOutside = palette('Grey', '200')
+$colorOutsideMonth = palette('Grey', '200')
+$colorText = palette('Black', 'Text')
+$colorTextSec = palette('Black', 'Secondary Text')
+
+$sizeTimeWidth = 140px
+$sizeTimeHeight = 220px
+$sizeClose = 20px
+
+.gdt-style
+
+  font-size 16px
+
+  /*****************************************************************************
+   * Default
+   ****************************************************************************/
+
+  /* layout and size */
+
+  &.gdt-container
+
+    /* hidden */
+    fixed top -999px left -999px
+
+  &.gdt-container.visible
+
+    /* visible */
+    relative top left
+
+  .gdt-box
+
+    /* position */
+    absolute top 2px left /* relative to container */
+    z-index 1 /* on top of body stuff */
+
+    /* style */
+    background-color #fff
+    color #000
+
+    border solid 1px rgba(0,0,0,0.1)
+    padding $sizeClose 15px 15px 15px
+
+  .gdt-close
+
+    /* position */
+    absolute top 5px right 5px /* relative to container */
+
+    /* style */
+    background-color #e84e40
+
+    size $sizeClose $sizeClose
+    border-radius 20px
+
+    &:hover
+      background-color darken(@background-color, 15)
+
+  .gdt-picker
+
+    /* style */
+    margin 0
+
+  .gdt-year
+
+    /* style */
+    font-size 1.6em
+    text-align center
+
+    li
+      display inline-block
+      vertical-align middle
+      padding 0 10px
+
+      &.selected
+        color $colorSelect
+
+      &.outside
+        color $colorOutside
+
+  .gdt-month
+
+    /* style */
+    font-size .9em
+    text-align center
+    margin-top 10px
+
+    li
+      display inline-block
+      vertical-align middle
+      padding 2px 4px
+      text-transform uppercase
+
+      &:last-child
+        padding-right 0
+
+      &.selected
+        color $colorSelect
+
+      &.outside
+        color $colorOutside
+
+  .gdt-calendar
+
+    /* position */
+    display inline-block
+    margin-top 20px
+
+    /* style */
+    text-align center
+
+    table
+      margin 0
+      padding 0
+      border-spacing 0
+      width 100%
+
+      th, td, td span
+        size 35px 35px
+
+      th
+        font-size 1em
+        font-weight bold
+        text-transform uppercase
+        color $colorTextSec
+
+      td
+
+        span
+          display inline-block
+          line-height 35px
+          border-radius 35px
+
+          &:hover
+            background-color $colorHover
+
+        /* weekend */
+        &:nth-child(1), &:nth-child(7)
+          background-color $colorWeekend
+
+        &.today
+          color $colorToday
+          font-weight bold
+
+        &.outside-month span
+          background-color transparent
+          color $colorOutsideMonth
+
+        &.outside span
+          background-color transparent
+          color $colorOutside
+          cursor not-allowed
+
+        &.selected span
+        &.selected span:hover
+          background-color $colorSelect
+          color #fff
+
+  .gdt-time
+
+    /* position */
+    display inline-block
+    margin-left 15px
+    size $sizeTimeWidth $sizeTimeHeight
+    overflow auto
+
+    /* style */
+    border solid 1px #eee
+    text-align right
+    font-size 1.2em
+
+    li
+      padding 5px 25px 5px 15px
+
+      &:hover
+        background-color $colorHover
+
+      &.outside
+        background-color transparent
+        color $colorOutside
+
+      &.selected
+        background-color $colorSelect
+        color #fff
+
+  /* .gdt-year */
+  /* .gdt-month */
+  /* .gdt-time */
+  ol
+    margin 0
+    padding 0
+
+  li
+    list-style none
+
+  /* action */
+  .gdt-close
+  .gdt-year li
+  .gdt-month li
+  .gdt-calendar td
+  .gdt-time li
+    cursor pointer
+
+  /*****************************************************************************
+   * Inline
+   ****************************************************************************/
+
+  &.inline
+    .gdt-box
+      position relative
+      display inline-block
+      z-index 0
+
+  /*****************************************************************************
+   * Close button hide
+   ****************************************************************************/
+
+  &.close-hide
+
+    .gdt-box .gdt-close
+
+      /* hidden */
+      display none
+
+    .gdt-box
+
+      padding-top 15px
+
+  /*****************************************************************************
+   * Time hide
+   ****************************************************************************/
+
+  &.time-hide
+
+    .gdt-box .gdt-time
+
+      /* hidden */
+      display none
+
+    .gdt-box .gdt-calendar
+      display block
+
+    .gdt-box .gdt-month
+      width 250px
+      margin 20px auto 0 auto
+      font-weight bold
+
+      li
+        padding 3px 5px
+
+    .gdt-box .gdt-year
+      li
+        &:first-child
+        &:last-child
+          display none
+
+      li.selected
+        font-size 1.4em
+        font-weight bold
+
+    .gdt-box .gdt-calendar
+      th
+        font-weight normal
+        color $colorSelectSec
+
+  /*****************************************************************************
+   * Time bottom
+   ****************************************************************************/
+
+  &.time-bottom
+
+    // size the box
+    @extend .gdt-style.time-hide
+
+    .gdt-box .gdt-time
+      display block
+      height 30px
+      margin 15px auto 0 auto
+      //font-size 1em
+
+
+  /*****************************************************************************
+   * Center
+   ****************************************************************************/
+
+  &.center
+
+    .gdt-box
+      width 450px
+      margin 0 auto
+      right 0

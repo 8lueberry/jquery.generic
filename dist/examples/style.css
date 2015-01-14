@@ -1,0 +1,22 @@
+.examples {
+  width: 900px;
+  margin: 0 auto;
+  font-size: 16px;
+}
+.examples >div {
+  margin-bottom: 75px;
+  background-color: #f5f5f5;
+  padding: 20px 20px 60px 20px;
+}
+.examples h1,
+.examples h2,
+.examples h3,
+.examples h4 {
+  text-align: center;
+}
+.space-top {
+  margin-top: 25px;
+}
+.space-bottom {
+  margin-bottom: 25px;
+}

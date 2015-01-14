@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>[[= layout.title ]]</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../dist/css/[[= layout.lib ]].css" />
+
+    <script src="../lib/jquery/jquery.min.js"></script>
+    <script src="../dist/jquery.[[= layout.lib ]].min.js"></script>
+
+    [[= layout.head ]]
+
+  </head>
+  <body>
+
+    <div class="examples">
+      <h1>[[= layout.title ]]</h1>
+      [[= layout.section ]]
+    </div>
+
+  </body>
+</html>

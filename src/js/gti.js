@@ -71,7 +71,7 @@
     // Sets tags
     //
     this.set = function(tags) {
-      this.tags = tags;
+      this.tags = Array.prototype.slice.call(tags, 0);
       updateUI();
       updateValue();
     };

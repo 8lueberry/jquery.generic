@@ -1,11 +1,11 @@
 /*
  * Generic - jQuery Plugin
  *
- * Example and documentation at: http://danlevan.github.io/jquery.generic
+ * Example and documentation at: http://danlevan.github.io/jquery.generic/
  *
- * Copyright (c) 2014 Dan LE VAN
+ * Copyright (c) 2014 Dan Le Van
  *
- * Version: 0.1.2 (Thu Nov 06 2014)
+ * Version: 0.2.0 (Wed Jan 14 2015)
  * Requires: jQuery v1.7+
  * * Licensed under the MIT license:
  *   https://raw.github.com/danlevan/jquery.generic/master/LICENSE
@@ -75,7 +75,12 @@
       box:        'gb-box',
       popup:      'gb-popup',
       overlay:    'gb-overlay',
+      style:      'gb-style',
       visible:    'visible',
+    },
+
+    data: {
+      style: 'style',
     },
 
     // hide box on overlay click
@@ -291,8 +296,14 @@
         });
 
       // container
+      var styles = that.$el.data(that.options.data.style);
       that.$container = that.$box
-        .wrap('<div class="' + that.options.css.container + '">')
+        .wrap('<div class="' + that.options.css.container +
+          (styles ?
+            ' ' + that.options.css.style + ' ' +
+            styles :
+            '') +
+          '">')
         .parent();
 
       // overlay
