@@ -5,6 +5,8 @@
 [page-example]: http://danlevan.github.io/jquery.generic/dist/examples/gb.html
 [page-license]: https://raw.githubusercontent.com/danlevan/jquery.generic/master/LICENSE
 
+[![GitHub version](https://badge.fury.io/gh/danlevan%2Fjquery.generic.svg)](http://badge.fury.io/gh/danlevan%2Fjquery.generic)
+
 [See the demo page][page-example]
 
 # GenericBox
