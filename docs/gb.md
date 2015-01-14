@@ -1,13 +1,21 @@
+[download-min]: http://danlevan.github.io/jquery.generic/dist/jquery.genericBox.min.js  "Minified version"
+[download-map]: http://danlevan.github.io/jquery.generic/dist/jquery.genericBox.min.js.map  "Minified map file"
+[download-dev]: http://danlevan.github.io/jquery.generic/dist/jquery.genericBox.js  "Not minified version"
+[download-css]: http://danlevan.github.io/jquery.generic/dist/css/gb.css  "Optional css"
+[page-example]: http://danlevan.github.io/jquery.generic/dist/examples/gb.html
+[page-license]: https://raw.githubusercontent.com/danlevan/jquery.generic/master/LICENSE
+
+[See the demo page][page-example]
+
 # GenericBox
 
 > GenericBox is a tiny jQuery popup plugin that doesn't handle any styling or animations in the lib. Instead, everything is customizable via css (or javascript) by you. The plugin only handles the html skeleton, events and key bindings.
 
-# Installation
+## Installation
 
-- Download the files you need from the dist directory
-  - [jquery.genericBox.min.js]() ([map]())
-    - or [jquery.genericBox.js]()
-  - [gb.css]() (Optional)
+- Directly
+  - [jquery.genericBox.js][download-dev] ([map][download-map], [min][download-min])
+  - [gb.css][download-css] (Optional)
 - Bower: `$ bower install jquery-generic`
 - NPM: `$ npm install jquery-generic`
 - Git: `$ git clone git://github.com/danlevan/jquery-generic.git`
@@ -22,45 +30,37 @@ jQuery 1.7+ ([download page](http://jquery.com/download/))
 - Lightweight: 1.5k .min.gz
 - No obscure styling options to be passed
 - Styles and anims entirely in css, by you
-- Supports animations libraries like animate.css
+- Supports animations libraries like [animate.css](http://daneden.github.io/animate.css/)
 - Esc key, overlay click to close
 - Multiple popup support (esc key works as expected)
 - The background doesn't scroll when you're scrolling the popup
 - Can be included as an AMD module
 - Events (show, hide, animation end...)
-- Free to use and modify
+- Free to use and modify [MIT][page-license]
 
 ## Browser support
 
 You decide! Animations and styling can entirely be done by css.
 
-# Why another library?
+## Why another library?
 
 > There are many popup jQuery plugins available but most of them either do too much, have obscure styling settings, are buggy or aren't flexible enough. Styling and animations should not be part of the library and you should have full control of your popups. If you're going to learn how to style a popup, might as well learn it with css.
-
-## License
-[MIT](https://raw.githubusercontent.com/danlevan/jquery.generic/master/LICENSE)
 
 # Getting started
 
 ## Step 1
 
-Include jquery and jquery.genericBox
+Include jquery and genericBox
 
 ```html
 <!-- Optional css, add this inside the head -->
-<link rel="stylesheet" href="path/to/gb.css" />
+<link rel="stylesheet" href="http://danlevan.github.io/jquery.generic/dist/css/gb.css" />
+
+...
 
 <!-- Add this at the end, before the closing body tag -->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="path/to/jquery.genericBox.min.js"></script>
-```
-
-If you're in a hurry and just want to try it asap, copy paste this
-```html
-<link rel="stylesheet" href="http://danlevan.github.io/jquery.generic/lib/gbTemplate.css" />
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="http://danlevan.github.io/jquery.generic/lib/jquery.genericBox.min.js"></script>
+<script src="http://danlevan.github.io/jquery.generic/dist/jquery.genericBox.min.js"></script>
 ```
 
 ## Step 2
@@ -68,8 +68,10 @@ If you're in a hurry and just want to try it asap, copy paste this
 Create a div with the popup content and hide it
 
 ```html
-<!-- your popup, hide it and style it the way you want -->
-<div id="#popup" style="display:none; background-color:#fff; width:400px; height:200px;">
+<!-- hide it and style it the way you want -->
+<div id="#popup"
+  style="display:none; background-color:#fff; width:400px; height:200px;"
+  data-style="overlay-fade center scale">
   ...
 </div>
 ```
@@ -80,10 +82,13 @@ Call genericBox
 
 ```js
 $(function() {
-  ...
   $('#popup').gb().show();
 })
 ```
+
+## That's it
+
+<button id="button-getting-started" onclick="$('#popup-example').gb().show();">Result</button>
 
 # How it works
 
@@ -179,7 +184,8 @@ $('#popup')
 
 Option | Type | Description | Default
 --- | --- | --- | ---
-css	| Object | You can change the default class name used. | ```{ wrap: 'gb', close: 'gb-close', box: 'gb-box', overlay: 'gb-overlay', visible: 'visible', }```
+css	| Object | You can change the default class name used. | ```{ container:  'gb-container', close:      'gb-close', box:        'gb-box', popup:      'gb-popup', overlay:    'gb-overlay', style:      'gb-style', visible:    'visible' }```
+data | Object | You can change the data keys to use for styling. e.g. ```data-style``` | ```{ style: 'style' }```
 hideOnClickOverlay | Boolean | Whether to hide the popup when the overlay is clicked. | true
 hideOnEsc | Boolean | Whether to hide the popup when the esc key is pressed. | true
 lockBackgroundScroll | Boolean | Whether to disable scrolling of the body when the popup is shown. | true
@@ -231,13 +237,18 @@ showAnimationEnd | When the show animation ended.
 hideAnimationStart | When the hide animation is starting.
 hideAnimationEnd | When the hide animation ended.
 
-Note that transition events are not supported yet. This is due to the difference in behavior of every browsers. You can still use at your own risk.
+Note that transition events are not supported. This is due to the difference in behavior of every browsers. You can still use at your own risk.
 
 - transitionEnd
 - showTransitionEnd
 - hideTransitionEnd
 
-PS: There are no transitionStart events supported by any browsers.
+There are no transitionStart events supported by any browsers.
+
+### See it in action
+
+<button id="button-event">Popup</button>
+<div id="log-event" class="log"></div>
 
 ### How to attach to an event
 
@@ -312,3 +323,11 @@ center | Centers the popup
 fullscreen | Makes the popup full screen
 scale | Light appearing animation of the box. It complements well the 'overlay-fade' and 'center' options.
 anim-1s | Helper class for 1 second animations
+
+# Examples
+
+You can see examples on the [demo page][page-example]
+
+---
+
+[MIT][page-license] &copy; Dan Le Van

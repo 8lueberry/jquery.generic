@@ -125,16 +125,20 @@ gulp.task('build-js-min', function() {
 
 gulp.task('build-css', ['clean-dist-css'], function() {
   return gulp.src('src/css/*.styl')
-    .pipe(stylus({
-      use: [nib()],
-      compress: false,
-    }))
+    .pipe(stylusWork())
     .pipe(header(banner, packageConfig))
     .pipe(rename(function(path) {
       path.extname = '.css';
     }))
     .pipe(gulp.dest(paths.distributionCss));
 });
+
+function stylusWork() {
+  return stylus({
+    use: [nib()],
+    compress: false,
+  });
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // EXAMPLES
@@ -170,10 +174,7 @@ gulp.task('build-examples-html', function() {
 
 gulp.task('build-examples-css', function() {
   return gulp.src('src/examples/*.styl')
-    .pipe(stylus({
-      use: [nib()],
-      compress: false,
-    }))
+    .pipe(stylusWork())
     .pipe(rename(function(path) {
       path.extname = '.css';
     }))
@@ -192,11 +193,17 @@ gulp.task('build-docs-html', function() {
     .pipe((function() {
       return through.obj(function(file, enc, cb) {
 
+        var layoutPath = path.join(
+          'src/docs',
+          '_' + file.relative.replace('.html', '.dot')
+        );
+
         template(
-          'src/docs/_layout.dot',
+          layoutPath,
           {
             title: 'Test',
             body: String(file.contents),
+            toc: '',
           },
           function(err, result) {
             if (err) {
@@ -214,10 +221,7 @@ gulp.task('build-docs-html', function() {
 
 gulp.task('build-docs-css', function() {
   return gulp.src('src/docs/*.styl')
-    .pipe(stylus({
-      use: [nib()],
-      compress: false,
-    }))
+    .pipe(stylusWork())
     .pipe(rename(function(path) {
       path.extname = '.css';
     }))
@@ -253,6 +257,9 @@ gulp.task('watch', function() {
   gulp.watch('src/examples/*', ['build-examples']);
   gulp.watch('src/css/*.styl', ['build-css']);
   gulp.watch('src/js/*.js', ['build-js']);
+
+  gulp.watch('docs/*', ['build-docs']);
+  gulp.watch('src/docs/*', ['build-docs']);
 });
 
 gulp.task('dev', [

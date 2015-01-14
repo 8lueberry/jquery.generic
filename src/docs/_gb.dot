@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>[[= model.title ]]</title>
+
+    <link rel="stylesheet" href="../css/gb.css" />
+    <link rel="stylesheet" href="../examples/gb-example.css" />
+    <link rel="stylesheet" href="gb-docs.css" />
+    <link rel="stylesheet" href="../../lib/github-markdown-css/github-markdown.css" />
+    <link rel="stylesheet" href="../../lib/animate.css/animate.min.css">
+    <link rel="stylesheet" href="../../lib/google-code-prettify/bin/prettify.min.css">
+    <link rel="stylesheet" href="../../lib/google-code-prettify/styles/desert.css">
+  </head>
+  <body>
+
+    <div class="header">
+      <div class="gb-container gb-style visible">
+        <div class="gb-box">
+          <div class="gb-close"></div>
+          <div class="popup">
+            <h1>GenericBox</h1>
+            <div>
+              <button id="button-try">Try it</button>
+              <button id="button-style">Style it</button>
+              <button id="button-animate">Animate it</button>
+              <button id="button-multi">Multiple popups</button>
+              <button id="button-modal">Modal</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content markdown-body">
+      [[= model.body ]]
+    </div>
+
+    <div id="popup-example" class="popup" data-style="overlay-fade center scale">
+      <h1>This is a popup</h1>
+
+      <div>
+        It can be closed in different manners
+      </div>
+
+      <ul>
+        <li>Pressing escape key</li>
+        <li>Clicking the background</li>
+        <li>Clicking the close button</li>
+        <li>or throwing your computer through the window</li>
+      </ul>
+    </div>
+
+    <div class="example6">
+      <div id="popup-style" class="popup" data-style="overlay-fade center scale">
+        <h1>Freedom !!</h1>
+        <ul>
+          <li>
+            You can style the box
+          </li>
+          <li>
+            You can style the close button
+          </li>
+          <li>
+            You can position the close button
+          </li>
+          <li>
+            You can style the background
+          </li>
+        </ul>
+
+        <div>
+          If you don't like the close button, make your own
+        </div>
+
+        <div>
+          <button onclick="$('#popup-style').gb().hide()">close button</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="example7">
+      <div id="popup-animate" class="popup" data-style="center">
+        <h1>Any animation you want</h1>
+        <ul>
+          <li>
+            Different animations for <strong>show</strong> and <strong>hide</strong>.
+          </li>
+          <li>
+            You can also animate the overlay (<strong>show</strong> and <strong>hide</strong> also)
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="example5">
+      <div class="popup popup1" style="width:600px; height:200px;" data-style="overlay-fade center scale">
+        <h1>And since everything is css...</h1>
+        <div>
+          z-index can be specified if needed.
+        </div>
+        <div>
+          <button>Open popup</button>
+        </div>
+      </div>
+
+      <div class="popup popup2" style="width:550px; height:150px;" data-style="overlay-fade center scale">
+        <h1>Click on the overlay also</h1>
+        <div>
+          <button>Open popup</button>
+        </div>
+      </div>
+
+      <div class="popup popup3" style="width:500px; height:100px;" data-style="overlay-fade center scale">
+        <h2>Notice how the esc key works</h2>
+      </div>
+    </div>
+
+    <div id="popup-modal" class="popup" data-gb='{"hideOnEsc": false, "hideOnClickOverlay": false}' data-style="overlay-fade close-hide center scale">
+
+      <h1>Modal popup</h1>
+
+      <ul>
+        <li>Click on the background doesn't close</li>
+        <li>Default close button is hidden</li>
+        <li>Esc key not listened</li>
+      </ul>
+
+      <div style="text-align: right;">
+        <button onclick="$('#popup-modal').gb().hide()">close</button>
+      </div>
+    </div>
+
+    <div id="popup-event" class="popup" style="width:200px; height:50px;" data-style="overlay-fade overlay-light anim-1s">
+      <h1>Event</h1>
+    </div>
+
+    <script src="../../lib/jquery/dist/jquery.min.js"></script>
+    <script src="../jquery.gb.min.js"></script>
+    <script src="../../lib/google-code-prettify/bin/prettify.min.js" defer="defer"></script>
+
+    <script>
+      $(function() {
+
+        $('pre').addClass('prettyprint');
+        prettyPrint();
+
+        $('button#button-try').on('click', function() {
+          $('#popup-example').gb().show();
+        });
+
+        $('button#button-style').on('click', function() {
+          $('#popup-style').gb().show();
+        });
+
+        $('button#button-animate').on('click', function() {
+          $('#popup-animate').gb().show();
+        });
+
+        $('button#button-multi').on('click', function() {
+          $('.example5 .popup1')
+            .gb()
+            .show();
+
+          setTimeout(function() {
+            $('.example5 .popup2')
+              .gb()
+              .show();
+          }, 400);
+
+          setTimeout(function() {
+            $('.example5 .popup3')
+              .gb()
+              .show();
+          }, 800);
+        });
+
+        $('.example5 .popup1 button').on('click', function() {
+          $('.example5 .popup2')
+            .gb()
+            .show();
+        });
+
+        $('.example5 .popup2 button').on('click', function() {
+          $('.example5 .popup3')
+            .gb()
+            .show();
+        });
+
+        $('button#button-modal').on('click', function() {
+          $('#popup-modal').gb().show();
+        });
+
+        function log(message) {
+          $('#log-event').append('<div>' + message + '</div>');
+        }
+
+        $('#button-event').on('click', function() {
+          log('--- button clicked ---');
+
+          $('#popup-event').gb({
+
+            onInitialize: function() {
+              log('genericBox initialized');
+            },
+
+            onShow: function() {
+              log('show ready');
+            },
+            onHide: function() {
+              log('hide ready');
+            },
+
+            onShowStart: function() {
+              log('show started');
+
+              console.log($(this).find('.gb-box'))
+              $(this).find('.gb-box').addClass('bounceIn animated');
+            },
+            onHideStart: function() {
+              log('hide started');
+
+              $(this).find('.gb-box').addClass('bounceOut animated');
+            },
+
+            onAnimationStart: function() {
+              log('(animation started)');
+            },
+            onAnimationEnd: function() {
+              log('(animation ended)');
+
+              $(this).find('.gb-box').removeClass('bounceIn bounceOut animated');
+            },
+
+            onShowAnimationStart: function() {
+              log('show animation started');
+            },
+            onShowAnimationEnd: function() {
+              log('show animation ended');
+            },
+
+            onHideAnimationStart: function() {
+              log('hide animation started');
+            },
+            onHideAnimationEnd: function() {
+              log('hide animation ended');
+            },
+
+            // these do now work so well
+            onTransitionEnd: function() {
+              log('(transition ended)');
+            },
+
+            // these do now work so well
+            onShowTransitionEnd: function() {
+              log('show transition ended');
+            },
+
+            // these do now work so well
+            onHideTransitionEnd: function() {
+              log('hide transition ended');
+            },
+          })
+          .show();
+        });
+      });
+    </script>
+
+  </body>
+</html>
