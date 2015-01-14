@@ -14,9 +14,11 @@
   </head>
   <body>
 
+    [[= layout.header ]]
+
     <div class="examples">
       <h1>[[= layout.title ]]</h1>
-      [[= layout.section ]]
+      [[= layout.examples ]]
     </div>
 
   </body>

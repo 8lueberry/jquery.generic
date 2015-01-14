@@ -10,7 +10,7 @@ lib: gdt
   <link rel="stylesheet" href="gdt-example.css" />
 #]]
 
-[[##section:
+[[##examples:
 
   <script>
     $(function() {

@@ -78,6 +78,16 @@ button:active {
   background: linear-gradient(top, #5677fc, #455ede);
   border-color: #2a36b1;
 }
+ul.clear {
+  margin: 0;
+  padding: 0;
+}
+ul.clear li {
+  list-style: none;
+}
+div.text-center {
+  text-align: center;
+}
 select {
   font-size: 18px;
   width: 150px;

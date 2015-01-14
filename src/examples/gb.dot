@@ -10,7 +10,22 @@ lib: gb
   <link rel="stylesheet" href="../../lib/animate.css/animate.min.css">
 #]]
 
-[[##section:
+[[##header:
+
+  <div class="text-center">
+    <ul class="clear">
+      <li>
+        <a href="../docs/gb.html">Documentation page</a>
+      </li>
+      <li>
+        <a href="https://github.com/danlevan/jquery.generic">GitHub page</a>
+      </li>
+    </ul>
+  </div>
+
+#]]
+
+[[##examples:
 
   <!--
     example1
@@ -19,7 +34,7 @@ lib: gb
   <div class="example1">
     <h2>example1: Fixed position</h2>
 
-    <div>This is the simplest example. It shows the popup on a fixed position. See the <a href="gbExamples.css">css</a> for the code.</div>
+    <div>This is the simplest example. It shows the popup on a fixed position. See the <a href="gb-example.css">css</a> for the code.</div>
 
     <button>Popup</button>
 
@@ -212,7 +227,7 @@ lib: gb
     <h2>example6: Custom styles</h2>
 
     <div>
-      Everything is customizable. You only need to know css. See the <a href="gbExamples.css">css</a> for the code.
+      Everything is customizable. You only need to know css. See the <a href="gb-example.css">css</a> for the code.
     </div>
 
     <button>Popup</button>
@@ -264,7 +279,7 @@ lib: gb
     <h2>example7: Custom animations</h2>
 
     <div>
-      Animations can be css or javascript. See the <a href="gbExamples.css">css</a> file for the code.
+      Animations can be css or javascript. See the <a href="gb-example.css">css</a> file for the code.
     </div>
 
     <button>css</button>
