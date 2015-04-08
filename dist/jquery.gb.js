@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2014 Dan Le Van
  *
- * Version: 1.0.0 (Wed Jan 14 2015)
+ * Version: 1.0.2 (Wed Apr 08 2015)
  * Requires: jQuery v1.7+
  * 
  * Licensed under the MIT license:
@@ -327,7 +327,7 @@
         })
 
         // after the element (for z-index)
-        .prependTo(that.$box);
+        .prependTo(that.$el);
     }
 
     //
