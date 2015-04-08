@@ -314,7 +314,7 @@
         })
 
         // after the element (for z-index)
-        .prependTo(that.$box);
+        .prependTo(that.$el);
     }
 
     //

@@ -1,6 +1,6 @@
 {
   "name": "jquery-generic",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generic jquery plugins for modern webapps. CSS3 animations and HTML5 driven.",
   "author": "Dan Le Van",
   "homepage": "http://danlevan.github.io/jquery.generic/",
@@ -27,6 +27,7 @@
   "optionalDependencies": {},
   "devDependencies": {
     "dot": "^1.0.2",
+    "express": "^4.12.3",
     "express-dot-engine": "^1.0.0",
     "gulp": "^3.8.10",
     "gulp-bower": "0.0.7",
@@ -41,6 +42,7 @@
     "lodash": "^2.4.1",
     "matchdep": "^0.3.0",
     "nib": "^1.0.4",
+    "nodemon": "^1.3.7",
     "through2": "^0.6.3"
   }
 }

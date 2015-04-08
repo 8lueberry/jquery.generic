@@ -118,13 +118,14 @@ becomes
   -->
   <div class="gb-box">
 
-    <!-- close button
-      Since it's inside gb-box, it's easy to position it at the top, left, ...
-    -->
-    <div class="gb-close"></div>
-
     <!-- your popup -->
     <div id="popup" class="gb-popup">
+      <!-- close button
+        This is injected to your popup
+        Since it's inside gb-popup, it's easy to position it at the top, left, ...
+      -->
+      <div class="gb-close"></div>
+
       ...
     </div>
   </div>

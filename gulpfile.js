@@ -5,6 +5,7 @@ var gulp = require('gulp');
 var header = require('gulp-header');
 var markdown = require('gulp-markdown');
 var nib = require('nib');
+var nodemon = require('nodemon');
 var path = require('path');
 var packageConfig = require('./package.json');
 var rename = require('gulp-rename');
@@ -260,11 +261,19 @@ gulp.task('watch', function() {
   gulp.watch('src/docs/*', ['build-docs']);
 });
 
+gulp.task('server', function() {
+  nodemon({
+    script: 'src/examples/server.js',
+  });
+});
+
+
 gulp.task('dev', [
   'build-examples',
   'build-docs',
   'dependencies',
   'watch',
+  'server',
 ]);
 
 ////////////////////////////////////////////////////////////////////////////////
