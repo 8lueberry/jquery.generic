@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2014 Dan Le Van
  *
- * Version: 1.0.2 (Wed Apr 08 2015)
+ * Version: 1.0.3 (Fri Apr 17 2015)
  * Requires: jQuery v1.7+
  * 
  * Licensed under the MIT license:
@@ -71,6 +71,7 @@
 
   $.fn.gb.defaults = {
     css: {
+      body:       'gb-modal',
       container:  'gb-container',
       close:      'gb-close',
       box:        'gb-box',
@@ -142,7 +143,6 @@
 
     // built
     buildBody();
-    handleScrolling(); // handle the scrolling of the elements
     registerEvents();
 
     trigger('initialize');
@@ -169,6 +169,11 @@
       // event before show
       if (!proceedTrigger('showStart')) {
         return;
+      }
+
+      // lock background scroll
+      if (that.options.lockBackgroundScroll) {
+        $('body').addClass(that.options.css.body);
       }
 
       // container visible
@@ -212,6 +217,11 @@
       // event before hide
       if (!proceedTrigger('hideStart')) {
         return;
+      }
+
+      // unlock background scroll
+      if (that.options.lockBackgroundScroll) {
+        $('body').removeClass(that.options.css.body);
       }
 
       // unregister keypress event
@@ -284,17 +294,13 @@
         // display the element (hidden by the box)
         .css({
           'display': 'block',
-          'pointer-events': 'auto',
         });
 
       // box
       that.$el
         .wrap('<div class="' + that.options.css.box + '">');
 
-      that.$box = that.$el.parent()
-        .css({
-          'pointer-events': 'none',
-        });
+      that.$box = that.$el.parent();
 
       // container
       var styles = that.$el.data(that.options.data.style);
@@ -317,17 +323,13 @@
       // close button
       that.$close = $('<div class="' + that.options.css.close + '">')
 
-        .css({
-          'pointer-events': 'auto',
-        })
-
         // close action
         .on('click', function() {
           that.hide();
         })
 
         // after the element (for z-index)
-        .prependTo(that.$el);
+        .prependTo(that.$box);
     }
 
     //
@@ -365,30 +367,6 @@
       trigger(event);
 
       return !event.isActionPrevented;
-    }
-
-    //
-    // Disable wheel action of the body
-    //
-    function handleScrolling() {
-      if (!that.options.lockBackgroundScroll) {
-        return;
-      }
-
-      that.$overlay.on(
-        'DOMMouseScroll mousewheel.gb',
-        preventScroll
-      );
-
-      that.$close.on(
-        'DOMMouseScroll mousewheel.gb',
-        preventScroll
-      );
-
-      that.$el.on(
-        'DOMMouseScroll mousewheel.gb',
-        preventScrollPropagation
-      );
     }
 
     //
